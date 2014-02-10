@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Pegasus.iml" filepath="$PROJECT_DIR$/Pegasus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pegasus/pegasus.iml" filepath="$PROJECT_DIR$/pegasus/pegasus.iml" />
+    </modules>
+  </component>
+</project>
+

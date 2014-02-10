@@ -1,0 +1,50 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/departure"
+        android:layout_centerHorizontal="true"
+        android:editable="false" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|\nv"
+        android:id="@+id/btn_dep_to_arr"
+        android:layout_below="@id/departure"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp" />/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="^\n|"
+        android:id="@+id/btn_arr_to_dep"
+        android:layout_below="@id/departure"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/destination"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_dep_to_arr"
+        android:editable="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculer"
+        android:id="@+id/btn_compute"
+        android:layout_below="@+id/destination"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
+</RelativeLayout>
