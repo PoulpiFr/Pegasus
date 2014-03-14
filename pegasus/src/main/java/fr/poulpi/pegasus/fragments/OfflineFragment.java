@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -24,6 +25,7 @@ import fr.poulpi.pegasus.dijkstra.DijkstraCalc;
 import fr.poulpi.pegasus.interfaces.StopSelectionInterface;
 import fr.poulpi.pegasus.model.OfflineGraph;
 import fr.poulpi.pegasus.model.OfflineStop;
+import fr.poulpi.pegasus.model.SortiesStation;
 
 
 /**
@@ -37,6 +39,7 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
     static public String TAG = "OfflineFragment";
 
     OfflineGraph mOfflineGraph;
+    SortiesStation  mSorties;
 
     private OfflineStop mDeparture = null;
     private OfflineStop mDestination = null;
@@ -68,6 +71,14 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
             e.printStackTrace();
         }
 
+        File file2 = new File(getActivity().getExternalFilesDir(null), "output.json");
+        mSorties = null;
+        try {
+            mSorties = mapper.readValue(file2, SortiesStation.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -82,6 +93,7 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         mDepartureEditText.setOnClickListener(departureEditTextOnClickListener);
         mDestinationEditText.setOnClickListener(destinationEditTextOnClickListener);
 
+        ((TextView)view.findViewById(R.id.textView)).setText(mSorties.data.get(1).name.replace("\\n ", "\n"));
         ((Button)view.findViewById(R.id.btn_compute)).setOnClickListener(computeBtnOnClickListener);
         return view;
 

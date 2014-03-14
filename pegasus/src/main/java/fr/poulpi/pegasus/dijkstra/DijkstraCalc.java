@@ -68,7 +68,7 @@ public class DijkstraCalc {
     }
 
     private int getDistance(OfflineStop node, OfflineStop target) {
-        for (OfflineEdge offlineEdge : node.offlineEdges) {
+        for (OfflineEdge offlineEdge : node.edges) {
             if (offlineEdge.dest == target.stop_id) {
                 return offlineEdge.dur;
             }
@@ -79,7 +79,7 @@ public class DijkstraCalc {
     private List<OfflineStop> getNeighbors(OfflineStop node) {
         List<OfflineStop> neighbors = new ArrayList<OfflineStop>();
         OfflineStop mOfflineStop;
-        for (OfflineEdge offlineEdge : node.offlineEdges) {
+        for (OfflineEdge offlineEdge : node.edges) {
             mOfflineStop = getStopFromId(offlineEdge.dest);
             if (!isSettled(mOfflineStop)) {
                 neighbors.add(mOfflineStop);

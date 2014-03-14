@@ -13,5 +13,4 @@ public class OfflineStop {
     public int zip;
     public List<OfflineEdge> edges;
 
-
 }
