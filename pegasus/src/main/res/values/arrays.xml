@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="screens_array">
+        <item>Recherche</item>
+        <item>Horaires</item>
+        <item>Paramètres</item>
+        <item>Chatons</item>
+        <item>Canard</item>
+    </array>
+</resources>

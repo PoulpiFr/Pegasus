@@ -1,7 +1,5 @@
 package fr.poulpi.pegasus.fragments;
 
-
-
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
