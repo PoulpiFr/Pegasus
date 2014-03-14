@@ -5,19 +5,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import fr.poulpi.pegasus.R;
-import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.interfaces.StopSelectionInterface;
-import fr.poulpi.pegasus.model.Graph;
-import fr.poulpi.pegasus.model.Stop;
+import fr.poulpi.pegasus.model.OfflineGraph;
+import fr.poulpi.pegasus.model.OfflineStop;
 
 /**
  * Created by pokito on 10/02/14.
@@ -27,11 +20,11 @@ public class StopChooserDialog extends DialogFragment {
     static public int DEPARTURE = 0;
     static public int DESTINATION = 1;
 
-    private Graph mGraph;
+    private OfflineGraph mOfflineGraph;
     private int mode;
 
-    public StopChooserDialog(Graph graph, int mode){
-        this.mGraph = graph;
+    public StopChooserDialog(OfflineGraph offlineGraph, int mode){
+        this.mOfflineGraph = offlineGraph;
         this.mode = mode;
     }
 
@@ -44,8 +37,8 @@ public class StopChooserDialog extends DialogFragment {
 
         final ArrayList<String> stopsName = new ArrayList<String>();
 
-        for(Stop stop : mGraph.data){
-            stopsName.add(stop.name);
+        for(OfflineStop offlineStop : mOfflineGraph.data){
+            stopsName.add(offlineStop.name);
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -56,8 +49,8 @@ public class StopChooserDialog extends DialogFragment {
                         StopSelectionInterface fragment = (StopSelectionInterface) getTargetFragment();
 
                         if (fragment != null) {
-                            if(mode == DEPARTURE) fragment.setDeparture(mGraph.data.get(which));
-                            if(mode == DESTINATION) fragment.setDestination(mGraph.data.get(which));
+                            if(mode == DEPARTURE) fragment.setDeparture(mOfflineGraph.data.get(which));
+                            if(mode == DESTINATION) fragment.setDestination(mOfflineGraph.data.get(which));
                         }
                     }
                 });

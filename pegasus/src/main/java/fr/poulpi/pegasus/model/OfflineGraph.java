@@ -5,8 +5,8 @@ import java.util.List;
 /**
  * Created by pokito on 09/02/14.
  */
-public class Graph {
+public class OfflineGraph {
 
-    public List<Stop> data;
+    public List<OfflineStop> data;
 
 }

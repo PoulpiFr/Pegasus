@@ -16,15 +16,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.dialog.StopChooserDialog;
 import fr.poulpi.pegasus.dijkstra.DijkstraCalc;
 import fr.poulpi.pegasus.interfaces.StopSelectionInterface;
-import fr.poulpi.pegasus.model.Graph;
-import fr.poulpi.pegasus.model.Stop;
+import fr.poulpi.pegasus.model.OfflineGraph;
+import fr.poulpi.pegasus.model.OfflineStop;
 
 
 /**
@@ -37,10 +36,10 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
 
     static public String TAG = "OfflineFragment";
 
-    Graph mGraph;
+    OfflineGraph mOfflineGraph;
 
-    private Stop mDeparture = null;
-    private Stop mDestination = null;
+    private OfflineStop mDeparture = null;
+    private OfflineStop mDestination = null;
     private EditText mDepartureEditText;
     private EditText mDestinationEditText;
 
@@ -62,9 +61,9 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         ObjectMapper mapper = new ObjectMapper();
 
         File file = new File(getActivity().getExternalFilesDir(null), "graph.json");
-        mGraph = null;
+        mOfflineGraph = null;
         try {
-            mGraph = mapper.readValue(file, Graph.class);
+            mOfflineGraph = mapper.readValue(file, OfflineGraph.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,7 +91,7 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         @Override
         public void onClick(View v) {
 
-            DialogFragment dialogFrag = new StopChooserDialog(mGraph, StopChooserDialog.DEPARTURE);
+            DialogFragment dialogFrag = new StopChooserDialog(mOfflineGraph, StopChooserDialog.DEPARTURE);
             dialogFrag.setTargetFragment(OfflineFragment.this, 0);
             dialogFrag.show(getFragmentManager().beginTransaction(), "dialog");
 
@@ -103,7 +102,7 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         @Override
         public void onClick(View v) {
 
-            DialogFragment dialogFrag = new StopChooserDialog(mGraph, StopChooserDialog.DESTINATION);
+            DialogFragment dialogFrag = new StopChooserDialog(mOfflineGraph, StopChooserDialog.DESTINATION);
             dialogFrag.setTargetFragment(OfflineFragment.this, 0);
             dialogFrag.show(getFragmentManager().beginTransaction(), "dialog");
 
@@ -114,14 +113,14 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         @Override
         public void onClick(View v) {
 
-            DijkstraCalc dijkstra = new DijkstraCalc(mGraph);
+            DijkstraCalc dijkstra = new DijkstraCalc(mOfflineGraph);
             dijkstra.execute(mDeparture);
 
-            LinkedList<Stop> path = dijkstra.getPath(mDestination);
+            LinkedList<OfflineStop> path = dijkstra.getPath(mDestination);
 
             String tmp = "";
-            for(Stop stop : path){
-                tmp += stop.name + "\n";
+            for(OfflineStop offlineStop : path){
+                tmp += offlineStop.name + "\n";
             }
 
             AlertDialog.Builder alb = new AlertDialog.Builder(getActivity());
@@ -131,14 +130,14 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
     };
 
     @Override
-    public void setDestination(Stop stop) {
-        mDestination = stop;
-        mDestinationEditText.setText(stop.name);
+    public void setDestination(OfflineStop offlineStop) {
+        mDestination = offlineStop;
+        mDestinationEditText.setText(offlineStop.name);
     }
 
     @Override
-    public void setDeparture(Stop stop) {
-        mDeparture = stop;
-        mDepartureEditText.setText(stop.name);
+    public void setDeparture(OfflineStop offlineStop) {
+        mDeparture = offlineStop;
+        mDepartureEditText.setText(offlineStop.name);
     }
 }

@@ -3,14 +3,11 @@ package fr.poulpi.pegasus.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,12 +17,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.adapters.StopsAdapter;
-import fr.poulpi.pegasus.model.Graph;
-import fr.poulpi.pegasus.model.Stop;
+import fr.poulpi.pegasus.model.OfflineGraph;
+import fr.poulpi.pegasus.model.OfflineStop;
 
 /**
  * A fragment representing a list of Items.
@@ -33,7 +29,7 @@ import fr.poulpi.pegasus.model.Stop;
 public class StopFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Stop> stops = null;
+    private ArrayList<OfflineStop> offlineStops = null;
 
     /**
      * The fragment's ListView/GridView.
@@ -68,17 +64,17 @@ public class StopFragment extends Fragment implements AbsListView.OnItemClickLis
         ObjectMapper mapper = new ObjectMapper();
 
         File file = new File(getActivity().getExternalFilesDir(null), "graph.json");
-        Graph graph = null;
+        OfflineGraph offlineGraph = null;
         try {
-            graph = mapper.readValue(file, Graph.class);
+            offlineGraph = mapper.readValue(file, OfflineGraph.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        stops = (ArrayList) graph.data;
+        offlineStops = (ArrayList) offlineGraph.data;
 
         // TODO: Change Adapter to display your content
-        mAdapter = new StopsAdapter(getActivity(), stops);
+        mAdapter = new StopsAdapter(getActivity(), offlineStops);
     }
 
     @Override
@@ -119,7 +115,7 @@ public class StopFragment extends Fragment implements AbsListView.OnItemClickLis
         if (null != mListener) {
             // Notify the active callbacks interfaces (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(stops.get(position).stop_id);
+            mListener.onFragmentInteraction(offlineStops.get(position).stop_id);
         }
     }
 
