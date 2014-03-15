@@ -15,7 +15,8 @@
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:background="#fff3f3f3"
-        android:divider="#0985B9"
+        android:padding="10dp"
+        android:divider="#D3D3D3"
         android:dividerHeight="1dp"
         />
 </android.support.v4.widget.DrawerLayout>

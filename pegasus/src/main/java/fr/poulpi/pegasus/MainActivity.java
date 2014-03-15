@@ -46,7 +46,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new DrawerItemAdapter(this, new ArrayList<String>(Arrays.asList(mPlanetTitles))));
+        mDrawerList.setAdapter(new DrawerItemAdapter(this, new ArrayList<String>(Arrays.asList(mPlanetTitles)), mTitle));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
