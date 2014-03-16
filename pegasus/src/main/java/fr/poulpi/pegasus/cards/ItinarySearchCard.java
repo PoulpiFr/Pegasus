@@ -1,8 +1,17 @@
 package fr.poulpi.pegasus.cards;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Rect;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.TypedValue;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,8 +26,47 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 
 public class ItinarySearchCard extends Card {
 
-    private CumulListLayout list;
-    private ListCumulAdapter mAdapter = null;
+    private TextView tvFrom;
+    private TextView tvTo;
+    private ImageButton btnFromClear;
+    private ImageButton btnToClear;
+    private ImageButton btnSwitch;
+
+    private TextWatcher tvFromWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s.length() > 0) btnFromClear.setVisibility(View.VISIBLE);
+            else btnFromClear.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    private TextWatcher tvToWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s.length() > 0) btnToClear.setVisibility(View.VISIBLE);
+            else btnToClear.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     public ItinarySearchCard(Context context) {
         super(context, R.layout.itinary_search_card_inner_content);
@@ -26,42 +74,54 @@ public class ItinarySearchCard extends Card {
     }
 
     private void init() {
-        //Add Header
-        CardHeader header = new CardHeader(getContext());
-        header.setTitle(getContext().getResources().getString(R.string.cumul));
-        addCardHeader(header);
-
     }
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
-        list = (CumulListLayout) view.findViewById(R.id.cumul_card_inner_list);
+        /* Find the views */
+        tvFrom = (TextView)view.findViewById(R.id.from);
+        tvTo = (TextView)view.findViewById(R.id.to);
+        btnFromClear = (ImageButton)view.findViewById(R.id.from_clear);
+        btnToClear = (ImageButton)view.findViewById(R.id.to_clear);
+        btnSwitch = (ImageButton)view.findViewById(R.id.switch_from_to);
 
-        ArrayList<FriendCount> tmp = buildArrayHelper();
-        mAdapter = new ListCumulAdapter(getContext(), event, tmp);
+        /* Set visibility to clear buttons */
+        btnFromClear.setVisibility(View.VISIBLE);
+        btnToClear.setVisibility(View.INVISIBLE);
 
-        list.setAdapter(mAdapter);
+        /* Set textChangedListener (toggle the clear button */
+        tvFrom.addTextChangedListener(tvFromWatcher);
+        tvTo.addTextChangedListener(tvToWatcher);
+
+        /* Set btns onClickListeners */
+        btnFromClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(tvFrom.getHint().toString().equals(getContext().getString(R.string.from_gps))){
+                    tvFrom.setHint(R.string.from);
+                }
+
+                tvFrom.setText("");
+            }
+        });
+
+        btnToClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvTo.setText("");
+            }
+        });
+
+        btnSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence tmp = tvFrom.getText();
+                tvFrom.setText(tvTo.getText());
+                tvTo.setText(tmp);
+            }
+        });
     }
-
-    //------------------------------------------------------------------------------------------
-
-
-    public ArrayList<FriendCount> buildArrayHelper() {
-
-        ArrayList<FriendCount> list = new ArrayList<FriendCount>();
-        Iterator<Friend> friendsIter = event.getFriends().iterator();
-        int i = 0;
-
-        while (friendsIter.hasNext()){
-
-            list.add(new FriendCount(((EventActivity)getContext()), event, friendsIter.next(), FriendCount.CUMUL_MODE));
-
-            i++;
-        }
-
-        return list;
-    }
-
 
 }

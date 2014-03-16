@@ -7,5 +7,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Ouvrir le menu</string>
     <string name="drawer_close">Fermer le menu</string>
+    <string name="from">De :</string>
+    <string name="from_gps">De : Position GPS actuelle</string>
+    <string name="to">A :</string>
 
 </resources>

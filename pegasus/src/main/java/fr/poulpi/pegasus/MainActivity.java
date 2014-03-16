@@ -1,7 +1,6 @@
 package fr.poulpi.pegasus;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
@@ -9,20 +8,17 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
+import fr.poulpi.pegasus.cards.ItinarySearchCard;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
@@ -46,13 +42,13 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new DrawerItemAdapter(this, new ArrayList<String>(Arrays.asList(mPlanetTitles)), mTitle));
+        mDrawerList.setAdapter(new DrawerItemAdapter(this, new ArrayList<String>(Arrays.asList(mPlanetTitles))));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.content_frame, OfflineFragment.newInstance())
+                    getFragmentManager().beginTransaction()
+                    .add(R.id.content_frame, SearchFragment.newInstance())
                     .commit();
         }
 
