@@ -10,5 +10,9 @@
     <string name="from">De :</string>
     <string name="from_gps">De : Position GPS actuelle</string>
     <string name="to">A :</string>
+    <string name="to_gps">A : Position GPS actuelle</string>
+    <string name="offline_mode_disabled">Mode hors-ligne désactivé</string>
+    <string name="offline_mode_enabled">Mode hors-ligne activé</string>
+    <string name="search">Rechercher</string>
 
 </resources>

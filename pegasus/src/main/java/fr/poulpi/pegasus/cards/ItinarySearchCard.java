@@ -117,9 +117,25 @@ public class ItinarySearchCard extends Card {
         btnSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CharSequence tmp = tvFrom.getText();
-                tvFrom.setText(tvTo.getText());
-                tvTo.setText(tmp);
+
+                /* Switching the text value & hint if we have to */
+                CharSequence txtFrom = tvFrom.getText();
+                CharSequence txtTo = tvTo.getText();
+
+                tvFrom.setText(txtTo);
+                tvTo.setText(txtFrom);
+
+                if(txtTo.length() == 0 && tvTo.getHint().equals(getContext().getString(R.string.to_gps))) {
+                    tvFrom.setHint(R.string.from_gps);
+                    tvTo.setHint(R.string.to);
+                    btnFromClear.setVisibility(View.VISIBLE);
+                }
+                else if(txtFrom.length() == 0 && tvFrom.getHint().equals(getContext().getString(R.string.from_gps))) {
+                    tvTo.setHint(R.string.to_gps);
+                    tvFrom.setHint(R.string.from);
+                    btnToClear.setVisibility(View.VISIBLE);
+                }
+
             }
         });
     }

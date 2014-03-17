@@ -3,13 +3,16 @@ package fr.poulpi.pegasus.fragments;
 
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.cards.IsOfflineSearchCard;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
+import fr.poulpi.pegasus.cards.ValidateSearchCard;
 import it.gmariotti.cardslib.library.view.CardView;
 
 
@@ -55,10 +58,17 @@ public class SearchFragment extends Fragment {
 
         //Create a Card
         ItinarySearchCard card= new ItinarySearchCard(getActivity());
-
-        //Set card in the cardView
         CardView cardView = (CardView) getActivity().findViewById(R.id.itinary_search_card);
         cardView.setCard(card);
+
+        IsOfflineSearchCard card2 = new IsOfflineSearchCard(getActivity());
+        cardView = (CardView) getActivity().findViewById(R.id.is_offline_search_card);
+        cardView.setCard(card2);
+
+        ValidateSearchCard card3 = new ValidateSearchCard(getActivity());
+        card3.setBackgroundResourceId(R.drawable.validate_card_selector);
+        cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
+        cardView.setCard(card3);
 
     }
 
