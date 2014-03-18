@@ -32,4 +32,6 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.+'
     compile 'com.github.gabrielemariotti.cards:library:1.4.+'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.squareup.retrofit:retrofit:1.4.1'
 }
