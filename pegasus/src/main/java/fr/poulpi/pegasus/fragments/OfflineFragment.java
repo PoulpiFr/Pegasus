@@ -69,13 +69,13 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
             e.printStackTrace();
         }
 
-        File file2 = new File(getActivity().getExternalFilesDir(null), "output.json");
+        /*File file2 = new File(getActivity().getExternalFilesDir(null), "output.json");
         mSorties = null;
         try {
             mSorties = mapper.readValue(file2, SortiesStation.class);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -91,7 +91,7 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         mDepartureEditText.setOnClickListener(departureEditTextOnClickListener);
         mDestinationEditText.setOnClickListener(destinationEditTextOnClickListener);
 
-        ((TextView)view.findViewById(R.id.textView)).setText(mSorties.data.get(1).name.replace("\\n ", "\n"));
+        //((TextView)view.findViewById(R.id.textView)).setText(mSorties.data.get(1).name.replace("\\n ", "\n"));
         ((Button)view.findViewById(R.id.btn_compute)).setOnClickListener(computeBtnOnClickListener);
         return view;
 

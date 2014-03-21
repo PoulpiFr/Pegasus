@@ -71,4 +71,64 @@
       <item name="android:background">@drawable/undertheme_btn_toggle_holo_light</item>
   </style>
 
+<style name="Theme.Undertheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <item name="android:actionBarItemBackground">@drawable/selectable_background_undertheme</item>
+    <item name="android:popupMenuStyle">@style/PopupMenu.Undertheme</item>
+    <item name="android:dropDownListViewStyle">@style/DropDownListView.Undertheme</item>
+    <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Undertheme</item>
+    <item name="android:actionDropDownStyle">@style/DropDownNav.Undertheme</item>
+    <item name="android:actionBarStyle">@style/ActionBar.Solid.Undertheme</item>
+    <item name="android:actionModeBackground">@drawable/cab_background_top_undertheme</item>
+    <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_undertheme</item>
+    <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Undertheme</item>
+
+    <!-- Light.DarkActionBar specific -->
+    <item name="android:actionBarWidgetTheme">@style/Theme.Undertheme.Widget</item>
+
+</style>
+
+<style name="ActionBar.Solid.Undertheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <item name="android:background">@drawable/ab_solid_undertheme</item>
+    <item name="android:backgroundStacked">@drawable/ab_stacked_solid_undertheme</item>
+    <item name="android:backgroundSplit">@drawable/ab_bottom_solid_undertheme</item>
+    <item name="android:progressBarStyle">@style/ProgressBar.Undertheme</item>
+</style>
+
+<style name="ActionBar.Transparent.Undertheme" parent="@android:style/Widget.Holo.ActionBar">
+    <item name="android:background">@drawable/ab_transparent_undertheme</item>
+    <item name="android:progressBarStyle">@style/ProgressBar.Undertheme</item>
+</style>
+
+<style name="PopupMenu.Undertheme" parent="@android:style/Widget.Holo.ListPopupWindow">
+    <item name="android:popupBackground">@drawable/menu_dropdown_panel_undertheme</item>
+</style>
+
+<style name="DropDownListView.Undertheme" parent="@android:style/Widget.Holo.ListView.DropDown">
+    <item name="android:listSelector">@drawable/selectable_background_undertheme</item>
+</style>
+
+<style name="ActionBarTabStyle.Undertheme" parent="@android:style/Widget.Holo.ActionBar.TabView">
+    <item name="android:background">@drawable/tab_indicator_ab_undertheme</item>
+</style>
+
+<style name="DropDownNav.Undertheme" parent="@android:style/Widget.Holo.Spinner">
+    <item name="android:background">@drawable/spinner_background_ab_undertheme</item>
+    <item name="android:popupBackground">@drawable/menu_dropdown_panel_undertheme</item>
+    <item name="android:dropDownSelector">@drawable/selectable_background_undertheme</item>
+</style>
+
+<style name="ProgressBar.Undertheme" parent="@android:style/Widget.Holo.ProgressBar.Horizontal">
+    <item name="android:progressDrawable">@drawable/progress_horizontal_undertheme</item>
+</style>
+
+<style name="ActionButton.CloseMode.Undertheme" parent="@android:style/Widget.Holo.ActionButton.CloseMode">
+    <item name="android:background">@drawable/btn_cab_done_undertheme</item>
+</style>
+
+<!-- this style is only referenced in a Light.DarkActionBar based theme -->
+<style name="Theme.Undertheme.Widget" parent="@android:style/Theme.Holo">
+    <item name="android:popupMenuStyle">@style/PopupMenu.Undertheme</item>
+    <item name="android:dropDownListViewStyle">@style/DropDownListView.Undertheme</item>
+</style>
+
 </resources>
