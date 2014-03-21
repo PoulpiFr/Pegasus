@@ -3,13 +3,11 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="UNDERTheme" parent="@style/_UNDERTheme"/>
-
-  <style name="_UNDERTheme" parent="android:Theme.Holo.Light">
+  <style name="_UNDERTheme" parent="android:Theme.Holo.Light.DarkActionBar">
 
     <item name="android:editTextBackground">@drawable/undertheme_edit_text_holo_light</item>
 
-    <item name="android:textColorHighlight">#99bde100</item>
+    <item name="android:textColorHighlight">#99a21a2e</item>
     <item name="android:textSelectHandleLeft">@drawable/undertheme_text_select_handle_left</item>
     <item name="android:textSelectHandleRight">@drawable/undertheme_text_select_handle_right</item>
     <item name="android:textSelectHandle">@drawable/undertheme_text_select_handle_middle</item>
