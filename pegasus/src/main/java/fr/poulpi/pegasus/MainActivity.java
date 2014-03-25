@@ -23,8 +23,9 @@ import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
+import fr.poulpi.pegasus.interfaces.TimeInterface;
 
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface {
 
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
@@ -127,6 +128,12 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     public void setTitle(CharSequence title) {
         mTitle = title;
         getActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    public void setTime(int hourOfDay, int minute) {
+
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

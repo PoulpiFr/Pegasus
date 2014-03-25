@@ -7,4 +7,10 @@
         <item>Statistiques</item>
         <item>Paramètres</item>
     </array>
+
+    <string-array name="time_array">
+        <item>Départ</item>
+        <item>Arrivée</item>
+    </string-array>
+
 </resources>

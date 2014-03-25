@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.cards.IsOfflineSearchCard;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
+import fr.poulpi.pegasus.cards.TimeSearchCard;
 import fr.poulpi.pegasus.cards.ValidateSearchCard;
 import it.gmariotti.cardslib.library.view.CardView;
 
@@ -69,6 +70,10 @@ public class SearchFragment extends Fragment {
         card3.setBackgroundResourceId(R.drawable.validate_card_selector);
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
         cardView.setCard(card3);
+
+        TimeSearchCard card4 = new TimeSearchCard((getActivity()));
+        cardView = (CardView) getActivity().findViewById(R.id.time_search_card);
+        cardView.setCard(card4);
 
     }
 
