@@ -22,11 +22,6 @@ import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
 import fr.poulpi.pegasus.model.ApiPredictionsResponse;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.view.CardView;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -112,6 +107,10 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
         cardView.setCard(validateSearchCard);
 
+        TimeSearchCard card4 = new TimeSearchCard((getActivity()));
+        cardView = (CardView) getActivity().findViewById(R.id.time_search_card);
+        cardView.setCard(card4);
+
     }
 
 
@@ -185,11 +184,6 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
         }
 
         return result;
-        cardView.setCard(card3);
-
-        TimeSearchCard card4 = new TimeSearchCard((getActivity()));
-        cardView = (CardView) getActivity().findViewById(R.id.time_search_card);
-        cardView.setCard(card4);
 
     }
 

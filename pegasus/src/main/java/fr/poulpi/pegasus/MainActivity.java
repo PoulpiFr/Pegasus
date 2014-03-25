@@ -5,9 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +25,7 @@ import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, PredictionsActivityInterface {
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface {
+public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsActivityInterface {
 
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
