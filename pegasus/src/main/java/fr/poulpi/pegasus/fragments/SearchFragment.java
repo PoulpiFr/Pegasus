@@ -13,8 +13,19 @@ import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.cards.IsOfflineSearchCard;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
 import fr.poulpi.pegasus.cards.TimeSearchCard;
+import fr.poulpi.pegasus.cards.PredictionsListCard;
 import fr.poulpi.pegasus.cards.ValidateSearchCard;
+import fr.poulpi.pegasus.interfaces.ApiPredictionsInterface;
+import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
+import fr.poulpi.pegasus.model.ApiPredictionsResponse;
+import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.view.CardView;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
@@ -23,7 +34,16 @@ import it.gmariotti.cardslib.library.view.CardView;
  * create an instance of this fragment.
  *
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements PredictionsFragmentInterface{
+
+    RestAdapter restAdapter;
+
+    ItinarySearchCard itinarySearchCard;
+    IsOfflineSearchCard isOfflineSearchCard;
+    PredictionsListCard predictionsListCard;
+    ValidateSearchCard validateSearchCard;
+
+    public static final String TAG = "SearchFragment";
 
     public static SearchFragment newInstance() {
         SearchFragment fragment = new SearchFragment();
@@ -53,22 +73,118 @@ public class SearchFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initCards();
+
+        String API_URL = "https://maps.googleapis.com/maps/api/place";
+
+        // debug purpose only, to get the messages
+        RestAdapter.Log log = new RestAdapter.Log(){
+            public void log(String msg){
+                System.out.println(msg);
+            }
+        };
+
+        // Create a very simple REST adapter which points the GitHub API endpoint.
+        restAdapter = new RestAdapter.Builder()
+                .setLog(log)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setEndpoint(API_URL)
+                .build();
+
     }
 
     private void initCards() {
 
         //Create a Card
-        ItinarySearchCard card= new ItinarySearchCard(getActivity());
+        itinarySearchCard = new ItinarySearchCard(getActivity());
         CardView cardView = (CardView) getActivity().findViewById(R.id.itinary_search_card);
-        cardView.setCard(card);
+        cardView.setCard(itinarySearchCard);
 
-        IsOfflineSearchCard card2 = new IsOfflineSearchCard(getActivity());
+        isOfflineSearchCard = new IsOfflineSearchCard(getActivity());
         cardView = (CardView) getActivity().findViewById(R.id.is_offline_search_card);
-        cardView.setCard(card2);
+        cardView.setCard(isOfflineSearchCard);
 
-        ValidateSearchCard card3 = new ValidateSearchCard(getActivity());
-        card3.setBackgroundResourceId(R.drawable.validate_card_selector);
+        predictionsListCard = new PredictionsListCard(getActivity());
+        cardView = (CardView) getActivity().findViewById(R.id.search_autocomplete_card);
+        cardView.setCard(predictionsListCard);
+
+        validateSearchCard = new ValidateSearchCard(getActivity());
+        validateSearchCard.setBackgroundResourceId(R.drawable.validate_card_selector);
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
+        cardView.setCard(validateSearchCard);
+
+    }
+
+
+
+    Callback predictionsCallback = new Callback() {
+        @Override
+        public void success(Object o, Response response) {
+
+            if(predictionsListCard instanceof PredictionsCardInterface){
+
+                predictionsListCard.getCardView().setVisibility(View.VISIBLE);
+                isOfflineSearchCard.getCardView().setVisibility(View.GONE);
+                validateSearchCard.getCardView().setVisibility(View.GONE);
+
+                ((PredictionsCardInterface) predictionsListCard).refreshCard((ApiPredictionsResponse) o);
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError retrofitError) {
+
+        }
+    };
+
+    /* === PredictionsFragmentInterface === */
+
+    public void googleAPIRequestPredictions(String str){
+
+        // Create an instance of our API interface.
+        ApiPredictionsInterface tmp = restAdapter.create(ApiPredictionsInterface.class);
+
+        tmp.response("false","AIzaSyDayrc8izwz8IG8OiA48tUJcFObFW0WLYw","country:fr", str, predictionsCallback);
+
+    }
+
+    @Override
+    public void googleAPISelectFromPrediction(ResultApiPrediction result) {
+
+        predictionsListCard.getCardView().setVisibility(View.GONE);
+        isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
+        validateSearchCard.getCardView().setVisibility(View.VISIBLE);
+
+        if(itinarySearchCard instanceof ItinarySearchCardInterface) {
+            ((ItinarySearchCardInterface) itinarySearchCard).refreshCard(result, null);
+        }
+
+    }
+
+    @Override
+    public void googleAPISelectToPrediction(ResultApiPrediction result) {
+
+        predictionsListCard.getCardView().setVisibility(View.GONE);
+        isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
+        validateSearchCard.getCardView().setVisibility(View.VISIBLE);
+
+        if(itinarySearchCard instanceof ItinarySearchCardInterface) {
+
+            ((ItinarySearchCardInterface) itinarySearchCard).refreshCard(null,result);
+        }
+
+    }
+
+    @Override
+    public int getFromToState() {
+
+        int result = ItinarySearchCard.UNKNOWN;
+
+        if(itinarySearchCard instanceof ItinarySearchCardInterface){
+            result = ((ItinarySearchCardInterface) itinarySearchCard).getFromToState();
+        }
+
+        return result;
         cardView.setCard(card3);
 
         TimeSearchCard card4 = new TimeSearchCard((getActivity()));

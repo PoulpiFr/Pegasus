@@ -1,36 +1,38 @@
 package fr.poulpi.pegasus.cards;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
+import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by pokito on 15/03/14.
  */
 
-public class ItinarySearchCard extends Card {
+public class ItinarySearchCard extends Card implements ItinarySearchCardInterface {
 
-    private TextView tvFrom;
-    private TextView tvTo;
+    private EditText edFrom;
+    private EditText edTo;
     private ImageButton btnFromClear;
     private ImageButton btnToClear;
     private ImageButton btnSwitch;
+
+    private ResultApiPrediction from;
+    private ResultApiPrediction to;
+
+    public static final int TO = 0;
+    public static final int FROM = 1;
+    public static final int UNKNOWN = 2;
 
     private TextWatcher tvFromWatcher = new TextWatcher() {
         @Override
@@ -42,6 +44,12 @@ public class ItinarySearchCard extends Card {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(s.length() > 0) btnFromClear.setVisibility(View.VISIBLE);
             else btnFromClear.setVisibility(View.INVISIBLE);
+
+            if(s.length() % 3 == 0 ){
+                if(getContext() instanceof PredictionsActivityInterface){
+                    ((PredictionsActivityInterface)getContext()).googleAPIRequestPredictions(s.toString());
+                }
+            }
         }
 
         @Override
@@ -60,6 +68,12 @@ public class ItinarySearchCard extends Card {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if(s.length() > 0) btnToClear.setVisibility(View.VISIBLE);
             else btnToClear.setVisibility(View.INVISIBLE);
+
+            if( s.length() % 3 == 0 ){
+                if(getContext() instanceof PredictionsActivityInterface){
+                    ((PredictionsActivityInterface)getContext()).googleAPIRequestPredictions(s.toString());
+                }
+            }
         }
 
         @Override
@@ -80,8 +94,8 @@ public class ItinarySearchCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
         /* Find the views */
-        tvFrom = (TextView)view.findViewById(R.id.from);
-        tvTo = (TextView)view.findViewById(R.id.to);
+        edFrom = (EditText)view.findViewById(R.id.from);
+        edTo = (EditText)view.findViewById(R.id.to);
         btnFromClear = (ImageButton)view.findViewById(R.id.from_clear);
         btnToClear = (ImageButton)view.findViewById(R.id.to_clear);
         btnSwitch = (ImageButton)view.findViewById(R.id.switch_from_to);
@@ -91,26 +105,26 @@ public class ItinarySearchCard extends Card {
         btnToClear.setVisibility(View.INVISIBLE);
 
         /* Set textChangedListener (toggle the clear button */
-        tvFrom.addTextChangedListener(tvFromWatcher);
-        tvTo.addTextChangedListener(tvToWatcher);
+        edFrom.addTextChangedListener(tvFromWatcher);
+        edTo.addTextChangedListener(tvToWatcher);
 
         /* Set btns onClickListeners */
         btnFromClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(tvFrom.getHint().toString().equals(getContext().getString(R.string.from_gps))){
-                    tvFrom.setHint(R.string.from);
+                if(edFrom.getHint().toString().equals(getContext().getString(R.string.from_gps))){
+                    edFrom.setHint(R.string.from);
                 }
 
-                tvFrom.setText("");
+                edFrom.setText("");
             }
         });
 
         btnToClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvTo.setText("");
+                edTo.setText("");
             }
         });
 
@@ -119,25 +133,55 @@ public class ItinarySearchCard extends Card {
             public void onClick(View v) {
 
                 /* Switching the text value & hint if we have to */
-                CharSequence txtFrom = tvFrom.getText();
-                CharSequence txtTo = tvTo.getText();
+                CharSequence txtFrom = edFrom.getText();
+                CharSequence txtTo = edTo.getText();
 
-                tvFrom.setText(txtTo);
-                tvTo.setText(txtFrom);
+                edFrom.setText(txtTo);
+                edTo.setText(txtFrom);
 
-                if(txtTo.length() == 0 && tvTo.getHint().equals(getContext().getString(R.string.to_gps))) {
-                    tvFrom.setHint(R.string.from_gps);
-                    tvTo.setHint(R.string.to);
+                if(txtTo.length() == 0 && edTo.getHint().equals(getContext().getString(R.string.to_gps))) {
+                    edFrom.setHint(R.string.from_gps);
+                    edTo.setHint(R.string.to);
                     btnFromClear.setVisibility(View.VISIBLE);
                 }
-                else if(txtFrom.length() == 0 && tvFrom.getHint().equals(getContext().getString(R.string.from_gps))) {
-                    tvTo.setHint(R.string.to_gps);
-                    tvFrom.setHint(R.string.from);
+                else if(txtFrom.length() == 0 && edFrom.getHint().equals(getContext().getString(R.string.from_gps))) {
+                    edTo.setHint(R.string.to_gps);
+                    edFrom.setHint(R.string.from);
                     btnToClear.setVisibility(View.VISIBLE);
                 }
 
             }
         });
+    }
+
+    @Override
+    public void refreshCard(ResultApiPrediction from, ResultApiPrediction to) {
+
+        edFrom.removeTextChangedListener(tvFromWatcher);
+        edTo.removeTextChangedListener(tvToWatcher);
+
+        if( from != null){
+            edFrom.setText(from.getDescription());
+            this.from = from;
+        }
+
+        if ( to != null){
+            edTo.setText(to.getDescription());
+            this.to = to;
+        }
+
+        edFrom.addTextChangedListener(tvFromWatcher);
+        edTo.addTextChangedListener(tvToWatcher);
+
+    }
+
+    @Override
+    public int getFromToState() {
+
+        if(edFrom.hasFocus()) return FROM;
+        else if(edTo.hasFocus()) return TO;
+        else return UNKNOWN;
+
     }
 
 }
