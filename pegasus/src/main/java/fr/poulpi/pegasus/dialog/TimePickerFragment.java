@@ -9,6 +9,8 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import fr.poulpi.pegasus.interfaces.TimeInterface;
+
 /**
  * Created by pokito on 25/03/2014.
  */
@@ -30,7 +32,9 @@ public class TimePickerFragment extends DialogFragment
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-
+        if(getActivity() instanceof TimeInterface){
+            ((TimeInterface)getActivity()).setTime(hourOfDay, minute);
+        }
 
     }
 }

@@ -1,5 +1,7 @@
 package fr.poulpi.pegasus.cards;
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.Spinner;
 import java.util.Calendar;
 
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.dialog.TimePickerFragment;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -44,7 +47,18 @@ public class TimeSearchCard extends Card implements TimeInterface {
 
         edTime.setText(time);
 
+        edTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DialogFragment newFragment = new TimePickerFragment();
+                newFragment.show(((Activity)getContext()).getFragmentManager(), "timePicker");
+
+            }
+        });
     }
+
+
 
     @Override
     public void setTime(int hourOfDay, int minute) {

@@ -3,7 +3,6 @@ package fr.poulpi.pegasus.fragments;
 
 
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,8 @@ import fr.poulpi.pegasus.cards.ValidateSearchCard;
 import fr.poulpi.pegasus.interfaces.ApiPredictionsInterface;
 import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
-import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsInterface;
+import fr.poulpi.pegasus.interfaces.TimeInterface;
 import fr.poulpi.pegasus.model.ApiPredictionsResponse;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.view.CardView;
@@ -33,14 +33,15 @@ import retrofit.client.Response;
  * create an instance of this fragment.
  *
  */
-public class SearchFragment extends Fragment implements PredictionsFragmentInterface{
+public class SearchFragment extends Fragment implements PredictionsInterface, TimeInterface {
 
     RestAdapter restAdapter;
 
-    ItinarySearchCard itinarySearchCard;
-    IsOfflineSearchCard isOfflineSearchCard;
-    PredictionsListCard predictionsListCard;
-    ValidateSearchCard validateSearchCard;
+    private ItinarySearchCard itinarySearchCard;
+    private IsOfflineSearchCard isOfflineSearchCard;
+    private PredictionsListCard predictionsListCard;
+    private ValidateSearchCard validateSearchCard;
+    private TimeSearchCard timeSearchCard;
 
     public static final String TAG = "SearchFragment";
 
@@ -111,9 +112,9 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
         cardView.setCard(validateSearchCard);
 
-        TimeSearchCard card4 = new TimeSearchCard((getActivity()));
+        timeSearchCard = new TimeSearchCard((getActivity()));
         cardView = (CardView) getActivity().findViewById(R.id.time_search_card);
-        cardView.setCard(card4);
+        cardView.setCard(timeSearchCard);
 
     }
 
@@ -128,6 +129,7 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
                 predictionsListCard.getCardView().setVisibility(View.VISIBLE);
                 isOfflineSearchCard.getCardView().setVisibility(View.GONE);
                 validateSearchCard.getCardView().setVisibility(View.GONE);
+                timeSearchCard.getCardView().setVisibility(View.GONE);
 
                 ((PredictionsCardInterface) predictionsListCard).refreshCard((ApiPredictionsResponse) o);
             }
@@ -140,7 +142,7 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
         }
     };
 
-    /* === PredictionsFragmentInterface === */
+    /* === PredictionsInterface === */
 
     public void googleAPIRequestPredictions(String str){
 
@@ -157,6 +159,7 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
         predictionsListCard.getCardView().setVisibility(View.GONE);
         isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
         validateSearchCard.getCardView().setVisibility(View.VISIBLE);
+        timeSearchCard.getCardView().setVisibility(View.VISIBLE);
 
         if(itinarySearchCard instanceof ItinarySearchCardInterface) {
             ((ItinarySearchCardInterface) itinarySearchCard).refreshCard(result, null);
@@ -170,6 +173,7 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
         predictionsListCard.getCardView().setVisibility(View.GONE);
         isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
         validateSearchCard.getCardView().setVisibility(View.VISIBLE);
+        timeSearchCard.getCardView().setVisibility(View.VISIBLE);
 
         if(itinarySearchCard instanceof ItinarySearchCardInterface) {
 
@@ -191,4 +195,10 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
 
     }
 
+    @Override
+    public void setTime(int hourOfDay, int minute) {
+
+        timeSearchCard.setTime(hourOfDay, minute);
+
+    }
 }
