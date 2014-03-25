@@ -22,6 +22,10 @@ import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
 import fr.poulpi.pegasus.model.ApiPredictionsResponse;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.view.CardView;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
