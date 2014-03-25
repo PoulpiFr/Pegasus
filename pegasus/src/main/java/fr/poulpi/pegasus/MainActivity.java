@@ -23,8 +23,11 @@ import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
+import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
+import fr.poulpi.pegasus.model.ResultApiPrediction;
 
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, PredictionsActivityInterface {
 
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
@@ -48,8 +51,8 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         if (savedInstanceState == null) {
-                    getFragmentManager().beginTransaction()
-                    .add(R.id.content_frame, SearchFragment.newInstance())
+            getFragmentManager().beginTransaction()
+                    .add(R.id.content_frame, SearchFragment.newInstance(), SearchFragment.TAG)
                     .commit();
         }
 
@@ -81,6 +84,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+
     }
 
 
@@ -159,6 +163,54 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /* === PredictionsActivityInterface === */
+    @Override
+    public void googleAPIRequestPredictions(String str) {
+
+        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+
+        if(tmp instanceof PredictionsFragmentInterface){
+            ((PredictionsFragmentInterface)tmp).googleAPIRequestPredictions(str);
+        }
+
+    }
+
+    @Override
+    public void googleAPISelectFromPrediction(ResultApiPrediction result) {
+
+        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+
+        if(tmp instanceof PredictionsFragmentInterface){
+            ((PredictionsFragmentInterface)tmp).googleAPISelectFromPrediction(result);
+        }
+
+    }
+
+    @Override
+    public void googleAPISelectToPrediction(ResultApiPrediction result) {
+
+        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+
+        if(tmp instanceof PredictionsFragmentInterface){
+            ((PredictionsFragmentInterface)tmp).googleAPISelectToPrediction(result);
+        }
+
+    }
+
+    @Override
+    public int getFromToState() {
+
+        int result = ItinarySearchCard.UNKNOWN;
+
+        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+
+        if(tmp instanceof PredictionsFragmentInterface){
+            result = ((PredictionsFragmentInterface)tmp).getFromToState();
+        }
+
+        return result;
     }
 
 }
