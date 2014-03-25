@@ -7,4 +7,5 @@ public class ResultApiTerms {
 
     int offset;
     String value;
+
 }

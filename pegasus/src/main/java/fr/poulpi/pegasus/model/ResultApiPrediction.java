@@ -3,7 +3,7 @@ package fr.poulpi.pegasus.model;
 /**
  * Created by paul-henri on 3/18/14.
  */
-public class ResultApiPredictions {
+public class ResultApiPrediction {
 
     String description;
     String id;
@@ -12,4 +12,9 @@ public class ResultApiPredictions {
     ResultApiTerms[] terms;
     String[] types;
 
+    public String getDescription(){
+
+        return description;
+
+    }
 }
