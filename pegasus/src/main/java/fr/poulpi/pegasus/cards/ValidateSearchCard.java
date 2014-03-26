@@ -11,7 +11,6 @@ import android.widget.TextView;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.fragments.ItinaryFragment;
 import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
-import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 

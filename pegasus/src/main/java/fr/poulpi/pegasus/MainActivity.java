@@ -26,12 +26,13 @@ import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
+import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
+import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsInterface {
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsActivityInterface, OTPActivityInterface {
+public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsInterface, OTPActivityInterface {
 
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
@@ -235,8 +236,6 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
             Log.d("ph", "from " + from.reference);
             Log.d("ph", "to " + to.reference );
-
-
 
         }
     }

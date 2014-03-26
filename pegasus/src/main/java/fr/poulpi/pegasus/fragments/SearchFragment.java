@@ -37,8 +37,7 @@ import retrofit.client.Response;
  * create an instance of this fragment.
  *
  */
-public class SearchFragment extends Fragment implements PredictionsFragmentInterface, OTPFragmentInterface {
-public class SearchFragment extends Fragment implements PredictionsInterface, TimeInterface {
+public class SearchFragment extends Fragment implements PredictionsInterface, TimeInterface, OTPFragmentInterface {
 
     RestAdapter restAdapter;
 
