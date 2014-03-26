@@ -29,8 +29,8 @@ public class OTPLegs {
 	String tripShortName;
 	int tripBlockId;
 	//headsign
-	long agencyId;
-	long tripId;
+	String agencyId;
+	String tripId;
 	long serviceDate;
 
 	OTPPoint from;
@@ -40,7 +40,7 @@ public class OTPLegs {
 
 	//notes
 	//alerts
-	int routeShortName;
+	String routeShortName;
 	String routeLongName;
 	//boardRule
 	//alightRule

@@ -4,8 +4,9 @@ import java.util.List;
 
 public class OTPPlan {
 
-	long date;
-	OTPPoint from;
-	OTPPoint to;
-	List<OTPItinerary> itineraries;
+	public long date;
+	public OTPPoint from;
+	public OTPPoint to;
+	public List<OTPItinerary> itineraries;
+
 }

@@ -4,22 +4,22 @@ import java.util.List;
 
 public class OTPItinerary {
 
-	double duration;
-	long startTime;
-	long endTime;
-	int walkTime;
-	int transitTime;
-	int waitingTime;
+	public double duration;
+    public long startTime;
+    public long endTime;
+    public int walkTime;
+    public int transitTime;
+    public int waitingTime;
 
-	double walkDistance;
-	boolean walkLimitExceeded;
+    public double walkDistance;
+    public boolean walkLimitExceeded;
 
-	double elevationLost;
-	double elevationGained;
+    public double elevationLost;
+    public double elevationGained;
 
-	int transfers;
+    public int transfers;
 	//fare
 
-	List<OTPLegs> legs;
+    public List<OTPLegs> legs;
 
 }

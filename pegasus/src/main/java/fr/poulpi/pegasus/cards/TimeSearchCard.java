@@ -9,7 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.dialog.TimePickerFragment;
@@ -66,6 +70,22 @@ public class TimeSearchCard extends Card implements TimeInterface {
         String time = new StringBuilder().append(hourOfDay).append(":").append(minute).toString();
 
         edTime.setText(time);
+
+    }
+
+    public String getTime(){
+
+        DateFormat dfISO8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+
+        String hour = edTime.getText().toString().split(":")[0];
+        String minute = edTime.getText().toString().split(":")[1];
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour));
+        calendar.set(Calendar.MINUTE, Integer.valueOf(minute));
+        Date date = calendar.getTime();
+
+        return dfISO8601.format(date);
 
     }
 }

@@ -131,6 +131,9 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
             @Override
             public void onClick(View v) {
 
+                edFrom.removeTextChangedListener(tvFromWatcher);
+                edTo.removeTextChangedListener(tvToWatcher);
+
                 /* Switching the text value & hint if we have to */
                 CharSequence txtFrom = edFrom.getText();
                 CharSequence txtTo = edTo.getText();
@@ -148,6 +151,9 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
                     edFrom.setHint(R.string.from);
                     btnToClear.setVisibility(View.VISIBLE);
                 }
+
+                edFrom.addTextChangedListener(tvFromWatcher);
+                edTo.addTextChangedListener(tvToWatcher);
 
             }
         });

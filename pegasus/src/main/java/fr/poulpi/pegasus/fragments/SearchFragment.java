@@ -16,6 +16,7 @@ import fr.poulpi.pegasus.cards.ItinarySearchCard;
 import fr.poulpi.pegasus.cards.TimeSearchCard;
 import fr.poulpi.pegasus.cards.PredictionsListCard;
 import fr.poulpi.pegasus.cards.ValidateSearchCard;
+import fr.poulpi.pegasus.constants.GoogleAPIConf;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
 import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
 import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
@@ -120,7 +121,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                ItinaryFragment fragment = ItinaryFragment.newInstance(itinarySearchCard.getFrom(), itinarySearchCard.getTo(), "2013-12-05T14:55:27+01:00");
+                ItinariesFragment fragment = ItinariesFragment.newInstance(itinarySearchCard.getFrom(), itinarySearchCard.getTo(), timeSearchCard.getTime());
 
                 fragmentTransaction.replace(R.id.content_frame, fragment);
                 fragmentTransaction.commit();
@@ -166,7 +167,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
         // Create an instance of our API interface.
         GooglePlaceAPIInterface tmp = restAdapter.create(GooglePlaceAPIInterface.class);
 
-        tmp.response("true","AIzaSyDayrc8izwz8IG8OiA48tUJcFObFW0WLYw","country:fr", str, predictionsCallback);
+        tmp.response("true", GoogleAPIConf.API_KEY, "country:fr", str, predictionsCallback);
 
     }
 

@@ -3,7 +3,6 @@ package fr.poulpi.pegasus;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -21,7 +20,6 @@ import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
-import fr.poulpi.pegasus.fragments.ItinaryFragment;
 import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
