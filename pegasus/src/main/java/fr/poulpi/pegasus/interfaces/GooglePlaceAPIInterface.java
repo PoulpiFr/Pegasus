@@ -23,6 +23,7 @@ public interface GooglePlaceAPIInterface {
             @Query("radius") String radius,
             @Query("language") String language,
             @Query("components") String components,
+            @Query("types") String types,
             @Query("input") String input,
             Callback<ApiPredictionsResponse> cb
     );

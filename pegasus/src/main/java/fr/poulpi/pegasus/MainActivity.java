@@ -23,6 +23,7 @@ import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
+import fr.poulpi.pegasus.fragments.ItinaryPreferenceFragment;
 import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
