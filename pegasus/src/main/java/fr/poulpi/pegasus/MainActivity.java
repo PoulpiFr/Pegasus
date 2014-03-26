@@ -3,8 +3,11 @@ package fr.poulpi.pegasus;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -108,8 +111,14 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     private void selectItem(int position) {
 
         Fragment fragment;
-        if(position == 1){
+        if(position == 0) {
+            fragment = SearchFragment.newInstance();
+        }
+        else if(position == 1) {
             fragment = MetroMapFragment.newInstance();
+        }
+        else if(position == 4){
+                fragment = ItinaryPreferenceFragment.newInstance();
         } else {
            fragment = new OfflineFragment();
         }

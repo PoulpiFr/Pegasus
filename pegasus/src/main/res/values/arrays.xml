@@ -13,4 +13,16 @@
         <item>Arrivée</item>
     </string-array>
 
+    <string-array name="marche_entry_array">
+        <item>Bon marcheur</item>
+        <item>Marcheur normal</item>
+        <item>Marcheur avec difficultés</item>
+    </string-array>
+
+    <string-array name="marche_value_array">
+        <item>bon_marcheur</item>
+        <item>marcheur_normal</item>
+        <item>marcheur_avec_difficultes</item>
+    </string-array>
+
 </resources>

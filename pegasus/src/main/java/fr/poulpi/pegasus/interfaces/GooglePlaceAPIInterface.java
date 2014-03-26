@@ -14,17 +14,20 @@ import retrofit.http.Query;
 public interface GooglePlaceAPIInterface {
 
     @GET("/autocomplete/json")
-
     void response(
             @Query("sensor") String sensor,
             @Query("key") String key,
+            // "lat,lon"
+            @Query("location") String location,
+            // "1000" = 1km
+            @Query("radius") String radius,
+            @Query("language") String language,
             @Query("components") String components,
             @Query("input") String input,
             Callback<ApiPredictionsResponse> cb
     );
 
     @GET("/details/json")
-
     void details(
             @Query("sensor") String sensor,
             @Query("key") String key,

@@ -169,6 +169,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
 
         tmp.response("true", GoogleAPIConf.API_KEY, "country:fr", str, predictionsCallback);
 
+        tmp.response("true","AIzaSyDayrc8izwz8IG8OiA48tUJcFObFW0WLYw","48.85647,2.34421","35000","fr","country:fr", str, predictionsCallback);
     }
 
     @Override
