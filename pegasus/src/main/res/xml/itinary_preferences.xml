@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory>
+
+        <CheckBoxPreference
+            android:key="checkbox_rer"
+            android:title="RER" />
+
+        <CheckBoxPreference
+            android:key="checkbox_metro"
+            android:title="Métro" />
+
+        <CheckBoxPreference
+            android:key="checkbox_bus"
+            android:title="Bus" />
+
+        <CheckBoxPreference
+            android:key="checkbox_tramway"
+            android:title="Tramway"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+
+        <ListPreference
+            android:title="Sélectionnez votre vitesse à pied"
+            android:key="marche_list"
+            android:entries="@array/marche_entry_array"
+            android:entryValues="@array/marche_value_array" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

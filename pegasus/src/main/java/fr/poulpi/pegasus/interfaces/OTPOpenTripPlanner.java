@@ -21,6 +21,8 @@ public interface OTPOpenTripPlanner {
             Callback<OTPResponse> cb
     );
 
+    // http://docs.opentripplanner.org/apidoc/0.11.0/resource_Planner.html
+
     @Headers("Accept: application/json")
     @GET("/plan")
     void complexResponse(
