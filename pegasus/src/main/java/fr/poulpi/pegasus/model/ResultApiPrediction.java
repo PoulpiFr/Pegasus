@@ -8,7 +8,7 @@ public class ResultApiPrediction {
     String description;
     String id;
     ResultApiMatchedSubstrings[] matched_substrings;
-    String reference;
+    public String reference;
     ResultApiTerms[] terms;
     String[] types;
 

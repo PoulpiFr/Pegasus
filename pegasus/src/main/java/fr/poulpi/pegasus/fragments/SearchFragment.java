@@ -3,7 +3,8 @@ package fr.poulpi.pegasus.fragments;
 
 
 import android.app.Fragment;
-import android.graphics.Color;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +16,14 @@ import fr.poulpi.pegasus.cards.ItinarySearchCard;
 import fr.poulpi.pegasus.cards.TimeSearchCard;
 import fr.poulpi.pegasus.cards.PredictionsListCard;
 import fr.poulpi.pegasus.cards.ValidateSearchCard;
-import fr.poulpi.pegasus.interfaces.ApiPredictionsInterface;
+import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
 import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
+import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
 import fr.poulpi.pegasus.model.ApiPredictionsResponse;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
+import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.CardView;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -33,7 +36,7 @@ import retrofit.client.Response;
  * create an instance of this fragment.
  *
  */
-public class SearchFragment extends Fragment implements PredictionsFragmentInterface{
+public class SearchFragment extends Fragment implements PredictionsFragmentInterface, OTPFragmentInterface {
 
     RestAdapter restAdapter;
 
@@ -108,6 +111,19 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
 
         validateSearchCard = new ValidateSearchCard(getActivity());
         validateSearchCard.setBackgroundResourceId(R.drawable.validate_card_selector);
+        validateSearchCard.setOnClickListener(new Card.OnCardClickListener() {
+            @Override
+            public void onClick(Card card, View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                ItinaryFragment fragment = ItinaryFragment.newInstance(itinarySearchCard.getFrom(), itinarySearchCard.getTo(), "2013-12-05T14:55:27+01:00");
+
+                fragmentTransaction.replace(R.id.content_frame, fragment);
+                fragmentTransaction.commit();
+            }
+        });
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
         cardView.setCard(validateSearchCard);
 
@@ -145,9 +161,9 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
     public void googleAPIRequestPredictions(String str){
 
         // Create an instance of our API interface.
-        ApiPredictionsInterface tmp = restAdapter.create(ApiPredictionsInterface.class);
+        GooglePlaceAPIInterface tmp = restAdapter.create(GooglePlaceAPIInterface.class);
 
-        tmp.response("false","AIzaSyDayrc8izwz8IG8OiA48tUJcFObFW0WLYw","country:fr", str, predictionsCallback);
+        tmp.response("true","AIzaSyDayrc8izwz8IG8OiA48tUJcFObFW0WLYw","country:fr", str, predictionsCallback);
 
     }
 
@@ -191,4 +207,15 @@ public class SearchFragment extends Fragment implements PredictionsFragmentInter
 
     }
 
+    @Override
+    public ResultApiPrediction getFrom() {
+        return itinarySearchCard.getFrom();
+    }
+
+    @Override
+    public ResultApiPrediction getTo() {
+
+        return itinarySearchCard.getTo();
+
+    }
 }

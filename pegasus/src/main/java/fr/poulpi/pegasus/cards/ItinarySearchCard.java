@@ -184,4 +184,11 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
 
     }
 
+    public ResultApiPrediction getFrom() {
+        return from;
+    }
+
+    public ResultApiPrediction getTo() {
+        return to;
+    }
 }

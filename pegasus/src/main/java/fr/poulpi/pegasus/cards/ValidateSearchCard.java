@@ -1,12 +1,18 @@
 package fr.poulpi.pegasus.cards;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.fragments.ItinaryFragment;
+import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
+import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
@@ -28,13 +34,6 @@ public class ValidateSearchCard extends Card {
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
-        /* Set card OnCLickListener */
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO : Do stuff
-            }
-        });
     }
 
 }
