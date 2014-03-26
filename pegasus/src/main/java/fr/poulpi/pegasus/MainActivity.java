@@ -26,13 +26,11 @@ import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
-import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
-import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
-import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
-import fr.poulpi.pegasus.interfaces.PredictionsFragmentInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 
+public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsInterface {
 public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsActivityInterface, OTPActivityInterface {
 
     private String[] mPlanetTitles;
@@ -139,12 +137,6 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         getActionBar().setTitle(mTitle);
     }
 
-    @Override
-    public void setTime(int hourOfDay, int minute) {
-
-
-    }
-
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -183,8 +175,8 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
-        if(tmp instanceof PredictionsFragmentInterface){
-            ((PredictionsFragmentInterface)tmp).googleAPIRequestPredictions(str);
+        if(tmp instanceof PredictionsInterface){
+            ((PredictionsInterface)tmp).googleAPIRequestPredictions(str);
         }
 
     }
@@ -194,8 +186,8 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
-        if(tmp instanceof PredictionsFragmentInterface){
-            ((PredictionsFragmentInterface)tmp).googleAPISelectFromPrediction(result);
+        if(tmp instanceof PredictionsInterface){
+            ((PredictionsInterface)tmp).googleAPISelectFromPrediction(result);
         }
 
     }
@@ -205,8 +197,8 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
-        if(tmp instanceof PredictionsFragmentInterface){
-            ((PredictionsFragmentInterface)tmp).googleAPISelectToPrediction(result);
+        if(tmp instanceof PredictionsInterface){
+            ((PredictionsInterface)tmp).googleAPISelectToPrediction(result);
         }
 
     }
@@ -218,8 +210,8 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
-        if(tmp instanceof PredictionsFragmentInterface){
-            result = ((PredictionsFragmentInterface)tmp).getFromToState();
+        if(tmp instanceof PredictionsInterface){
+            result = ((PredictionsInterface)tmp).getFromToState();
         }
 
         return result;
@@ -249,4 +241,14 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         }
     }
 
+    @Override
+    public void setTime(int hourOfDay, int minute) {
+
+        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
+
+        if(tmp instanceof PredictionsInterface){
+            ((TimeInterface)tmp).setTime(hourOfDay, minute);
+        }
+
+    }
 }

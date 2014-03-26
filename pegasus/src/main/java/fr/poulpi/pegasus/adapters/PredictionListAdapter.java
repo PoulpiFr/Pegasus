@@ -11,7 +11,7 @@ import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
-import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 
 /**
@@ -51,15 +51,15 @@ public class PredictionListAdapter extends ArrayAdapter<ResultApiPrediction> {
 
                 Integer pos = (Integer) v.getTag();
 
-                if(getContext() instanceof PredictionsActivityInterface) {
+                if(getContext() instanceof PredictionsInterface) {
 
-                    int tmp = ((PredictionsActivityInterface) getContext()).getFromToState();
+                    int tmp = ((PredictionsInterface) getContext()).getFromToState();
                     int tmp2 =  ItinarySearchCard.FROM;
 
-                    if ( ((PredictionsActivityInterface) getContext()).getFromToState() == ItinarySearchCard.FROM ) {
-                        ((PredictionsActivityInterface) getContext()).googleAPISelectFromPrediction(counts.get(pos));
-                    } else if (((PredictionsActivityInterface) getContext()).getFromToState() == ItinarySearchCard.TO ){
-                        ((PredictionsActivityInterface) getContext()).googleAPISelectToPrediction(counts.get(pos));
+                    if ( ((PredictionsInterface) getContext()).getFromToState() == ItinarySearchCard.FROM ) {
+                        ((PredictionsInterface) getContext()).googleAPISelectFromPrediction(counts.get(pos));
+                    } else if (((PredictionsInterface) getContext()).getFromToState() == ItinarySearchCard.TO ){
+                        ((PredictionsInterface) getContext()).googleAPISelectToPrediction(counts.get(pos));
                     }
 
                 }

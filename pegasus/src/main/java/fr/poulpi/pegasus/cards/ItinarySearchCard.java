@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
-import fr.poulpi.pegasus.interfaces.PredictionsActivityInterface;
+import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 
@@ -46,8 +45,8 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
             else btnFromClear.setVisibility(View.INVISIBLE);
 
             if(s.length() % 3 == 0 ){
-                if(getContext() instanceof PredictionsActivityInterface){
-                    ((PredictionsActivityInterface)getContext()).googleAPIRequestPredictions(s.toString());
+                if(getContext() instanceof PredictionsInterface){
+                    ((PredictionsInterface)getContext()).googleAPIRequestPredictions(s.toString());
                 }
             }
         }
@@ -70,8 +69,8 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
             else btnToClear.setVisibility(View.INVISIBLE);
 
             if( s.length() % 3 == 0 ){
-                if(getContext() instanceof PredictionsActivityInterface){
-                    ((PredictionsActivityInterface)getContext()).googleAPIRequestPredictions(s.toString());
+                if(getContext() instanceof PredictionsInterface){
+                    ((PredictionsInterface)getContext()).googleAPIRequestPredictions(s.toString());
                 }
             }
         }
@@ -163,6 +162,7 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
         if( from != null){
             edFrom.setText(from.getDescription());
             this.from = from;
+            edTo.requestFocus();
         }
 
         if ( to != null){
