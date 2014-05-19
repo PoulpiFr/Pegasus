@@ -75,7 +75,7 @@ public class TimeSearchCard extends Card implements TimeInterface {
 
     public String getTime(){
 
-        DateFormat dfISO8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
+        DateFormat dfISO8601 = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
 
         String hour = edTime.getText().toString().split(":")[0];
         String minute = edTime.getText().toString().split(":")[1];

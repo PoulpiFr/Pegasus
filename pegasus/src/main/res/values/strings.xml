@@ -14,5 +14,9 @@
     <string name="offline_mode_disabled">Mode hors-ligne désactivé</string>
     <string name="offline_mode_enabled">Mode hors-ligne activé</string>
     <string name="search">Rechercher</string>
+    <string name="quickest">Le plus rapide</string>
+    <string name="less_correspondance">Le moins de correspondances</string>
+    <string name="less_walking">Le moins de marche</string>
+    <string name="alternative">Itinéraire alternatif</string>
 
 </resources>

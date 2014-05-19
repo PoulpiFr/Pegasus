@@ -22,6 +22,7 @@
         android:layout_height="1dp"
         android:layout_width="match_parent"
         android:layout_marginTop="4dp"
-        android:layout_below="@+id/prediction_card_item_name"/>
+        android:layout_below="@+id/prediction_card_item_name"
+        android:id="@+id/view" />
 
 </RelativeLayout>

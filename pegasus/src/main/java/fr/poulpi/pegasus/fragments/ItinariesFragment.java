@@ -3,37 +3,47 @@ package fr.poulpi.pegasus.fragments;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.cards.ItinaryCard;
 import fr.poulpi.pegasus.constants.GoogleAPIConf;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
-import fr.poulpi.pegasus.interfaces.OTPOpenTripPlanner;
+import fr.poulpi.pegasus.interfaces.NavitiaIoInterface;
+import fr.poulpi.pegasus.model.CTPJourney;
+import fr.poulpi.pegasus.model.CTPJourneyResponse;
 import fr.poulpi.pegasus.model.GoogleAPIDetailsPlace;
 import fr.poulpi.pegasus.model.GoogleAPIGeometry;
-import fr.poulpi.pegasus.model.OTPItinerary;
 import fr.poulpi.pegasus.model.OTPResponse;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.view.CardListView;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 /**
  * Created by paul-henri on 3/25/14.
  */
 public class ItinariesFragment extends Fragment {
 
-    RestAdapter otpRestAdapter;
+    RestAdapter navitiaRestAdapter;
     RestAdapter googleRestAdapter;
     ItinaryCard itinaryCard;
 
@@ -82,7 +92,7 @@ public class ItinariesFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String API_URL = "http://under-apps.com:8080/otp-rest-servlet/ws/routers/default";
+        String API_URL = "http://api.navitia.io/v1/";
 
         // debug purpose only, to get the messages
         RestAdapter.Log log = new RestAdapter.Log(){
@@ -91,13 +101,32 @@ public class ItinariesFragment extends Fragment {
             }
         };
 
+        // Set the navitia time format
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+            DateFormat df = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+
+            @Override
+            public Date deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+                    throws JsonParseException {
+                try {
+                    return df.parse(json.getAsString());
+                } catch (ParseException e) {
+                    return null;
+                }
+            }
+        });
+        Gson gson = gsonBuilder.create();
+
         // Create a very simple REST adapter which points the GitHub API endpoint.
-        otpRestAdapter = new RestAdapter.Builder()
+        navitiaRestAdapter = new RestAdapter.Builder()
                 .setLog(log)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(API_URL)
+                .setConverter(new GsonConverter(gson))
                 .build();
 
+        // Demande des coordonnées GPS à partir de la référence Places API
         API_URL = "https://maps.googleapis.com/maps/api/place";
 
         googleRestAdapter = new RestAdapter.Builder()
@@ -120,36 +149,20 @@ public class ItinariesFragment extends Fragment {
 
     }
 
-    private void initCards(OTPResponse otpResponse) {
+    private void initCards(CTPJourneyResponse journeyResponse) {
 
-        ArrayList<Card> cards = new ArrayList<Card>();
-
-        Iterator<OTPItinerary> it = otpResponse.plan.itineraries.iterator();
-
-        while (it.hasNext()){
-            ItinaryCard card = new ItinaryCard(getActivity(), it.next());
-            cards.add(card);
-        }
-
-        CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
-
-        CardListView listView = (CardListView) getView().findViewById(R.id.itinaries_list);
-
-        if (listView!=null){
-            listView.setAdapter(mCardArrayAdapter);
-        }
-
+        Log.d(TAG, "" + journeyResponse.getJourneys().size());
         pd.dismiss();
 
     }
 
-    private void askForOTPItinary(){
+    private void askForItinary(){
 
-        String fromStr = new StringBuilder().append(from.location.lat).append(",").append(from.location.lng).toString();
-        String toStr = new StringBuilder().append(to.location.lat).append(",").append(to.location.lng).toString();
+        String fromStr = new StringBuilder().append(from.location.lng).append(";").append(from.location.lat).toString();
+        String toStr = new StringBuilder().append(to.location.lng).append(";").append(to.location.lat).toString();
 
-        OTPOpenTripPlanner ws = otpRestAdapter.create(OTPOpenTripPlanner.class);
-        ws.response(fromStr, toStr, getArguments().getString("date"), itinaryCallback);
+        NavitiaIoInterface ws = navitiaRestAdapter.create(NavitiaIoInterface.class);
+        ws.journey(fromStr, toStr, getArguments().getString("date"), "departure", itinaryCallback);
 
     }
 
@@ -158,9 +171,10 @@ public class ItinariesFragment extends Fragment {
         @Override
         public void success(Object o, Response response) {
 
-            OTPResponse otpResponse = (OTPResponse) o;
-
-            initCards(otpResponse);
+            if(o instanceof CTPJourneyResponse) {
+                CTPJourneyResponse journeyResponse = (CTPJourneyResponse) o;
+                initCards(journeyResponse);
+            }
 
         }
 
@@ -180,15 +194,13 @@ public class ItinariesFragment extends Fragment {
             from = ((GoogleAPIDetailsPlace) o).result.geometry;
 
             if (to != null){
-                askForOTPItinary();
+                askForItinary();
             }
 
         }
 
         @Override
-        public void failure(RetrofitError retrofitError) {
-
-        }
+        public void failure(RetrofitError retrofitError) {}
     };
 
     Callback detailsToCallback = new Callback() {
@@ -198,15 +210,13 @@ public class ItinariesFragment extends Fragment {
             to = ((GoogleAPIDetailsPlace) o).result.geometry;
 
             if (from != null){
-                askForOTPItinary();
+                askForItinary();
             }
 
         }
 
         @Override
-        public void failure(RetrofitError retrofitError) {
-
-        }
+        public void failure(RetrofitError retrofitError) {}
     };
 
 }

@@ -40,8 +40,8 @@ public class OTPLegs {
 
 	//notes
 	//alerts
-	String routeShortName;
-	String routeLongName;
+    public String routeShortName;
+	public String routeLongName;
 	//boardRule
 	//alightRule
 	boolean rentedBike;
