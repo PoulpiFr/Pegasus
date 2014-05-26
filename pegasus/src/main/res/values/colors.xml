@@ -6,4 +6,11 @@
     <color name="brown">#55272e</color>
     <color name="red">#a21a2e</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="divider_gray">#dedfde</color>
+    <color name="separator_gray">#cecece</color>
+    <color name="txt_gray">#777777</color>
+    <color name="background_gray">#eaeaea</color>
+    <color name="black">#000000</color>
+
 </resources>

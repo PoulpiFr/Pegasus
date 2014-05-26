@@ -3,11 +3,9 @@ package fr.poulpi.pegasus;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,9 +21,12 @@ import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
+import fr.poulpi.pegasus.fragments.DateFragment;
 import fr.poulpi.pegasus.fragments.ItinaryPreferenceFragment;
 import fr.poulpi.pegasus.fragments.MetroMapFragment;
+import fr.poulpi.pegasus.fragments.NewSearchFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
+import fr.poulpi.pegasus.fragments.PredictionsFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
 import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
@@ -34,7 +35,14 @@ import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.model.ResultApiPrediction;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsInterface, OTPActivityInterface {
+public class MainActivity extends Activity implements
+        StopFragment.OnFragmentInteractionListener,
+        TimeInterface,
+        PredictionsInterface,
+        OTPActivityInterface,
+        NewSearchFragment.OnFragmentInteractionListener,
+        DateFragment.OnFragmentInteractionListener,
+        PredictionsFragment.OnFragmentInteractionListener {
 
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
@@ -59,7 +67,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.content_frame, SearchFragment.newInstance(), SearchFragment.TAG)
+                    .add(R.id.content_frame, NewSearchFragment.newInstance(), NewSearchFragment.TAG)
                     .commit();
         }
 
@@ -67,7 +75,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.drawable.ic_navigation_drawer,  /* nav drawer icon to replace 'Up' caret */
                 R.string.drawer_open,  /* "open drawer" description */
                 R.string.drawer_close  /* "close drawer" description */
         ) {
@@ -113,10 +121,13 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         Fragment fragment;
         if(position == 0) {
-            fragment = SearchFragment.newInstance();
+            fragment = NewSearchFragment.newInstance();
         }
         else if(position == 1) {
             fragment = MetroMapFragment.newInstance();
+        }
+        else if (position == 2){
+            fragment = DateFragment.newInstance();
         }
         else if(position == 4){
                 fragment = ItinaryPreferenceFragment.newInstance();
@@ -144,6 +155,21 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     public void setTitle(CharSequence title) {
         mTitle = title;
         getActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    public void onSearchFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onDateFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onPredictionsFragmentInteraction(String id) {
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
