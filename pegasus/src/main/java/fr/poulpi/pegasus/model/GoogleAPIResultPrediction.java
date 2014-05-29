@@ -3,13 +3,13 @@ package fr.poulpi.pegasus.model;
 /**
  * Created by paul-henri on 3/18/14.
  */
-public class ResultApiPrediction {
+public class GoogleAPIResultPrediction {
 
     String description;
     String id;
-    ResultApiMatchedSubstrings[] matched_substrings;
+    GoogleAPIResultMatchedSubstrings[] matched_substrings;
     public String reference;
-    ResultApiTerms[] terms;
+    GoogleAPIResultiTerms[] terms;
     String[] types;
 
     public String getDescription(){

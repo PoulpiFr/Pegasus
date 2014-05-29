@@ -1,8 +1,7 @@
 package fr.poulpi.pegasus.interfaces;
 
-import fr.poulpi.pegasus.model.ApiPredictionsResponse;
+import fr.poulpi.pegasus.model.GoogleAPIPredictionsResponse;
 import fr.poulpi.pegasus.model.GoogleAPIDetailsPlace;
-import fr.poulpi.pegasus.model.GoogleAPIGeometry;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
@@ -25,7 +24,7 @@ public interface GooglePlaceAPIInterface {
             @Query("components") String components,
             @Query("types") String types,
             @Query("input") String input,
-            Callback<ApiPredictionsResponse> cb
+            Callback<GoogleAPIPredictionsResponse> cb
     );
 
     @GET("/details/json")

@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsInterface;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 
 /**
@@ -26,8 +26,8 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
     private ImageButton btnToClear;
     private ImageButton btnSwitch;
 
-    private ResultApiPrediction from;
-    private ResultApiPrediction to;
+    private GoogleAPIResultPrediction from;
+    private GoogleAPIResultPrediction to;
 
     public static final int TO = 0;
     public static final int FROM = 1;
@@ -160,7 +160,7 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
     }
 
     @Override
-    public void refreshCard(ResultApiPrediction from, ResultApiPrediction to) {
+    public void refreshCard(GoogleAPIResultPrediction from, GoogleAPIResultPrediction to) {
 
         edFrom.removeTextChangedListener(tvFromWatcher);
         edTo.removeTextChangedListener(tvToWatcher);
@@ -190,11 +190,11 @@ public class ItinarySearchCard extends Card implements ItinarySearchCardInterfac
 
     }
 
-    public ResultApiPrediction getFrom() {
+    public GoogleAPIResultPrediction getFrom() {
         return from;
     }
 
-    public ResultApiPrediction getTo() {
+    public GoogleAPIResultPrediction getTo() {
         return to;
     }
 }

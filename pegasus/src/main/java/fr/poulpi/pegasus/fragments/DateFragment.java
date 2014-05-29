@@ -19,6 +19,7 @@ import fr.poulpi.pegasus.R;
  */
 public class DateFragment extends Fragment {
 
+    public static final String TAG = "DateFragment";
     private OnFragmentInteractionListener mListener;
 
     public DateFragment() {

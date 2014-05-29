@@ -1,30 +1,36 @@
 package fr.poulpi.pegasus.fragments;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.adapters.PredictionListAdapter;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIPredictionsResponse;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 
 
-public class PredictionsFragment extends ListFragment {
+public class PredictionsFragment extends Fragment {
 
+    public static final String TAG = "PredictionsFragment";
     private OnFragmentInteractionListener mListener;
+    private PredictionListAdapter mAdapter;
 
     private static String MODE = "MODE";
-
     public static String TO = "TO";
     public static String FROM = "FROM";
 
-    // TODO: Rename and change types of parameters
+    ListView mListView;
+
     public static PredictionsFragment newInstance(String mode) {
         PredictionsFragment fragment = new PredictionsFragment();
         Bundle args = new Bundle();
@@ -37,14 +43,12 @@ public class PredictionsFragment extends ListFragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public PredictionsFragment() {
-    }
+    public PredictionsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setListAdapter(new PredictionListAdapter(getActivity(), new ArrayList<ResultApiPrediction>()));
     }
 
     @Override
@@ -52,6 +56,13 @@ public class PredictionsFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_predictions, container, false);
+
+        mListView = (ListView) view.findViewById(R.id.list);
+
+        mListView.setAdapter(new PredictionListAdapter(getActivity(), new ArrayList<GoogleAPIResultPrediction>()));
+        mListView.setEmptyView(view.findViewById(R.id.empty));
+        mListView.setItemsCanFocus(true);
+        mListView.setOnItemClickListener(onItemClickListener);
 
         return view;
 
@@ -74,20 +85,29 @@ public class PredictionsFragment extends ListFragment {
         mListener = null;
     }
 
+    public AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+            Log.d("poulpi", "Clickyyyyy");
+            mListener.onPredictionsFragmentInteraction(getArguments().getString(MODE), mAdapter.getItem(position));
+            getFragmentManager().popBackStack();
 
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onPredictionsFragmentInteraction(null);
         }
+    };
+
+    public void refreshData(GoogleAPIPredictionsResponse response) {
+
+        ArrayList<GoogleAPIResultPrediction> list = new ArrayList<GoogleAPIResultPrediction>(response.getPredictions());
+
+        mAdapter = new PredictionListAdapter(getActivity(), list);
+
+        mListView.setAdapter(mAdapter);
+
     }
 
     public interface OnFragmentInteractionListener {
-        public void onPredictionsFragmentInteraction(String id);
+        public void onPredictionsFragmentInteraction(String mode, GoogleAPIResultPrediction destination);
     }
 
 }

@@ -31,19 +31,20 @@
                     android:layout_gravity="center_horizontal"
                     />
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/destination_from_container"
                     android:padding="@dimen/destination_padding"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_from"
-                        android:id="@+id/ic_from"
-                        android:layout_centerVertical="true"/>
+                        android:id="@+id/ic_from"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -54,11 +55,9 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_size"
                         android:background="@color/white"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/ic_from"
                         android:layout_marginLeft="@dimen/destination_ic_space"/>
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -73,19 +72,20 @@
                         />
                 </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/destination_to_container"
                     android:padding="@dimen/destination_padding"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_to"
-                        android:id="@+id/ic_to"
-                        android:layout_centerVertical="true"/>
+                        android:id="@+id/ic_to"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -96,10 +96,8 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/txt_size"
                         android:background="@color/white"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/ic_to"
                         android:layout_marginLeft="@dimen/destination_ic_space"/>
-                </RelativeLayout>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"

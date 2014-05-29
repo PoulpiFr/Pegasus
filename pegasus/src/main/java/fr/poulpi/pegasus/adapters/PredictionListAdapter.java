@@ -1,6 +1,7 @@
 package fr.poulpi.pegasus.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +11,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.poulpi.pegasus.R;
-import fr.poulpi.pegasus.cards.ItinarySearchCard;
-import fr.poulpi.pegasus.interfaces.PredictionsInterface;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 
 /**
  * Created by paul-henri on 3/20/14.
  */
-public class PredictionListAdapter extends ArrayAdapter<ResultApiPrediction> {
+public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPrediction> {
 
-    private List<ResultApiPrediction> counts;
+    private List<GoogleAPIResultPrediction> counts;
 
-    public PredictionListAdapter(Context context, List<ResultApiPrediction> objects) {
+    public PredictionListAdapter(Context context, List<GoogleAPIResultPrediction> objects) {
         super(context, 0, objects);
         this.counts = objects;
     }
@@ -29,43 +28,19 @@ public class PredictionListAdapter extends ArrayAdapter<ResultApiPrediction> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ResultApiPrediction item = getItem(position);
+        GoogleAPIResultPrediction item = getItem(position);
 
         //Without ViewHolder for demo purpose
         View view = convertView;
 
         if (view == null) {
-            LayoutInflater li =
-                    (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = li.inflate(R.layout.prediction_card_item_list, parent, false);
+            LayoutInflater vi;
+            vi = LayoutInflater.from(getContext());
+            view = vi.inflate(R.layout.prediction_item_list, null);
         }
 
-        TextView textView1 = (TextView) view.findViewById(R.id.prediction_card_item_name);
+        TextView textView1 = (TextView) view.findViewById(R.id.prediction_item_name);
         textView1.setText(item.getDescription());
-
-        view.setTag(position);
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Integer pos = (Integer) v.getTag();
-
-                if(getContext() instanceof PredictionsInterface) {
-
-                    int tmp = ((PredictionsInterface) getContext()).getFromToState();
-                    int tmp2 =  ItinarySearchCard.FROM;
-
-                    if ( ((PredictionsInterface) getContext()).getFromToState() == ItinarySearchCard.FROM ) {
-                        ((PredictionsInterface) getContext()).googleAPISelectFromPrediction(counts.get(pos));
-                    } else if (((PredictionsInterface) getContext()).getFromToState() == ItinarySearchCard.TO ){
-                        ((PredictionsInterface) getContext()).googleAPISelectToPrediction(counts.get(pos));
-                    }
-
-                }
-
-            }
-        });
 
         return view;
     }

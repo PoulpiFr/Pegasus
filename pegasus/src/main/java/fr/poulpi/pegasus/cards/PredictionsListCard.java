@@ -10,10 +10,9 @@ import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.adapters.PredictionListAdapter;
 import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
 import fr.poulpi.pegasus.layout.PredictionListLayout;
-import fr.poulpi.pegasus.model.ApiPredictionsResponse;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIPredictionsResponse;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by paul-henri on 3/21/14.
@@ -38,9 +37,9 @@ public class PredictionsListCard extends Card implements PredictionsCardInterfac
     }
 
     @Override
-    public void refreshCard(ApiPredictionsResponse response) {
+    public void refreshCard(GoogleAPIPredictionsResponse response) {
 
-        ArrayList<ResultApiPrediction> list = new ArrayList<ResultApiPrediction>(response.getPredictions());
+        ArrayList<GoogleAPIResultPrediction> list = new ArrayList<GoogleAPIResultPrediction>(response.getPredictions());
 
         listLayout = (PredictionListLayout) getCardView().findViewById(R.id.predictions_card_inner_list);
 

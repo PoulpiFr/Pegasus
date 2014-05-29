@@ -21,8 +21,8 @@ import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
-import fr.poulpi.pegasus.model.ApiPredictionsResponse;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIPredictionsResponse;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.CardView;
 import retrofit.Callback;
@@ -125,6 +125,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
                 fragmentTransaction.commit();
             }
         });
+
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
         cardView.setCard(validateSearchCard);
 
@@ -147,7 +148,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
                 validateSearchCard.getCardView().setVisibility(View.GONE);
                 timeSearchCard.getCardView().setVisibility(View.GONE);
 
-                ((PredictionsCardInterface) predictionsListCard).refreshCard((ApiPredictionsResponse) o);
+                ((PredictionsCardInterface) predictionsListCard).refreshCard((GoogleAPIPredictionsResponse) o);
             }
 
         }
@@ -176,7 +177,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
     }
 
     @Override
-    public void googleAPISelectFromPrediction(ResultApiPrediction result) {
+    public void googleAPISelectFromPrediction(GoogleAPIResultPrediction result) {
 
         predictionsListCard.getCardView().setVisibility(View.GONE);
         isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
@@ -190,7 +191,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
     }
 
     @Override
-    public void googleAPISelectToPrediction(ResultApiPrediction result) {
+    public void googleAPISelectToPrediction(GoogleAPIResultPrediction result) {
 
         predictionsListCard.getCardView().setVisibility(View.GONE);
         isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
@@ -224,12 +225,12 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
 
     }
     @Override
-    public ResultApiPrediction getFrom() {
+    public GoogleAPIResultPrediction getFrom() {
         return itinarySearchCard.getFrom();
     }
 
     @Override
-    public ResultApiPrediction getTo() {
+    public GoogleAPIResultPrediction getTo() {
 
         return itinarySearchCard.getTo();
 

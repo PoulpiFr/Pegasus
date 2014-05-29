@@ -26,12 +26,10 @@ import fr.poulpi.pegasus.cards.ItinaryCard;
 import fr.poulpi.pegasus.constants.GoogleAPIConf;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
 import fr.poulpi.pegasus.interfaces.NavitiaIoInterface;
-import fr.poulpi.pegasus.model.CTPJourney;
 import fr.poulpi.pegasus.model.CTPJourneyResponse;
 import fr.poulpi.pegasus.model.GoogleAPIDetailsPlace;
 import fr.poulpi.pegasus.model.GoogleAPIGeometry;
-import fr.poulpi.pegasus.model.OTPResponse;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -53,7 +51,7 @@ public class ItinariesFragment extends Fragment {
     public static final String TAG = "ItinariesFragment";
     private ProgressDialog pd;
 
-    public static ItinariesFragment newInstance(ResultApiPrediction from, ResultApiPrediction to, String date) {
+    public static ItinariesFragment newInstance(GoogleAPIResultPrediction from, GoogleAPIResultPrediction to, String date) {
         ItinariesFragment fragment = new ItinariesFragment();
         Bundle args = new Bundle();
         args.putString("from_ref", from.reference);

@@ -1,7 +1,6 @@
 package fr.poulpi.pegasus.cards;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -9,20 +8,14 @@ import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.adapters.PredictionListAdapter;
-import fr.poulpi.pegasus.fragments.ItinariesFragment;
-import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
 import fr.poulpi.pegasus.layout.PredictionListLayout;
-import fr.poulpi.pegasus.model.ApiPredictionsResponse;
 import fr.poulpi.pegasus.model.OTPItinerary;
 import fr.poulpi.pegasus.model.OTPLegs;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 

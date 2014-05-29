@@ -32,7 +32,8 @@ import fr.poulpi.pegasus.fragments.StopFragment;
 import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
 import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsInterface;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIResult;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 
 public class MainActivity extends Activity implements
@@ -119,9 +120,14 @@ public class MainActivity extends Activity implements
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
 
+        FragmentManager fragmentManager = getFragmentManager();
+
         Fragment fragment;
         if(position == 0) {
             fragment = NewSearchFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         }
         else if(position == 1) {
             fragment = MetroMapFragment.newInstance();
@@ -134,16 +140,6 @@ public class MainActivity extends Activity implements
         } else {
            fragment = new OfflineFragment();
         }
-        // Create a new fragment and specify the planet to show based on position
-
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
@@ -168,7 +164,13 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-    public void onPredictionsFragmentInteraction(String id) {
+    public void onPredictionsFragmentInteraction(String mode, GoogleAPIResultPrediction destination) {
+
+        if(mode.equals(PredictionsFragment.FROM)){
+            ((NewSearchFragment)getFragmentManager().findFragmentByTag(NewSearchFragment.TAG)).setFromDestination(destination);
+        } else if (mode.equals(PredictionsFragment.TO)){
+            ((NewSearchFragment)getFragmentManager().findFragmentByTag(NewSearchFragment.TAG)).setToDestination(destination);
+        }
 
     }
 
@@ -217,7 +219,7 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-    public void googleAPISelectFromPrediction(ResultApiPrediction result) {
+    public void googleAPISelectFromPrediction(GoogleAPIResultPrediction result) {
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
@@ -228,7 +230,7 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-    public void googleAPISelectToPrediction(ResultApiPrediction result) {
+    public void googleAPISelectToPrediction(GoogleAPIResultPrediction result) {
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
@@ -256,8 +258,8 @@ public class MainActivity extends Activity implements
     @Override
     public void getFromTo() {
 
-        ResultApiPrediction from = null;
-        ResultApiPrediction to = null;
+        GoogleAPIResultPrediction from = null;
+        GoogleAPIResultPrediction to = null;
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
