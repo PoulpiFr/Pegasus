@@ -89,7 +89,6 @@ public class PredictionsFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            Log.d("poulpi", "Clickyyyyy");
             mListener.onPredictionsFragmentInteraction(getArguments().getString(MODE), mAdapter.getItem(position));
             getFragmentManager().popBackStack();
 

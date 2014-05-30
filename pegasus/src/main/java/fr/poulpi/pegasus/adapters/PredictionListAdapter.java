@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.Iterator;
 import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
+import fr.poulpi.pegasus.view.RATPLineView;
 
 /**
  * Created by paul-henri on 3/20/14.
@@ -32,15 +34,43 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
 
         //Without ViewHolder for demo purpose
         View view = convertView;
-
+        LineHolder lineHolder = null;
         if (view == null) {
-            LayoutInflater vi;
-            vi = LayoutInflater.from(getContext());
-            view = vi.inflate(R.layout.prediction_item_list, null);
+            lineHolder = new LineHolder();
+            view = View.inflate(getContext(), R.layout.prediction_item_list, null);
+            lineHolder.destinationName = (TextView) view.findViewById(R.id.prediction_item_name);
+            lineHolder.ratpSign = (RATPLineView) view.findViewById(R.id.sign);
+
+            view.setTag(lineHolder);
+        } else {
+            lineHolder = (LineHolder) view.getTag();
         }
 
-        TextView textView1 = (TextView) view.findViewById(R.id.prediction_item_name);
-        textView1.setText(item.getDescription());
+        boolean isSubwayStation = false;
+        boolean isRERStation = false;
+        Iterator<String> it = item.getTypes().iterator();
+        String tmp;
+
+        while (it.hasNext()){
+
+            tmp = it.next();
+
+            if(tmp.equals(getContext().getString(R.string.google_api_subway_station))){
+                isSubwayStation = true;
+            } else if(tmp.equals(getContext().getString(R.string.google_api_rer_station))){
+                isRERStation = true;
+            }
+        }
+
+        if (isSubwayStation) {
+            lineHolder.ratpSign.setLine(RATPLineView.METRO);
+        } else if (isRERStation){
+            lineHolder.ratpSign.setLine(RATPLineView.RER);
+        } else {
+            lineHolder.ratpSign.setLine(RATPLineView.BLANK);
+        }
+
+        lineHolder.destinationName.setText(item.getDescription());
 
         return view;
     }
@@ -54,6 +84,11 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
     @Override
     public int getCount(){
         return counts.size();
+    }
+
+    static class LineHolder {
+        public TextView destinationName;
+        public RATPLineView ratpSign;
     }
 
 }

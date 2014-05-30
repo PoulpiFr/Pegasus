@@ -20,5 +20,10 @@
     <string name="alternative">Itinéraire alternatif</string>
     <string name="now">Maintenant</string>
     <string name="no_predictions">On a encore rien trouvé !</string>
+    <string name="google_api_subway_station">subway_station</string>
+    <string name="google_api_rer_station">train_station</string>
+    <string name="arrival">Arrivée : </string>
+    <string name="departure">Départ : </string>
+    <string name="with">avec</string>
 
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ratp="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <fr.poulpi.pegasus.view.RATPLineView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ratp:bgColor="@color/azur"
+        ratp:filled="false"
+        ratp:text="1"
+        ratp:textSize="50sp"
+        ratp:border="3dp"
+        ratp:radius="25dp"
+        ratp:textColor="@color/azur"/>
+
+</LinearLayout>
