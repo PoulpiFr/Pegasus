@@ -267,13 +267,6 @@ public class MainActivity extends Activity implements
             from = ((OTPFragmentInterface)tmp).getFrom();
             to = ((OTPFragmentInterface)tmp).getTo();
         }
-
-        if( from.reference!= null && to.reference!= null ) {
-
-            Log.d("ph", "from " + from.reference);
-            Log.d("ph", "to " + to.reference );
-
-        }
     }
 
     @Override

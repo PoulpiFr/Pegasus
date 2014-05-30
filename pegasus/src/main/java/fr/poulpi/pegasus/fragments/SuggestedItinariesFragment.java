@@ -7,8 +7,38 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.adapters.SuggestedItinaryListAdapter;
+import fr.poulpi.pegasus.constants.GoogleAPIConf;
+import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
+import fr.poulpi.pegasus.interfaces.NavitiaIoInterface;
+import fr.poulpi.pegasus.model.CTPJourney;
+import fr.poulpi.pegasus.model.CTPJourneyResponse;
+import fr.poulpi.pegasus.model.GoogleAPIDetailsPlace;
+import fr.poulpi.pegasus.model.GoogleAPIGeometry;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,59 +50,132 @@ import fr.poulpi.pegasus.R;
  *
  */
 public class SuggestedItinariesFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String TO_REF = "to_ref";
+    public static final String FROM_REF = "from_ref";
+    public static final String TO_NAME = "to_name";
+    public static final String FROM_NAME = "from_name";
+    public static final String DATE = "date";
+
+    RestAdapter navitiaRestAdapter;
+    RestAdapter googleRestAdapter;
+
+    GoogleAPIGeometry from = null;
+    GoogleAPIGeometry to = null;
+
+    SuggestedItinaryListAdapter mAdapter;
+
+    public static final String TAG = "SuggestedItinariesFragment";
+
+    private String mFromRef;
+    private String mToRef;
+    private String mDate;
 
     private OnFragmentInteractionListener mListener;
+    private ListView mListView;
+    private TextView mFromTv;
+    private TextView mToTv;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SuggestedItinariesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SuggestedItinariesFragment newInstance(String param1, String param2) {
+    public static SuggestedItinariesFragment newInstance(Bundle bundle) {
         SuggestedItinariesFragment fragment = new SuggestedItinariesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
+        fragment.setArguments(bundle);
         return fragment;
     }
-    public SuggestedItinariesFragment() {
-        // Required empty public constructor
-    }
+
+    public SuggestedItinariesFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mFromRef = getArguments().getString(FROM_REF);
+            mToRef = getArguments().getString(TO_REF);
+            mDate = getArguments().getString(DATE);
         }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        String API_URL = "http://api.navitia.io/v1/";
+
+        // debug purpose only, to get the messages
+        RestAdapter.Log log = new RestAdapter.Log(){
+            public void log(String msg){
+                System.out.println(msg);
+            }
+        };
+
+        // Set the navitia time format
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+            DateFormat df = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+
+            @Override
+            public Date deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
+                    throws JsonParseException {
+                try {
+                    return df.parse(json.getAsString());
+                } catch (ParseException e) {
+                    return null;
+                }
+            }
+        });
+
+        Gson gson = gsonBuilder.create();
+
+        // Create a very simple REST adapter which points the GitHub API endpoint.
+        navitiaRestAdapter = new RestAdapter.Builder()
+                .setLog(log)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setEndpoint(API_URL)
+                .setConverter(new GsonConverter(gson))
+                .build();
+
+        // Demande des coordonnées GPS à partir de la référence Places API
+        API_URL = "https://maps.googleapis.com/maps/api/place";
+
+        googleRestAdapter = new RestAdapter.Builder()
+                .setLog(log)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setEndpoint(API_URL)
+                .build();
+
+        GooglePlaceAPIInterface tmp = googleRestAdapter.create(GooglePlaceAPIInterface.class);
+        tmp.details("true",
+                GoogleAPIConf.API_KEY,
+                getArguments().getString(FROM_REF),
+                "fr",
+                detailsFromCallback);
+        tmp.details("true",
+                GoogleAPIConf.API_KEY,
+                getArguments().getString(TO_REF),
+                "fr",
+                detailsToCallback);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_suggested_itinaries, container, false);
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        View view = inflater.inflate(R.layout.fragment_suggested_itinaries, container, false);
+
+        mListView = (ListView) view.findViewById(R.id.list);
+        mAdapter = new SuggestedItinaryListAdapter(getActivity(), new ArrayList<CTPJourney>());
+        mListView.setAdapter(mAdapter);
+        mListView.setEmptyView(view.findViewById(R.id.empty));
+        mListView.setItemsCanFocus(true);
+        //mListView.setOnItemClickListener(onItemClickListener);
+
+        mFromTv = (TextView) view.findViewById(R.id.destination_from_text);
+        mToTv = (TextView) view.findViewById(R.id.destination_to_text);
+        mFromTv.setText(getArguments().getString(FROM_NAME));
+        mToTv.setText(getArguments().getString(TO_NAME));
+
+        return view;
     }
 
     @Override
@@ -92,19 +195,66 @@ public class SuggestedItinariesFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    private void askForItinary(){
+
+        String fromStr = new StringBuilder().append(from.location.lng).append(";").append(from.location.lat).toString();
+        String toStr = new StringBuilder().append(to.location.lng).append(";").append(to.location.lat).toString();
+
+        NavitiaIoInterface ws = navitiaRestAdapter.create(NavitiaIoInterface.class);
+        ws.journey(fromStr, toStr, getArguments().getString("date"), "departure", itinaryCallback);
+
+    }
+
+
+    Callback itinaryCallback = new Callback() {
+        @Override
+        public void success(Object o, Response response) {
+
+            if(o instanceof CTPJourneyResponse) {
+                CTPJourneyResponse journeyResponse = (CTPJourneyResponse) o;
+                mAdapter = new SuggestedItinaryListAdapter(getActivity(), journeyResponse.getJourneys());
+                mListView.setAdapter(mAdapter);
+            }
+
+        }
+
+        @Override
+        public void failure(RetrofitError retrofitError) {
+
+            System.out.println(retrofitError);
+            retrofitError.printStackTrace();
+
+        }
+    };
+
+    Callback detailsFromCallback = new Callback() {
+        @Override
+        public void success(Object o, Response response) {
+            from = ((GoogleAPIDetailsPlace) o).result.geometry;
+            if (to != null){
+                askForItinary();
+            }
+        }
+
+        @Override
+        public void failure(RetrofitError retrofitError) {}
+    };
+
+    Callback detailsToCallback = new Callback() {
+        @Override
+        public void success(Object o, Response response) {
+            to = ((GoogleAPIDetailsPlace) o).result.geometry;
+            if (from != null){
+                askForItinary();
+            }
+        }
+
+        @Override
+        public void failure(RetrofitError retrofitError) {}
+    };
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onSuggestedItinariesFragmentInteraction(Uri uri);
     }
 
 }

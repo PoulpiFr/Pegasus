@@ -54,8 +54,8 @@ public class ItinariesFragment extends Fragment {
     public static ItinariesFragment newInstance(GoogleAPIResultPrediction from, GoogleAPIResultPrediction to, String date) {
         ItinariesFragment fragment = new ItinariesFragment();
         Bundle args = new Bundle();
-        args.putString("from_ref", from.reference);
-        args.putString("to_ref", to.reference);
+        args.putString("from_ref", from.getReference());
+        args.putString("to_ref", to.getReference());
         args.putString("date", date);
         fragment.setArguments(args);
         return fragment;

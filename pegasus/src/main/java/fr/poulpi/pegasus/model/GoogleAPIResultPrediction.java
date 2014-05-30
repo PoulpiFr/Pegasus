@@ -10,7 +10,7 @@ public class GoogleAPIResultPrediction {
     String description;
     String id;
     GoogleAPIResultMatchedSubstrings[] matched_substrings;
-    public String reference;
+    String reference;
     ArrayList<GoogleAPIResultiTerms> terms;
     ArrayList<String> types;
 

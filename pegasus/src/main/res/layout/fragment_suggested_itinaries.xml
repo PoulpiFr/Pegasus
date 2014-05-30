@@ -1,13 +1,115 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.poulpi.pegasus.fragments.SuggestedItinariesFragment">
+    android:orientation="vertical"
+    tools:context="fr.poulpi.pegasus.fragments.SuggestedItinariesFragment"
+    android:background="@color/background_gray">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:id="@+id/destination_container"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/up_sep_height"
+            android:background="@color/separator_gray"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/destination_from_container"
+            android:padding="@dimen/destination_padding"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_from"
+                android:id="@+id/ic_from"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/from_gps"
+                android:textColorHint="@color/txt_gray"
+                android:id="@+id/destination_from_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_size"
+                android:background="@color/white"
+                android:layout_marginLeft="@dimen/destination_ic_space"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white">
+            <View
+                android:layout_width="@dimen/div_width"
+                android:layout_height="@dimen/div_height"
+                android:background="@color/separator_gray"
+                android:layout_gravity="center_horizontal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/destination_to_container"
+            android:padding="@dimen/destination_padding"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_to"
+                android:id="@+id/ic_to"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/to"
+                android:textColorHint="@color/txt_gray"
+                android:id="@+id/destination_to_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_size"
+                android:background="@color/white"
+                android:layout_marginLeft="@dimen/destination_ic_space"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/down_sep_height"
+            android:background="@color/separator_gray"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/destination_down_sep" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/suggested_itinary_block_distance"
+        android:background="@color/background_gray"
+        android:layout_gravity="center_horizontal" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background_gray"
+            android:layout_weight="1"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/suggested_itinary_block_distance"
+            android:drawSelectorOnTop="false"/>
+
+</LinearLayout>

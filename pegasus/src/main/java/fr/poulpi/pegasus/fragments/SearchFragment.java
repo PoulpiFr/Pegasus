@@ -224,6 +224,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
         timeSearchCard.setTime(hourOfDay, minute);
 
     }
+
     @Override
     public GoogleAPIResultPrediction getFrom() {
         return itinarySearchCard.getFrom();

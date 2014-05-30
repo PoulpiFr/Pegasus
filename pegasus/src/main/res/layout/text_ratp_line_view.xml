@@ -9,12 +9,12 @@
     <fr.poulpi.pegasus.view.RATPLineView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ratp:bgColor="@color/azur"
-        ratp:filled="false"
-        ratp:text="1"
-        ratp:textSize="50sp"
-        ratp:border="3dp"
-        ratp:radius="25dp"
-        ratp:textColor="@color/azur"/>
+        ratp:bgColor="@color/sapin"
+        ratp:filled="true"
+        ratp:text="12"
+        ratp:textSize="@dimen/ratp_sign_text_size"
+        ratp:border="@dimen/ratp_sign_border"
+        ratp:radius="@dimen/ratp_sign_radius"
+        ratp:textColor="@color/white"/>
 
 </LinearLayout>

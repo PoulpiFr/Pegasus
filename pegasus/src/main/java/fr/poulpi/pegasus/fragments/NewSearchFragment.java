@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,9 +20,12 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.EditText;
 
-import java.util.Objects;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.SuggestedItinariesActivity;
 import fr.poulpi.pegasus.constants.GoogleAPIConf;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
 import fr.poulpi.pegasus.model.GoogleAPIPredictionsResponse;
@@ -65,6 +69,28 @@ public class NewSearchFragment extends Fragment {
     private LayerEnablingAnimatorListener mLayerEnablingAnimatorListener;
     private GoogleAPIResultPrediction fromDestination;
     private GoogleAPIResultPrediction toDestination;
+
+    private View.OnClickListener btnSearchOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(getActivity(), SuggestedItinariesActivity.class);
+
+            Bundle bundle = new Bundle();
+            bundle.putString(SuggestedItinariesFragment.FROM_REF, fromDestination.getReference());
+            bundle.putString(SuggestedItinariesFragment.TO_REF, toDestination.getReference());
+
+            DateFormat dfISO8601 = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+            Date date = new Date();
+            bundle.putString(SuggestedItinariesFragment.DATE, dfISO8601.format(date));
+
+            bundle.putString(SuggestedItinariesFragment.FROM_NAME, fromDestination.getDescription());
+            bundle.putString(SuggestedItinariesFragment.TO_NAME, toDestination.getDescription());
+            intent.putExtras(bundle);
+
+            startActivity(intent);
+        }
+    };
 
     public static NewSearchFragment newInstance() {
         NewSearchFragment fragment = new NewSearchFragment();
@@ -126,6 +152,8 @@ public class NewSearchFragment extends Fragment {
         mFromEditText.setOnFocusChangeListener(onFromFocusChange);
         mToEditText.setOnFocusChangeListener(onToFocusChange);
 
+        mBtnSearchContainer.setOnClickListener(btnSearchOnClickListener);
+
         mLayerEnablingAnimatorListener = new LayerEnablingAnimatorListener(view);
         return view;
     }
@@ -174,7 +202,6 @@ public class NewSearchFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onSearchFragmentInteraction(Uri uri);
     }
 
