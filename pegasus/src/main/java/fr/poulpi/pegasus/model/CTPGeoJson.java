@@ -15,11 +15,11 @@ public class CTPGeoJson {
         this.type = type;
     }
 
-    public CTPGeoJsonProperties getProperties() {
+    public ArrayList<CTPGeoJsonProperties> getProperties() {
         return properties;
     }
 
-    public void setProperties(CTPGeoJsonProperties properties) {
+    public void setProperties(ArrayList<CTPGeoJsonProperties> properties) {
         this.properties = properties;
     }
 
@@ -32,6 +32,6 @@ public class CTPGeoJson {
     }
 
     String type;
-    CTPGeoJsonProperties properties;
+    ArrayList<CTPGeoJsonProperties> properties;
     ArrayList<ArrayList<Double>> coordinates;
 }

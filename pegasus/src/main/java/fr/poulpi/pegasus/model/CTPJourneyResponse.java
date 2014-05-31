@@ -16,4 +16,5 @@ public class CTPJourneyResponse {
     public void setJourneys(List<CTPJourney> journeys) {
         this.journeys = journeys;
     }
+
 }

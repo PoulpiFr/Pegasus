@@ -56,8 +56,7 @@ import retrofit.converter.GsonConverter;
 
 public class SuggestedItinariesActivity extends FragmentActivity implements ActionBar.TabListener,
         SuggestedItinariesFragment.OnFragmentInteractionListener,
-        SuggestedItinariesGoogleMapFragment.OnFragmentInteractionListener,
-SuggestedItinariesActivity.journeysProvider{
+        SuggestedItinariesGoogleMapFragment.OnFragmentInteractionListener{
 
     public static final String TO_REF = "to_ref";
     public static final String FROM_REF = "from_ref";
@@ -74,7 +73,7 @@ SuggestedItinariesActivity.journeysProvider{
     GoogleAPIGeometry to = null;
 
     ViewPager mViewPager;
-    private ArrayList<CTPJourney> mJourneys;
+    private List<CTPJourney> mJourneys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,8 +276,7 @@ SuggestedItinariesActivity.journeysProvider{
 
     }
 
-    @Override
-    public ArrayList<CTPJourney> getJourneys() {
+    public List<CTPJourney> getJourneys() {
         return mJourneys;
     }
 
@@ -334,9 +332,5 @@ SuggestedItinariesActivity.journeysProvider{
             return "android:switcher:" + viewId + ":" + index;
         }
 
-    }
-
-    public interface journeysProvider{
-        public ArrayList<CTPJourney> getJourneys();
     }
 }

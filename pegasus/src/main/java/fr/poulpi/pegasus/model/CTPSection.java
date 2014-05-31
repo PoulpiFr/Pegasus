@@ -24,7 +24,8 @@ public class CTPSection {
     CTPDisplay_informations display_informations;
     //Other informations : TODO
     String additionnal_informations;
-    //GeoJson geojson	GeoJson <http://www.geojson.org>
+    //GeoJson <http://www.geojson.org>
+    CTPGeoJson geojson;
     //The path of this section
     List<CTPPath> path;
     //The type of this transfer it can be : WALKING, GUARANTEED, EXTENSION
@@ -130,5 +131,13 @@ public class CTPSection {
 
     public void setArrival_date_time(Date arrival_date_time) {
         this.arrival_date_time = arrival_date_time;
+    }
+
+    public CTPGeoJson getGeojson() {
+        return geojson;
+    }
+
+    public void setGeojson(CTPGeoJson geojson) {
+        this.geojson = geojson;
     }
 }

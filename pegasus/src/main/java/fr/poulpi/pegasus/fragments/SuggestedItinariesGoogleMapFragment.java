@@ -1,9 +1,11 @@
 package fr.poulpi.pegasus.fragments;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +15,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.SuggestedItinariesActivity;
+import fr.poulpi.pegasus.model.CTPGeoJson;
 import fr.poulpi.pegasus.model.CTPJourney;
 import fr.poulpi.pegasus.model.CTPSection;
 
@@ -63,15 +68,34 @@ public class SuggestedItinariesGoogleMapFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            if (getActivity() instanceof SuggestedItinariesActivity.journeysProvider) {
-                ArrayList<CTPJourney> list = ((SuggestedItinariesActivity.journeysProvider)getActivity()).getJourneys();
+            Log.d("Poulpi", "We are in da place !!");
+            if (getActivity() instanceof SuggestedItinariesActivity) {
+                List<CTPJourney> list = ((SuggestedItinariesActivity) getActivity()).getJourneys();
 
-                Iterator<CTPJourney> itJourney = list.iterator();
-                Iterator<CTPSection> itSection;
-                while(itJourney.hasNext()){
-                    itSection = itJourney.next().getSections().iterator();
-                    while (itSection.hasNext()){
-                        itSection.next().get
+                if (list != null) {
+                    Iterator<CTPJourney> itJourney = list.iterator();
+                    Iterator<CTPSection> itSection;
+                    Iterator<ArrayList<Double>> itCoords;
+                    ArrayList<Double> tmp;
+
+                    while (itJourney.hasNext()) {
+                        itSection = itJourney.next().getSections().iterator();
+                        PolylineOptions line = new PolylineOptions();
+                        line.width(5);
+                        line.color(Color.RED);
+                        while (itSection.hasNext()) {
+                            CTPGeoJson geoJson = itSection.next().getGeojson();
+
+                            if (geoJson != null && geoJson.getCoordinates() != null) {
+                                itCoords = geoJson.getCoordinates().iterator();
+                                while (itCoords.hasNext()) {
+                                    tmp = itCoords.next();
+                                    Log.d("Poulpi", "Lat : " + tmp.get(1) + " lng : " + tmp.get(0));
+                                    line.add(new LatLng(tmp.get(1), tmp.get(0)));
+                                }
+                            }
+                        }
+                        googleMap.addPolyline(line);
                     }
                 }
             }
@@ -96,8 +120,8 @@ public class SuggestedItinariesGoogleMapFragment extends Fragment {
         mListener = null;
     }
 
-public interface OnFragmentInteractionListener {
-    public void onSuggestedItinariesGoogleMapFragmentInteraction(Uri uri);
-}
+    public interface OnFragmentInteractionListener {
+        public void onSuggestedItinariesGoogleMapFragmentInteraction(Uri uri);
+    }
 
 }
