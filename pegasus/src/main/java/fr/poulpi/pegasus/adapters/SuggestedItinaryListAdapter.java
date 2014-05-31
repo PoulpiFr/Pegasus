@@ -14,7 +14,7 @@ import java.util.List;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.model.CTPJourney;
 import fr.poulpi.pegasus.model.CTPSection;
-import fr.poulpi.pegasus.view.RATPLineView;
+import fr.poulpi.pegasus.view.RATPLineSignView;
 
 /**
  * Created by pokito on 30/05/2014.
@@ -46,12 +46,12 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
             journeyHolder.timeOfDeparture = (TextView) view.findViewById(R.id.suggested_itinary_departure_time);
             journeyHolder.timeOfArrival = (TextView) view.findViewById(R.id.suggested_itinary_arrival_time);
 
-            journeyHolder.sign1 = (RATPLineView) view.findViewById(R.id.suggested_itinary_ratp_sign_1);
-            journeyHolder.sign2 = (RATPLineView) view.findViewById(R.id.suggested_itinary_ratp_sign_2);
-            journeyHolder.sign3 = (RATPLineView) view.findViewById(R.id.suggested_itinary_ratp_sign_3);
-            journeyHolder.sign4 = (RATPLineView) view.findViewById(R.id.suggested_itinary_ratp_sign_4);
-            journeyHolder.sign5 = (RATPLineView) view.findViewById(R.id.suggested_itinary_ratp_sign_5);
-            journeyHolder.sign6 = (RATPLineView) view.findViewById(R.id.suggested_itinary_ratp_sign_6);
+            journeyHolder.sign1 = (RATPLineSignView) view.findViewById(R.id.suggested_itinary_ratp_sign_1);
+            journeyHolder.sign2 = (RATPLineSignView) view.findViewById(R.id.suggested_itinary_ratp_sign_2);
+            journeyHolder.sign3 = (RATPLineSignView) view.findViewById(R.id.suggested_itinary_ratp_sign_3);
+            journeyHolder.sign4 = (RATPLineSignView) view.findViewById(R.id.suggested_itinary_ratp_sign_4);
+            journeyHolder.sign5 = (RATPLineSignView) view.findViewById(R.id.suggested_itinary_ratp_sign_5);
+            journeyHolder.sign6 = (RATPLineSignView) view.findViewById(R.id.suggested_itinary_ratp_sign_6);
 
             view.setTag(journeyHolder);
         } else {
@@ -79,7 +79,7 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
         int nbOfSigns = 0;
         Iterator<CTPSection> it = item.getSections().iterator();
         CTPSection tmp;
-        RATPLineView currentSign = null;
+        RATPLineSignView currentSign = null;
         while (it.hasNext()){
             tmp = it.next();
             if(tmp.getMode() != null && tmp.getMode().equals(getContext().getString(R.string.navitia_api_walking))){
@@ -110,33 +110,37 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
                 currentSign.setVisibility(View.VISIBLE);
 
                 if(tmp.getDisplay_informations().getLabel().equals("1")){
-                    currentSign.setLine(RATPLineView.M1);
+                    currentSign.setLine(RATPLineSignView.M1);
                 } else if(tmp.getDisplay_informations().getLabel().equals("2")){
-                    currentSign.setLine(RATPLineView.M2);
+                    currentSign.setLine(RATPLineSignView.M2);
                 } else if(tmp.getDisplay_informations().getLabel().equals("3")){
-                    currentSign.setLine(RATPLineView.M3);
+                    currentSign.setLine(RATPLineSignView.M3);
                 } else if(tmp.getDisplay_informations().getLabel().equals("4")){
-                    currentSign.setLine(RATPLineView.M4);
+                    currentSign.setLine(RATPLineSignView.M4);
                 } else if(tmp.getDisplay_informations().getLabel().equals("5")){
-                    currentSign.setLine(RATPLineView.M5);
+                    currentSign.setLine(RATPLineSignView.M5);
                 } else if(tmp.getDisplay_informations().getLabel().equals("6")){
-                    currentSign.setLine(RATPLineView.M6);
+                    currentSign.setLine(RATPLineSignView.M6);
                 } else if(tmp.getDisplay_informations().getLabel().equals("7")){
-                    currentSign.setLine(RATPLineView.M7);
+                    currentSign.setLine(RATPLineSignView.M7);
                 } else if(tmp.getDisplay_informations().getLabel().equals("8")){
-                    currentSign.setLine(RATPLineView.M8);
+                    currentSign.setLine(RATPLineSignView.M8);
                 } else if(tmp.getDisplay_informations().getLabel().equals("9")){
-                    currentSign.setLine(RATPLineView.M9);
+                    currentSign.setLine(RATPLineSignView.M9);
                 } else if(tmp.getDisplay_informations().getLabel().equals("10")){
-                    currentSign.setLine(RATPLineView.M10);
+                    currentSign.setLine(RATPLineSignView.M10);
                 } else if(tmp.getDisplay_informations().getLabel().equals("11")){
-                    currentSign.setLine(RATPLineView.M11);
+                    currentSign.setLine(RATPLineSignView.M11);
                 } else if(tmp.getDisplay_informations().getLabel().equals("12")){
-                    currentSign.setLine(RATPLineView.M12);
+                    currentSign.setLine(RATPLineSignView.M12);
                 } else if(tmp.getDisplay_informations().getLabel().equals("13")){
-                    currentSign.setLine(RATPLineView.M13);
+                    currentSign.setLine(RATPLineSignView.M13);
                 } else if(tmp.getDisplay_informations().getLabel().equals("14")){
-                    currentSign.setLine(RATPLineView.M14);
+                    currentSign.setLine(RATPLineSignView.M14);
+                } else if(tmp.getDisplay_informations().getLabel().equals("A")){
+                    currentSign.setLine(RATPLineSignView.RA);
+                } else if(tmp.getDisplay_informations().getLabel().equals("B")){
+                    currentSign.setLine(RATPLineSignView.RB);
                 }
 
             }
@@ -166,12 +170,12 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
         public TextView timeOfDeparture;
         public TextView timeOfArrival;
 
-        public RATPLineView sign1;
-        public RATPLineView sign2;
-        public RATPLineView sign3;
-        public RATPLineView sign4;
-        public RATPLineView sign5;
-        public RATPLineView sign6;
+        public RATPLineSignView sign1;
+        public RATPLineSignView sign2;
+        public RATPLineSignView sign3;
+        public RATPLineSignView sign4;
+        public RATPLineSignView sign5;
+        public RATPLineSignView sign6;
     }
 
 }

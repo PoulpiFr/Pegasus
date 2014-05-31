@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <fr.poulpi.pegasus.view.RATPLineView
+    <fr.poulpi.pegasus.view.RATPLineSignView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ratp:bgColor="@color/sapin"

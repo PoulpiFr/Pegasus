@@ -75,7 +75,7 @@
         android:id="@+id/suggested_itinary_second_line"
         android:padding="@dimen/suggested_itinary_padding">
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:id="@+id/suggested_itinary_ratp_sign_1"
@@ -89,7 +89,7 @@
             ratp:radius="@dimen/ratp_sign_radius"
             ratp:textColor="@color/azur"/>
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:id="@+id/suggested_itinary_ratp_sign_2"
@@ -104,7 +104,7 @@
             ratp:radius="@dimen/ratp_sign_radius"
             ratp:textColor="@color/azur"/>
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:id="@+id/suggested_itinary_ratp_sign_3"
@@ -119,7 +119,7 @@
             ratp:radius="@dimen/ratp_sign_radius"
             ratp:textColor="@color/azur"/>
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:id="@+id/suggested_itinary_ratp_sign_4"
@@ -134,7 +134,7 @@
             ratp:radius="@dimen/ratp_sign_radius"
             ratp:textColor="@color/azur"/>
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:id="@+id/suggested_itinary_ratp_sign_5"
@@ -149,7 +149,7 @@
             ratp:radius="@dimen/ratp_sign_radius"
             ratp:textColor="@color/azur"/>
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:id="@+id/suggested_itinary_ratp_sign_6"

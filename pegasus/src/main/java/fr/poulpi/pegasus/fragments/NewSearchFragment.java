@@ -77,15 +77,15 @@ public class NewSearchFragment extends Fragment {
             Intent intent = new Intent(getActivity(), SuggestedItinariesActivity.class);
 
             Bundle bundle = new Bundle();
-            bundle.putString(SuggestedItinariesFragment.FROM_REF, fromDestination.getReference());
-            bundle.putString(SuggestedItinariesFragment.TO_REF, toDestination.getReference());
+            bundle.putString(SuggestedItinariesActivity.FROM_REF, fromDestination.getReference());
+            bundle.putString(SuggestedItinariesActivity.TO_REF, toDestination.getReference());
 
             DateFormat dfISO8601 = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
             Date date = new Date();
-            bundle.putString(SuggestedItinariesFragment.DATE, dfISO8601.format(date));
+            bundle.putString(SuggestedItinariesActivity.DATE, dfISO8601.format(date));
 
-            bundle.putString(SuggestedItinariesFragment.FROM_NAME, fromDestination.getDescription());
-            bundle.putString(SuggestedItinariesFragment.TO_NAME, toDestination.getDescription());
+            bundle.putString(SuggestedItinariesActivity.FROM_NAME, fromDestination.getDescription());
+            bundle.putString(SuggestedItinariesActivity.TO_NAME, toDestination.getDescription());
             intent.putExtras(bundle);
 
             startActivity(intent);

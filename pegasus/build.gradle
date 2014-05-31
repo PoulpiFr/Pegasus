@@ -3,21 +3,18 @@ apply plugin: 'android'
 android {
     compileSdkVersion 19
     buildToolsVersion '19.1'
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
-
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
@@ -26,6 +23,13 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
+    }
+    productFlavors {
+    }
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+        }
     }
 }
 
@@ -36,4 +40,5 @@ dependencies {
     compile 'com.github.gabrielemariotti.cards:library:1.4.+'
     compile 'it.sephiroth.android.library.imagezoom:library:+'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.android.gms:play-services:4.4.52'
 }

@@ -17,7 +17,7 @@ import fr.poulpi.pegasus.R;
 /**
  * Created by pokito on 29/05/2014.
  */
-public class RATPLineView extends View {
+public class RATPLineSignView extends View {
 
     private static final int TEXT_SIZE = 50;
     private static final int RADIUS = 3;
@@ -61,12 +61,12 @@ public class RATPLineView extends View {
     public final static int RA = 41;
     public final static int RB = 42;
 
-    public RATPLineView(Context context, AttributeSet attrs) {
+    public RATPLineSignView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.RATPLineView,
+                R.styleable.RATPLineSignView,
                 0, 0);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -78,13 +78,13 @@ public class RATPLineView extends View {
         float textSize = (int)TEXT_SIZE * dm.scaledDensity;
 
         try {
-            mTextColor = a.getColor(R.styleable.RATPLineView_textColor, Color.BLACK);
-            mBgColor = a.getColor(R.styleable.RATPLineView_bgColor, Color.BLACK);
-            mIsFilled = a.getBoolean(R.styleable.RATPLineView_filled, false);
-            mRadius = a.getDimension(R.styleable.RATPLineView_radius, radius);
-            mBorder = a.getDimension(R.styleable.RATPLineView_border, border);
-            mText = a.getString(R.styleable.RATPLineView_text);
-            mTextSize = a.getDimension(R.styleable.RATPLineView_textSize, textSize);
+            mTextColor = a.getColor(R.styleable.RATPLineSignView_textColor, Color.BLACK);
+            mBgColor = a.getColor(R.styleable.RATPLineSignView_bgColor, Color.BLACK);
+            mIsFilled = a.getBoolean(R.styleable.RATPLineSignView_filled, false);
+            mRadius = a.getDimension(R.styleable.RATPLineSignView_radius, radius);
+            mBorder = a.getDimension(R.styleable.RATPLineSignView_border, border);
+            mText = a.getString(R.styleable.RATPLineSignView_text);
+            mTextSize = a.getDimension(R.styleable.RATPLineSignView_textSize, textSize);
         } finally {
             a.recycle();
         }

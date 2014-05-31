@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RATPLineView">
+    <declare-styleable name="RATPLineSignView">
         <attr name="filled" format="boolean" />
         <attr name="bgColor" format="reference"/>
         <attr name="textColor" format="reference"/>

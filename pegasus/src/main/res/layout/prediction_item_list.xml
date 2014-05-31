@@ -8,7 +8,7 @@
     android:layout_height="@dimen/prediction_item_height"
     android:padding="@dimen/prediction_padding">
 
-        <fr.poulpi.pegasus.view.RATPLineView
+        <fr.poulpi.pegasus.view.RATPLineSignView
             android:layout_width="@dimen/ratp_sign_width"
             android:layout_height="@dimen/ratp_sign_height"
             android:layout_centerVertical="true"

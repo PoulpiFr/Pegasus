@@ -1,8 +1,6 @@
 package fr.poulpi.pegasus.adapters;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -13,7 +11,7 @@ import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
-import fr.poulpi.pegasus.view.RATPLineView;
+import fr.poulpi.pegasus.view.RATPLineSignView;
 
 /**
  * Created by paul-henri on 3/20/14.
@@ -39,7 +37,7 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
             lineHolder = new LineHolder();
             view = View.inflate(getContext(), R.layout.prediction_item_list, null);
             lineHolder.destinationName = (TextView) view.findViewById(R.id.prediction_item_name);
-            lineHolder.ratpSign = (RATPLineView) view.findViewById(R.id.sign);
+            lineHolder.ratpSign = (RATPLineSignView) view.findViewById(R.id.sign);
 
             view.setTag(lineHolder);
         } else {
@@ -63,11 +61,11 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
         }
 
         if (isSubwayStation) {
-            lineHolder.ratpSign.setLine(RATPLineView.METRO);
+            lineHolder.ratpSign.setLine(RATPLineSignView.METRO);
         } else if (isRERStation){
-            lineHolder.ratpSign.setLine(RATPLineView.RER);
+            lineHolder.ratpSign.setLine(RATPLineSignView.RER);
         } else {
-            lineHolder.ratpSign.setLine(RATPLineView.BLANK);
+            lineHolder.ratpSign.setLine(RATPLineSignView.BLANK);
         }
 
         lineHolder.destinationName.setText(item.getDescription());
@@ -88,7 +86,7 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
 
     static class LineHolder {
         public TextView destinationName;
-        public RATPLineView ratpSign;
+        public RATPLineSignView ratpSign;
     }
 
 }
