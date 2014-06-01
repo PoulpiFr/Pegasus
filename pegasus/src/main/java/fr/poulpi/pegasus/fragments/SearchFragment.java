@@ -126,6 +126,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
                 fragmentTransaction.commit();
             }
         });
+
         cardView = (CardView) getActivity().findViewById(R.id.validate_search_card);
         cardView.setCard(validateSearchCard);
 

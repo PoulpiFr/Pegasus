@@ -15,4 +15,27 @@
     <string name="offline_mode_enabled">Mode hors-ligne activé</string>
     <string name="search">Rechercher</string>
 
+    <string name="description_titre">UNDER</string>
+    <string name="description">UNDER est la première application à calculer votre itinéraire optimal et réunir toute l\'information sur votre trajet en incluant les correspondances et les sorties, le tout via une interface simple et intuitive.</string>
+
+    <string name="intuitive_titre">Intuitive</string>
+    <string name="intuitive">Pas besoin d\'être un geek pour utiliser UNDER ! Grâce à une interface épurée, la prise en main de l\'application se fait sans détour. « 3 clics, 1 trajet », telle est notre devise.</string>
+
+    <string name="performante_titre">Performante</string>
+    <string name="performante">Des algorithmes optimisés, de puissants serveurs et une application allégée sont à la base de la planification UNDER. Fini le lag des transports !</string>
+
+    <string name="esthetique_titre">Esthétique</string>
+    <string name="esthetique">Planifier sur UNDER, c\'est joindre l\'utile à l\'agréable. L\'application arbore un design sobre et fluide, conforme au guide de développement Android de Google.</string>
+
+    <string name="sorties_correspondances_titre">Sorties et correspondances</string>
+    <string name="sorties_correspondances">Grâce à la base de données la plus complète du marché, UNDER est capable de vous orienter avec précision tout au long de votre trajet en vous indiquant quelles sorties prendre et où vous placer dans le métro.</string>
+
+    <string name="hors_ligne_titre">Un mode hors-ligne</string>
+    <string name="hors_ligne">Marre de ne pas capter dans le métro ? UNDER est aussi faite pour fonctionner même au plus profond de la ville grâce à son mode hors-ligne unique en son genre !</string>
+
+    <string name="itineraire_optimal_titre">Un itinéraire optimal</string>
+    <string name="itineraire_optimal">Basée sur des technologies Open Source de pointe au niveau mondial pour la planification d\'itinéraires multi-modaux, UNDER vous garantit le meilleur choix d\'itinéraire pour tous vos trajets.</string>
+
+    <string name="equipe_titre">Notre équipe</string>
+    <string name="equipe">Issue des meilleures écoles d\'ingénieur françaises et européennes, notre équipe est constituée de jeunes entrepreneurs urbains passionnés de nouvelles technologies. Notre but ? Rendre la planification de vos trajets plus facile et plus complète que jamais !</string>
 </resources>

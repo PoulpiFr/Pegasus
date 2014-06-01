@@ -23,6 +23,7 @@ import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
+import fr.poulpi.pegasus.fragments.AProposFragment;
 import fr.poulpi.pegasus.fragments.ItinaryFragment;
 import fr.poulpi.pegasus.fragments.ItinaryPreferenceFragment;
 import fr.poulpi.pegasus.fragments.MetroMapFragment;
@@ -119,9 +120,12 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         else if(position == 1) {
             fragment = MetroMapFragment.newInstance();
         }
-        else if(position == 4){
-                fragment = ItinaryPreferenceFragment.newInstance();
-        } else {
+        else if(position == 4) {
+            fragment = ItinaryPreferenceFragment.newInstance();
+        }
+        else if(position == 5){
+                fragment = AProposFragment.newInstance();}
+        else {
            fragment = new OfflineFragment();
         }
         // Create a new fragment and specify the planet to show based on position

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/rootView">
+
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description_titre"
+                android:id="@+id/description_titre"
+                android:background="@color/red"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:id="@+id/description"
+                android:background="#ffffff"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/intuitive_titre"
+                android:id="@+id/intuitive_titre"
+                android:background="@color/red"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/intuitive"
+                android:id="@+id/intuitive"
+                android:background="#ffffff"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/performante_titre"
+                android:id="@+id/performante_titre"
+                android:background="@color/red"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/performante"
+                android:id="@+id/performante"
+                android:background="#ffffff"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/esthetique_titre"
+                android:id="@+id/esthetique_titre"
+                android:background="@color/red"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:fontFamily="sans-serif-condensed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/esthetique"
+                android:id="@+id/esthetique"
+                android:background="#ffffff"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -6,6 +6,7 @@
         <item>Infos trafic</item>
         <item>Statistiques</item>
         <item>Paramètres</item>
+        <item>À Propos</item>
     </array>
 
     <string-array name="time_array">

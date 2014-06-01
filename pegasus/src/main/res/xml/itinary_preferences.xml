@@ -2,7 +2,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory>
+    <PreferenceCategory android:title="Mes modes de transport préférés">
 
         <CheckBoxPreference
             android:key="checkbox_rer"
@@ -22,10 +22,10 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory android:title="Ma vitesse de marche">
 
         <ListPreference
-            android:title="Sélectionnez votre vitesse à pied"
+            android:title="Je sélectionne ma vitesse à pied"
             android:key="marche_list"
             android:entries="@array/marche_entry_array"
             android:entryValues="@array/marche_value_array" />
