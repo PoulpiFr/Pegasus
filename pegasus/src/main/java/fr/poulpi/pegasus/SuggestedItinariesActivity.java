@@ -39,6 +39,7 @@ import java.util.Locale;
 
 import fr.poulpi.pegasus.adapters.SuggestedItinaryListAdapter;
 import fr.poulpi.pegasus.constants.GoogleAPIConf;
+import fr.poulpi.pegasus.constants.NavitiaIoConf;
 import fr.poulpi.pegasus.fragments.SuggestedItinariesFragment;
 import fr.poulpi.pegasus.fragments.SuggestedItinariesGoogleMapFragment;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
@@ -114,7 +115,7 @@ public class SuggestedItinariesActivity extends FragmentActivity implements Acti
                             .setTabListener(this));
         }
 
-        String API_URL = "http://api.navitia.io/v1/";
+        String API_URL = "https://beta.navitia.io/v1/";
 
         // debug purpose only, to get the messages
         RestAdapter.Log log = new RestAdapter.Log(){

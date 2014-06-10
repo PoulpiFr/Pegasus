@@ -68,7 +68,6 @@ public class SuggestedItinariesGoogleMapFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            Log.d("Poulpi", "We are in da place !!");
             if (getActivity() instanceof SuggestedItinariesActivity) {
                 List<CTPJourney> list = ((SuggestedItinariesActivity) getActivity()).getJourneys();
 

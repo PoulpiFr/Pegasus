@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -22,6 +23,9 @@ public class RATPLineSignView extends View {
     private static final int TEXT_SIZE = 50;
     private static final int RADIUS = 3;
     private static final int BORDER = 25;
+    private static final int METRO_MODE = 0;
+    private static final int BUS_MODE = 1;
+
 
     private String mText;
     private float mBorder;
@@ -61,6 +65,9 @@ public class RATPLineSignView extends View {
     public final static int RA = 41;
     public final static int RB = 42;
 
+    private int mode;
+    private Rect mBusRect;
+
     public RATPLineSignView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -96,19 +103,56 @@ public class RATPLineSignView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        float centerX = (float) (getWidth()/2.);
-        float centerY = (float) (getHeight()/2.);
-        canvas.drawCircle(centerX, centerY, mRadius, mBgPaint);
+        float centerX = (float) (getWidth() / 2.);
+        float centerY = (float) (getHeight() / 2.);
+
+        if(mode == METRO_MODE) {
+            canvas.drawCircle(centerX, centerY, mRadius, mBgPaint);
+        } else if(mode == BUS_MODE){
+            Log.v("poulpi", "l " + mBusRect.left + " b " + mBusRect.bottom + " t " + mBusRect.top + " r " + mBusRect.right);
+            canvas.drawRect(mBusRect, mBgPaint);
+        }
 
         int xPos = (int) centerX;
-        int yPos = (int) ((centerY) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2)) ;
+        int yPos = (int) ((centerY) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2));
 
-        if(mText != null) {
+        if (mText != null) {
             canvas.drawText(mText, xPos, yPos, mTextPaint);
         }
+
     }
 
-    public void setLine(int line){
+    private void init(boolean isInEditMode) {
+
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint.setColor(mTextColor);
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        if (!isInEditMode){
+            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/ratp.otf");
+            mTextPaint.setTypeface(tf);
+        }
+
+        mBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mBgPaint.setColor(mBgColor);
+        mBgPaint.setStrokeWidth(mBorder);
+
+        if(mIsFilled){
+            mBgPaint.setStyle(Paint.Style.FILL);
+        } else {
+            mBgPaint.setStyle(Paint.Style.STROKE);
+        }
+
+        int top = (int) (getTop() - getHeight()/6.);
+        int bottom = (int) (getBottom() + getHeight()/6.);
+
+        mBusRect = new Rect(getLeft(), top, getRight(), bottom);
+    }
+
+    public void setMetroLine(int line){
+
+        mode = METRO_MODE;
 
         switch (line){
             /* METRO */
@@ -270,28 +314,15 @@ public class RATPLineSignView extends View {
 
     }
 
-    private void init(boolean isInEditMode) {
+    public void setBusLine(String label) {
+        mode = BUS_MODE;
 
-        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(mTextColor);
-        mTextPaint.setTextSize(mTextSize);
-        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextColor = getContext().getResources().getColor(R.color.white);
+        mBgColor = getContext().getResources().getColor(R.color.divider_gray);
+        mText = label;
+        mIsFilled = true;
 
-        if (!isInEditMode){
-            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/ratp.otf");
-            mTextPaint.setTypeface(tf);
-        }
-
-        mBgPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mBgPaint.setColor(mBgColor);
-        mBgPaint.setStrokeWidth(mBorder);
-
-        if(mIsFilled){
-            mBgPaint.setStyle(Paint.Style.FILL);
-        } else {
-            mBgPaint.setStyle(Paint.Style.STROKE);
-        }
-
+        init(false);
+        invalidate();
     }
-
 }

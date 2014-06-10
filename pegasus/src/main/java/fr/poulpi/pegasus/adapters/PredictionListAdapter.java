@@ -61,11 +61,11 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
         }
 
         if (isSubwayStation) {
-            lineHolder.ratpSign.setLine(RATPLineSignView.METRO);
+            lineHolder.ratpSign.setMetroLine(RATPLineSignView.METRO);
         } else if (isRERStation){
-            lineHolder.ratpSign.setLine(RATPLineSignView.RER);
+            lineHolder.ratpSign.setMetroLine(RATPLineSignView.RER);
         } else {
-            lineHolder.ratpSign.setLine(RATPLineSignView.BLANK);
+            lineHolder.ratpSign.setMetroLine(RATPLineSignView.BLANK);
         }
 
         lineHolder.destinationName.setText(item.getDescription());

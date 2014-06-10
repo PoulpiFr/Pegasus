@@ -24,6 +24,7 @@ import java.util.Date;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.cards.ItinaryCard;
 import fr.poulpi.pegasus.constants.GoogleAPIConf;
+import fr.poulpi.pegasus.constants.NavitiaIoConf;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
 import fr.poulpi.pegasus.interfaces.NavitiaIoInterface;
 import fr.poulpi.pegasus.model.CTPJourneyResponse;
@@ -90,7 +91,7 @@ public class ItinariesFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        String API_URL = "http://api.navitia.io/v1/";
+        String API_URL = "http://beta.navitia.io/v1/";
 
         // debug purpose only, to get the messages
         RestAdapter.Log log = new RestAdapter.Log(){
@@ -160,7 +161,7 @@ public class ItinariesFragment extends Fragment {
         String toStr = new StringBuilder().append(to.location.lng).append(";").append(to.location.lat).toString();
 
         NavitiaIoInterface ws = navitiaRestAdapter.create(NavitiaIoInterface.class);
-        ws.journey(fromStr, toStr, getArguments().getString("date"), "departure", itinaryCallback);
+        //ws.journey(NavitiaIoConf.navitiaIoKey, fromStr, toStr, getArguments().getString("date"), "departure", itinaryCallback);
 
     }
 
