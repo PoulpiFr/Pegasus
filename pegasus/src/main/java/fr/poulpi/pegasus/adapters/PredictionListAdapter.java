@@ -1,27 +1,26 @@
 package fr.poulpi.pegasus.adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.Iterator;
 import java.util.List;
 
 import fr.poulpi.pegasus.R;
-import fr.poulpi.pegasus.cards.ItinarySearchCard;
-import fr.poulpi.pegasus.interfaces.PredictionsInterface;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
+import fr.poulpi.pegasus.view.RATPLineSignView;
 
 /**
  * Created by paul-henri on 3/20/14.
  */
-public class PredictionListAdapter extends ArrayAdapter<ResultApiPrediction> {
+public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPrediction> {
 
-    private List<ResultApiPrediction> counts;
+    private List<GoogleAPIResultPrediction> counts;
 
-    public PredictionListAdapter(Context context, List<ResultApiPrediction> objects) {
+    public PredictionListAdapter(Context context, List<GoogleAPIResultPrediction> objects) {
         super(context, 0, objects);
         this.counts = objects;
     }
@@ -29,43 +28,47 @@ public class PredictionListAdapter extends ArrayAdapter<ResultApiPrediction> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ResultApiPrediction item = getItem(position);
+        GoogleAPIResultPrediction item = getItem(position);
 
         //Without ViewHolder for demo purpose
         View view = convertView;
-
+        LineHolder lineHolder = null;
         if (view == null) {
-            LayoutInflater li =
-                    (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = li.inflate(R.layout.prediction_card_item_list, parent, false);
+            lineHolder = new LineHolder();
+            view = View.inflate(getContext(), R.layout.prediction_item_list, null);
+            lineHolder.destinationName = (TextView) view.findViewById(R.id.prediction_item_name);
+            lineHolder.ratpSign = (RATPLineSignView) view.findViewById(R.id.sign);
+
+            view.setTag(lineHolder);
+        } else {
+            lineHolder = (LineHolder) view.getTag();
         }
 
-        TextView textView1 = (TextView) view.findViewById(R.id.prediction_card_item_name);
-        textView1.setText(item.getDescription());
+        boolean isSubwayStation = false;
+        boolean isRERStation = false;
+        Iterator<String> it = item.getTypes().iterator();
+        String tmp;
 
-        view.setTag(position);
+        while (it.hasNext()){
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            tmp = it.next();
 
-                Integer pos = (Integer) v.getTag();
-
-                if(getContext() instanceof PredictionsInterface) {
-
-                    int tmp = ((PredictionsInterface) getContext()).getFromToState();
-                    int tmp2 =  ItinarySearchCard.FROM;
-
-                    if ( ((PredictionsInterface) getContext()).getFromToState() == ItinarySearchCard.FROM ) {
-                        ((PredictionsInterface) getContext()).googleAPISelectFromPrediction(counts.get(pos));
-                    } else if (((PredictionsInterface) getContext()).getFromToState() == ItinarySearchCard.TO ){
-                        ((PredictionsInterface) getContext()).googleAPISelectToPrediction(counts.get(pos));
-                    }
-
-                }
-
+            if(tmp.equals(getContext().getString(R.string.google_api_subway_station))){
+                isSubwayStation = true;
+            } else if(tmp.equals(getContext().getString(R.string.google_api_rer_station))){
+                isRERStation = true;
             }
-        });
+        }
+
+        if (isSubwayStation) {
+            lineHolder.ratpSign.setMetroLine(RATPLineSignView.METRO);
+        } else if (isRERStation){
+            lineHolder.ratpSign.setMetroLine(RATPLineSignView.RER);
+        } else {
+            lineHolder.ratpSign.setMetroLine(RATPLineSignView.BLANK);
+        }
+
+        lineHolder.destinationName.setText(item.getDescription());
 
         return view;
     }
@@ -79,6 +82,11 @@ public class PredictionListAdapter extends ArrayAdapter<ResultApiPrediction> {
     @Override
     public int getCount(){
         return counts.size();
+    }
+
+    static class LineHolder {
+        public TextView destinationName;
+        public RATPLineSignView ratpSign;
     }
 
 }

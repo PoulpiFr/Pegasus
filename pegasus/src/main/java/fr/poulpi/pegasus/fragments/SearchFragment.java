@@ -1,7 +1,5 @@
 package fr.poulpi.pegasus.fragments;
 
-
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -16,14 +14,15 @@ import fr.poulpi.pegasus.cards.ItinarySearchCard;
 import fr.poulpi.pegasus.cards.TimeSearchCard;
 import fr.poulpi.pegasus.cards.PredictionsListCard;
 import fr.poulpi.pegasus.cards.ValidateSearchCard;
+import fr.poulpi.pegasus.constants.GoogleAPIConf;
 import fr.poulpi.pegasus.interfaces.GooglePlaceAPIInterface;
 import fr.poulpi.pegasus.interfaces.ItinarySearchCardInterface;
 import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsCardInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsInterface;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
-import fr.poulpi.pegasus.model.ApiPredictionsResponse;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIPredictionsResponse;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.view.CardView;
 import retrofit.Callback;
@@ -120,7 +119,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                ItinaryFragment fragment = ItinaryFragment.newInstance(itinarySearchCard.getFrom(), itinarySearchCard.getTo(), "2013-12-05T14:55:27+01:00");
+                ItinariesFragment fragment = ItinariesFragment.newInstance(itinarySearchCard.getFrom(), itinarySearchCard.getTo(), timeSearchCard.getTime());
 
                 fragmentTransaction.replace(R.id.content_frame, fragment);
                 fragmentTransaction.commit();
@@ -149,7 +148,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
                 validateSearchCard.getCardView().setVisibility(View.GONE);
                 timeSearchCard.getCardView().setVisibility(View.GONE);
 
-                ((PredictionsCardInterface) predictionsListCard).refreshCard((ApiPredictionsResponse) o);
+                ((PredictionsCardInterface) predictionsListCard).refreshCard((GoogleAPIPredictionsResponse) o);
             }
 
         }
@@ -165,13 +164,20 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
     public void googleAPIRequestPredictions(String str){
 
         // Create an instance of our API interface.
-        GooglePlaceAPIInterface tmp = restAdapter.create(GooglePlaceAPIInterface.class);
+        GooglePlaceAPIInterface ws = restAdapter.create(GooglePlaceAPIInterface.class);
 
-        tmp.response("true","AIzaSyDayrc8izwz8IG8OiA48tUJcFObFW0WLYw","48.85647,2.34421","35000","fr","country:fr", str, predictionsCallback);
+        ws.response("true",GoogleAPIConf.API_KEY,
+                GoogleAPIConf.PARIS_CENTER,
+                GoogleAPIConf.PARIS_RADIUS,
+                GoogleAPIConf.LANG,
+                GoogleAPIConf.COMPONENTS,
+                GoogleAPIConf.TYPES,
+                str,
+                predictionsCallback);
     }
 
     @Override
-    public void googleAPISelectFromPrediction(ResultApiPrediction result) {
+    public void googleAPISelectFromPrediction(GoogleAPIResultPrediction result) {
 
         predictionsListCard.getCardView().setVisibility(View.GONE);
         isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
@@ -185,7 +191,7 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
     }
 
     @Override
-    public void googleAPISelectToPrediction(ResultApiPrediction result) {
+    public void googleAPISelectToPrediction(GoogleAPIResultPrediction result) {
 
         predictionsListCard.getCardView().setVisibility(View.GONE);
         isOfflineSearchCard.getCardView().setVisibility(View.VISIBLE);
@@ -218,13 +224,14 @@ public class SearchFragment extends Fragment implements PredictionsInterface, Ti
         timeSearchCard.setTime(hourOfDay, minute);
 
     }
+
     @Override
-    public ResultApiPrediction getFrom() {
+    public GoogleAPIResultPrediction getFrom() {
         return itinarySearchCard.getFrom();
     }
 
     @Override
-    public ResultApiPrediction getTo() {
+    public GoogleAPIResultPrediction getTo() {
 
         return itinarySearchCard.getTo();
 

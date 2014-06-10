@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/up_sep_height"
+                android:background="@color/separator_gray"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/time_date_space"
+                android:textOff="Départ"
+                android:textOn="Arrivée"
+                android:id="@+id/switch_from_to_time"
+                android:layout_centerHorizontal="true"/>
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/switch_from_to_time"
+                android:id="@+id/time_picker"
+                android:layout_centerHorizontal="true"/>
+
+            <DatePicker
+                android:id="@+id/timePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/time_picker"
+                android:calendarViewShown="false"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

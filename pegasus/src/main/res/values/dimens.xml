@@ -5,4 +5,36 @@
 
     <!-- Card -->
     <dimen name="card_base_empty_height">30dp</dimen>
-    </resources>
+    <dimen name="spacing_large">8dp</dimen>
+    <dimen name="form_field_height">80dp</dimen>
+    <dimen name="destination_padding">15dp</dimen>
+    <dimen name="destination_ic_space">10dp</dimen>
+    <dimen name="up_sep_height">1dp</dimen>
+    <dimen name="div_height">1dp</dimen>
+    <dimen name="div_width">330dp</dimen>
+    <dimen name="down_sep_height">2dp</dimen>
+    <dimen name="block_distance">30dp</dimen>
+    <dimen name="search_padding_top">15dp</dimen>
+    <dimen name="search_padding_left">100dp</dimen>
+    <dimen name="search_text_size">20sp</dimen>
+    <dimen name="time_date_space">5dp</dimen>
+    <dimen name="txt_size">16sp</dimen>
+    <dimen name="prediction_padding">10dp</dimen>
+    <dimen name="prediction_textsize">20sp</dimen>
+    <dimen name="ratp_sign_width">35dp</dimen>
+    <dimen name="ratp_sign_height">35dp</dimen>
+    <dimen name="prediction_item_height">50dp</dimen>
+    <dimen name="rer_sign_text_size">8sp</dimen>
+    <dimen name="sugdested_itinary_walking_time_left_margin">5dp</dimen>
+    <dimen name="sugdested_itinary_walking_ic_left_margin">5dp</dimen>
+    <dimen name="sugdested_itinary_arrow_margin">5dp</dimen>
+    <dimen name="suggested_itinary_padding">8dp</dimen>
+    <dimen name="suggested_itinary_block_distance">40dp</dimen>
+    <dimen name="ratp_sign_text_size">18sp</dimen>
+    <dimen name="ratp_sign_radius">14dp</dimen>
+    <dimen name="ratp_sign_border">2dp</dimen>
+    <dimen name="with_left_padding">5dp</dimen>
+    <dimen name="big_text">18sp</dimen>
+    <dimen name="medium_text">16sp</dimen>
+
+</resources>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ratp="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/suggested_itinary_block_distance"
+    android:id="@+id/suggested_itinary_main_container"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/up_sep_height"
+        android:background="@color/separator_gray"
+        android:id="@+id/itinary_up_sep" />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/suggested_itinary_first_line"
+        android:padding="@dimen/suggested_itinary_padding"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/medium_text"
+            tools:text="45 min"
+            android:id="@+id/suggested_itinary_whole_time"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chrono"
+            android:gravity="right"
+            android:id="@+id/suggested_itinary_chrono_ic"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/suggested_itinary_whole_time"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/big_text"
+            android:layout_centerVertical="true"
+            tools:text="Le + court"
+            android:id="@+id/suggested_itinary_description"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/suggested_itinary_chrono_ic"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/up_sep_height"
+        android:background="@color/separator_gray"
+        />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/suggested_itinary_second_line"
+        android:padding="@dimen/suggested_itinary_padding">
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width"
+            android:layout_height="@dimen/ratp_sign_height"
+            android:id="@+id/suggested_itinary_ratp_sign_1"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size"
+            ratp:border="@dimen/ratp_sign_border"
+            ratp:radius="@dimen/ratp_sign_radius"
+            ratp:textColor="@color/azur"/>
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width"
+            android:layout_height="@dimen/ratp_sign_height"
+            android:id="@+id/suggested_itinary_ratp_sign_2"
+            android:layout_toRightOf="@id/suggested_itinary_ratp_sign_1"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size"
+            ratp:border="@dimen/ratp_sign_border"
+            ratp:radius="@dimen/ratp_sign_radius"
+            ratp:textColor="@color/azur"/>
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width"
+            android:layout_height="@dimen/ratp_sign_height"
+            android:id="@+id/suggested_itinary_ratp_sign_3"
+            android:layout_toRightOf="@id/suggested_itinary_ratp_sign_2"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size"
+            ratp:border="@dimen/ratp_sign_border"
+            ratp:radius="@dimen/ratp_sign_radius"
+            ratp:textColor="@color/azur"/>
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width"
+            android:layout_height="@dimen/ratp_sign_height"
+            android:id="@+id/suggested_itinary_ratp_sign_4"
+            android:layout_toRightOf="@id/suggested_itinary_ratp_sign_3"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size"
+            ratp:border="@dimen/ratp_sign_border"
+            ratp:radius="@dimen/ratp_sign_radius"
+            ratp:textColor="@color/azur"/>
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width"
+            android:layout_height="@dimen/ratp_sign_height"
+            android:id="@+id/suggested_itinary_ratp_sign_5"
+            android:layout_toRightOf="@id/suggested_itinary_ratp_sign_4"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size"
+            ratp:border="@dimen/ratp_sign_border"
+            ratp:radius="@dimen/ratp_sign_radius"
+            ratp:textColor="@color/azur"/>
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width"
+            android:layout_height="@dimen/ratp_sign_height"
+            android:id="@+id/suggested_itinary_ratp_sign_6"
+            android:layout_toRightOf="@id/suggested_itinary_ratp_sign_5"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size"
+            ratp:border="@dimen/ratp_sign_border"
+            ratp:radius="@dimen/ratp_sign_radius"
+            ratp:textColor="@color/azur"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_walking_text_with"
+            android:textColor="@color/txt_gray"
+            android:layout_toRightOf="@id/suggested_itinary_ratp_sign_6"
+            android:layout_marginLeft="@dimen/with_left_padding"
+            android:layout_centerVertical="true"
+            android:text="@string/with"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_walking_ic"
+            android:layout_toRightOf="@id/suggested_itinary_walking_text_with"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/sugdested_itinary_walking_ic_left_margin"
+            android:src="@drawable/ic_walking"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_walking_time"
+            android:layout_toRightOf="@id/suggested_itinary_walking_ic"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/sugdested_itinary_walking_time_left_margin"
+            tools:text="15 min"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/suggested_itinary_third_line"
+        android:padding="@dimen/suggested_itinary_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_departure_text"
+            android:textSize="@dimen/medium_text"
+            android:textColor="@color/txt_gray"
+            android:layout_centerVertical="true"
+            android:text="@string/departure"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_departure_time"
+            android:textSize="@dimen/medium_text"
+            android:layout_toRightOf="@id/suggested_itinary_departure_text"
+            android:layout_centerVertical="true"
+            tools:text="18h15"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_right_arrow"
+            android:id="@+id/suggested_itinary_arrow"
+            android:layout_toRightOf="@id/suggested_itinary_departure_time"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/sugdested_itinary_arrow_margin"
+            android:layout_marginRight="@dimen/sugdested_itinary_arrow_margin"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_arrival_text"
+            android:textSize="@dimen/medium_text"
+            android:textColor="@color/txt_gray"
+            android:layout_toRightOf="@id/suggested_itinary_arrow"
+            android:layout_centerVertical="true"
+            android:text="@string/arrival"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggested_itinary_arrival_time"
+            android:textSize="@dimen/medium_text"
+            android:layout_toRightOf="@id/suggested_itinary_arrival_text"
+            android:layout_centerVertical="true"
+            tools:text="18h37"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/down_sep_height"
+        android:background="@color/separator_gray"
+        android:layout_marginTop="5dp"
+        android:id="@+id/itinary_down_sep" />
+
+</LinearLayout>

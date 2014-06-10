@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RATPLineSignView">
+        <attr name="filled" format="boolean" />
+        <attr name="bgColor" format="reference"/>
+        <attr name="textColor" format="reference"/>
+        <attr name="radius" format="dimension" />
+        <attr name="border" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+</resources>

@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="dark_red">#550e18</color>
-    <color name="rose">#dc6577</color>
+    <color name="dark_rose">#dc6577</color>
     <color name="logo_red">#d5223d</color>
     <color name="brown">#55272e</color>
     <color name="red">#a21a2e</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="divider_gray">#dedfde</color>
+    <color name="separator_gray">#cecece</color>
+    <color name="txt_gray">#777777</color>
+    <color name="background_gray">#eaeaea</color>
+    <color name="black">#000000</color>
+
+    <!-- RATP Colors -->
+    <color name="acacia">#FFCDC83F</color>
+    <color name="azur">#FF216EB4</color>
+    <color name="boutondor">#FFF2C931</color>
+    <color name="cobalt">#FF4E90CC</color>
+    <color name="coquelicot">#FFD35E3C</color>
+    <color name="iris">#FF67328E</color>
+    <color name="lilas">#FFC5A3CA</color>
+    <color name="marron">#FF8E6538</color>
+    <color name="menthe">#FF79BB92</color>
+    <color name="ocre">#FFDFB039</color>
+    <color name="olive">#FF9A9940</color>
+    <color name="orange">#FFDE8B53</color>
+    <color name="parme">#FFBB4D98</color>
+    <color name="pervenche">#FF89C7D6</color>
+    <color name="rose">#FFDF9AB1</color>
+    <color name="sapin">#FF328E5B</color>
+    <color name="ratp_blue">#FF003F91</color>
+
+
 </resources>

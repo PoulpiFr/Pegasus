@@ -5,7 +5,8 @@ package fr.poulpi.pegasus.model;
  */
 public class OTPResponse {
 
-    OTPRequestParameters requestParameters;
-    OTPPlan plan;
-    OTPDebug debug;
+    public OTPRequestParameters requestParameters;
+    public OTPPlan plan;
+    public OTPDebug debug;
+
 }

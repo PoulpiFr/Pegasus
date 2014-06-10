@@ -3,11 +3,9 @@ package fr.poulpi.pegasus;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,20 +21,29 @@ import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
 import fr.poulpi.pegasus.cards.ItinarySearchCard;
-import fr.poulpi.pegasus.fragments.AProposFragment;
-import fr.poulpi.pegasus.fragments.ItinaryFragment;
+import fr.poulpi.pegasus.fragments.DateFragment;
 import fr.poulpi.pegasus.fragments.ItinaryPreferenceFragment;
 import fr.poulpi.pegasus.fragments.MetroMapFragment;
+import fr.poulpi.pegasus.fragments.NewSearchFragment;
 import fr.poulpi.pegasus.fragments.OfflineFragment;
+import fr.poulpi.pegasus.fragments.PredictionsFragment;
 import fr.poulpi.pegasus.fragments.SearchFragment;
 import fr.poulpi.pegasus.fragments.StopFragment;
 import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
 import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
 import fr.poulpi.pegasus.interfaces.PredictionsInterface;
-import fr.poulpi.pegasus.model.ResultApiPrediction;
+import fr.poulpi.pegasus.model.GoogleAPIResult;
+import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
 import fr.poulpi.pegasus.interfaces.TimeInterface;
 
-public class MainActivity extends Activity implements StopFragment.OnFragmentInteractionListener, TimeInterface, PredictionsInterface, OTPActivityInterface {
+public class MainActivity extends Activity implements
+        StopFragment.OnFragmentInteractionListener,
+        TimeInterface,
+        PredictionsInterface,
+        OTPActivityInterface,
+        NewSearchFragment.OnFragmentInteractionListener,
+        DateFragment.OnFragmentInteractionListener,
+        PredictionsFragment.OnFragmentInteractionListener {
 
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
@@ -61,7 +68,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.content_frame, SearchFragment.newInstance(), SearchFragment.TAG)
+                    .add(R.id.content_frame, NewSearchFragment.newInstance(), NewSearchFragment.TAG)
                     .commit();
         }
 
@@ -69,7 +76,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.drawable.ic_navigation_drawer,  /* nav drawer icon to replace 'Up' caret */
                 R.string.drawer_open,  /* "open drawer" description */
                 R.string.drawer_close  /* "close drawer" description */
         ) {
@@ -113,31 +120,26 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
 
+        FragmentManager fragmentManager = getFragmentManager();
+
         Fragment fragment;
         if(position == 0) {
-            fragment = SearchFragment.newInstance();
+            fragment = NewSearchFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         }
         else if(position == 1) {
             fragment = MetroMapFragment.newInstance();
         }
-        else if(position == 4) {
-            fragment = ItinaryPreferenceFragment.newInstance();
+        else if (position == 2){
+            fragment = DateFragment.newInstance();
         }
-        else if(position == 5){
-                fragment = AProposFragment.newInstance();}
-        else {
+        else if(position == 4){
+                fragment = ItinaryPreferenceFragment.newInstance();
+        } else {
            fragment = new OfflineFragment();
         }
-        // Create a new fragment and specify the planet to show based on position
-
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
@@ -149,6 +151,27 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     public void setTitle(CharSequence title) {
         mTitle = title;
         getActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    public void onSearchFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onDateFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onPredictionsFragmentInteraction(String mode, GoogleAPIResultPrediction destination) {
+
+        if(mode.equals(PredictionsFragment.FROM)){
+            ((NewSearchFragment)getFragmentManager().findFragmentByTag(NewSearchFragment.TAG)).setFromDestination(destination);
+        } else if (mode.equals(PredictionsFragment.TO)){
+            ((NewSearchFragment)getFragmentManager().findFragmentByTag(NewSearchFragment.TAG)).setToDestination(destination);
+        }
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -196,7 +219,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     }
 
     @Override
-    public void googleAPISelectFromPrediction(ResultApiPrediction result) {
+    public void googleAPISelectFromPrediction(GoogleAPIResultPrediction result) {
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
@@ -207,7 +230,7 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     }
 
     @Override
-    public void googleAPISelectToPrediction(ResultApiPrediction result) {
+    public void googleAPISelectToPrediction(GoogleAPIResultPrediction result) {
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
@@ -235,21 +258,14 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
     @Override
     public void getFromTo() {
 
-        ResultApiPrediction from = null;
-        ResultApiPrediction to = null;
+        GoogleAPIResultPrediction from = null;
+        GoogleAPIResultPrediction to = null;
 
         Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
 
         if(tmp instanceof OTPFragmentInterface){
             from = ((OTPFragmentInterface)tmp).getFrom();
             to = ((OTPFragmentInterface)tmp).getTo();
-        }
-
-        if( from.reference!= null && to.reference!= null ) {
-
-            Log.d("ph", "from " + from.reference);
-            Log.d("ph", "to " + to.reference );
-
         }
     }
 
@@ -263,6 +279,4 @@ public class MainActivity extends Activity implements StopFragment.OnFragmentInt
         }
 
     }
-
-
 }
