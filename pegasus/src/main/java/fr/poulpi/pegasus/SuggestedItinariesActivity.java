@@ -115,7 +115,7 @@ public class SuggestedItinariesActivity extends FragmentActivity implements Acti
                             .setTabListener(this));
         }
 
-        String API_URL = "https://beta.navitia.io/v1/";
+        String API_URL = "http://api.navitia.io/v1";
 
         // debug purpose only, to get the messages
         RestAdapter.Log log = new RestAdapter.Log(){

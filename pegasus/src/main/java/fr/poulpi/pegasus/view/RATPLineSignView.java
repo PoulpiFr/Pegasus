@@ -22,10 +22,10 @@ public class RATPLineSignView extends View {
 
     private static final int TEXT_SIZE = 50;
     private static final int RADIUS = 3;
+    private static final float BUS_BOX_RATIO = (float) 0.8;
     private static final int BORDER = 25;
     private static final int METRO_MODE = 0;
     private static final int BUS_MODE = 1;
-
 
     private String mText;
     private float mBorder;
@@ -64,6 +64,9 @@ public class RATPLineSignView extends View {
 
     public final static int RA = 41;
     public final static int RB = 42;
+    public final static int RC = 43;
+    public final static int RD = 44;
+    public final static int RE = 45;
 
     private int mode;
     private Rect mBusRect;
@@ -106,11 +109,13 @@ public class RATPLineSignView extends View {
         float centerX = (float) (getWidth() / 2.);
         float centerY = (float) (getHeight() / 2.);
 
-        if(mode == METRO_MODE) {
-            canvas.drawCircle(centerX, centerY, mRadius, mBgPaint);
-        } else if(mode == BUS_MODE){
-            Log.v("poulpi", "l " + mBusRect.left + " b " + mBusRect.bottom + " t " + mBusRect.top + " r " + mBusRect.right);
-            canvas.drawRect(mBusRect, mBgPaint);
+        switch (mode){
+            case METRO_MODE:
+                canvas.drawCircle(centerX, centerY, mRadius, mBgPaint);
+                break;
+            case BUS_MODE:
+                canvas.drawRect(0, (1-BUS_BOX_RATIO)*getHeight(), getWidth(), BUS_BOX_RATIO*getHeight(), mBgPaint);
+                break;
         }
 
         int xPos = (int) centerX;
@@ -147,7 +152,6 @@ public class RATPLineSignView extends View {
         int top = (int) (getTop() - getHeight()/6.);
         int bottom = (int) (getBottom() + getHeight()/6.);
 
-        mBusRect = new Rect(getLeft(), top, getRight(), bottom);
     }
 
     public void setMetroLine(int line){
@@ -264,15 +268,33 @@ public class RATPLineSignView extends View {
             /* RER */
             case RA:
                 mIsFilled = false;
-                mBgColor = getContext().getResources().getColor(R.color.coquelicot);
-                mTextColor = getContext().getResources().getColor(R.color.coquelicot);
+                mBgColor = getContext().getResources().getColor(R.color.rera);
+                mTextColor = getContext().getResources().getColor(R.color.rera);
                 mText = "A";
                 break;
             case RB:
                 mIsFilled = false;
-                mBgColor = getContext().getResources().getColor(R.color.cobalt);
-                mTextColor = getContext().getResources().getColor(R.color.cobalt);
+                mBgColor = getContext().getResources().getColor(R.color.rerb);
+                mTextColor = getContext().getResources().getColor(R.color.rerb);
                 mText = "B";
+                break;
+            case RC:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerc);
+                mTextColor = getContext().getResources().getColor(R.color.rerc);
+                mText = "C";
+                break;
+            case RD:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerd);
+                mTextColor = getContext().getResources().getColor(R.color.rerd);
+                mText = "D";
+                break;
+            case RE:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rere);
+                mTextColor = getContext().getResources().getColor(R.color.rere);
+                mText = "E";
                 break;
 
             /* SIGNS */
@@ -315,9 +337,10 @@ public class RATPLineSignView extends View {
     }
 
     public void setBusLine(String label) {
+
         mode = BUS_MODE;
 
-        mTextColor = getContext().getResources().getColor(R.color.white);
+        mTextColor = getContext().getResources().getColor(R.color.black);
         mBgColor = getContext().getResources().getColor(R.color.divider_gray);
         mText = label;
         mIsFilled = true;

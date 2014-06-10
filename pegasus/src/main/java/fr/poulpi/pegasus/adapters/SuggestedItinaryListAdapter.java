@@ -1,6 +1,7 @@
 package fr.poulpi.pegasus.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -110,42 +111,52 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
                 currentSign.setVisibility(View.VISIBLE);
 
                 String label = tmp.getDisplay_informations().getLabel();
-                if(label.equals("1")){
-                    currentSign.setMetroLine(RATPLineSignView.M1);
-                } else if(label.equals("2")){
-                    currentSign.setMetroLine(RATPLineSignView.M2);
-                } else if(label.equals("3")){
-                    currentSign.setMetroLine(RATPLineSignView.M3);
-                } else if(label.equals("4")){
-                    currentSign.setMetroLine(RATPLineSignView.M4);
-                } else if(label.equals("5")){
-                    currentSign.setMetroLine(RATPLineSignView.M5);
-                } else if(label.equals("6")){
-                    currentSign.setMetroLine(RATPLineSignView.M6);
-                } else if(label.equals("7")){
-                    currentSign.setMetroLine(RATPLineSignView.M7);
-                } else if(label.equals("8")){
-                    currentSign.setMetroLine(RATPLineSignView.M8);
-                } else if(label.equals("9")){
-                    currentSign.setMetroLine(RATPLineSignView.M9);
-                } else if(label.equals("10")){
-                    currentSign.setMetroLine(RATPLineSignView.M10);
-                } else if(label.equals("11")){
-                    currentSign.setMetroLine(RATPLineSignView.M11);
-                } else if(label.equals("12")){
-                    currentSign.setMetroLine(RATPLineSignView.M12);
-                } else if(label.equals("13")){
-                    currentSign.setMetroLine(RATPLineSignView.M13);
-                } else if(label.equals("14")){
-                    currentSign.setMetroLine(RATPLineSignView.M14);
-                } else if(label.equals("A")){
-                    currentSign.setMetroLine(RATPLineSignView.RA);
-                } else if(label.equals("B")){
-                    currentSign.setMetroLine(RATPLineSignView.RB);
-                } else if(Integer.valueOf(label) > 20){
-                    currentSign.setBusLine(label);
-                }
 
+                try {
+                    if (label.equals("1")) {
+                        currentSign.setMetroLine(RATPLineSignView.M1);
+                    } else if (label.equals("2")) {
+                        currentSign.setMetroLine(RATPLineSignView.M2);
+                    } else if (label.equals("3")) {
+                        currentSign.setMetroLine(RATPLineSignView.M3);
+                    } else if (label.equals("4")) {
+                        currentSign.setMetroLine(RATPLineSignView.M4);
+                    } else if (label.equals("5")) {
+                        currentSign.setMetroLine(RATPLineSignView.M5);
+                    } else if (label.equals("6")) {
+                        currentSign.setMetroLine(RATPLineSignView.M6);
+                    } else if (label.equals("7")) {
+                        currentSign.setMetroLine(RATPLineSignView.M7);
+                    } else if (label.equals("8")) {
+                        currentSign.setMetroLine(RATPLineSignView.M8);
+                    } else if (label.equals("9")) {
+                        currentSign.setMetroLine(RATPLineSignView.M9);
+                    } else if (label.equals("10")) {
+                        currentSign.setMetroLine(RATPLineSignView.M10);
+                    } else if (label.equals("11")) {
+                        currentSign.setMetroLine(RATPLineSignView.M11);
+                    } else if (label.equals("12")) {
+                        currentSign.setMetroLine(RATPLineSignView.M12);
+                    } else if (label.equals("13")) {
+                        currentSign.setMetroLine(RATPLineSignView.M13);
+                    } else if (label.equals("14")) {
+                        currentSign.setMetroLine(RATPLineSignView.M14);
+                    } else if (label.equals("A")) {
+                        currentSign.setMetroLine(RATPLineSignView.RA);
+                    } else if (label.equals("B")) {
+                        currentSign.setMetroLine(RATPLineSignView.RB);
+                    } else if (label.equals("C")) {
+                        currentSign.setMetroLine(RATPLineSignView.RC);
+                    } else if (label.equals("D")) {
+                        currentSign.setMetroLine(RATPLineSignView.RD);
+                    } else if (label.equals("E")) {
+                        currentSign.setMetroLine(RATPLineSignView.RE);
+                    } else if (Integer.valueOf(label) >= 20) {
+                        currentSign.setBusLine(label);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
 
