@@ -67,6 +67,14 @@ public class RATPLineSignView extends View {
     public final static int RC = 43;
     public final static int RD = 44;
     public final static int RE = 45;
+    public final static int RJ = 46;
+    public final static int RK = 47;
+    public final static int RL = 48;
+    public final static int RN = 49;
+    public final static int RP = 50;
+    public final static int RR = 51;
+    public final static int RU = 52;
+
 
     private int mode;
     private Rect mBusRect;
@@ -295,6 +303,48 @@ public class RATPLineSignView extends View {
                 mBgColor = getContext().getResources().getColor(R.color.rere);
                 mTextColor = getContext().getResources().getColor(R.color.rere);
                 mText = "E";
+                break;
+            case RJ:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerj);
+                mTextColor = getContext().getResources().getColor(R.color.rerj);
+                mText = "J";
+                break;
+            case RK:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerk);
+                mTextColor = getContext().getResources().getColor(R.color.rerk);
+                mText = "K";
+                break;
+            case RL:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerl);
+                mTextColor = getContext().getResources().getColor(R.color.rerl);
+                mText = "L";
+                break;
+            case RN:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rern);
+                mTextColor = getContext().getResources().getColor(R.color.rern);
+                mText = "N";
+                break;
+            case RP:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerp);
+                mTextColor = getContext().getResources().getColor(R.color.rerp);
+                mText = "P";
+                break;
+            case RR:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.rerr);
+                mTextColor = getContext().getResources().getColor(R.color.rerr);
+                mText = "R";
+                break;
+            case RU:
+                mIsFilled = false;
+                mBgColor = getContext().getResources().getColor(R.color.reru);
+                mTextColor = getContext().getResources().getColor(R.color.reru);
+                mText = "U";
                 break;
 
             /* SIGNS */

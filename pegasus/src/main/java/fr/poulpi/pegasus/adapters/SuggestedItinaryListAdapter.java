@@ -151,6 +151,21 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
                         currentSign.setMetroLine(RATPLineSignView.RD);
                     } else if (label.equals("E")) {
                         currentSign.setMetroLine(RATPLineSignView.RE);
+                    } else if (label.equals("J")) {
+                        currentSign.setMetroLine(RATPLineSignView.RJ);
+                    } else if (label.equals("K")) {
+                        currentSign.setMetroLine(RATPLineSignView.RK);
+                    } else if (label.equals("L")) {
+                        currentSign.setMetroLine(RATPLineSignView.RL);
+                    } else if (label.equals("N")) {
+                        currentSign.setMetroLine(RATPLineSignView.RN);
+                    } else if (label.equals("P")) {
+                        currentSign.setMetroLine(RATPLineSignView.RP);
+                    } else if (label.equals("R")) {
+                        currentSign.setMetroLine(RATPLineSignView.RR);
+                    } else if (label.equals("U")) {
+                        currentSign.setMetroLine(RATPLineSignView.RU);
+
                     } else if (Integer.valueOf(label) >= 20) {
                         currentSign.setBusLine(label);
                     }
