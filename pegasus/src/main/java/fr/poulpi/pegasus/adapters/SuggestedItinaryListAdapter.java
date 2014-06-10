@@ -165,7 +165,8 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
                         currentSign.setMetroLine(RATPLineSignView.RR);
                     } else if (label.equals("U")) {
                         currentSign.setMetroLine(RATPLineSignView.RU);
-
+                    } else if (label.startsWith("N")){
+                        currentSign.setBusLine(label);
                     } else if (Integer.valueOf(label) >= 20) {
                         currentSign.setBusLine(label);
                     }
