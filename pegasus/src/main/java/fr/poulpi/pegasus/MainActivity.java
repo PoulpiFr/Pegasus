@@ -159,8 +159,14 @@ public class MainActivity extends Activity implements
     }
 
     @Override
-    public void onDateFragmentInteraction(Uri uri) {
-
+    public void onTimeChanged(int hourOfDay, int minute){
+    // S'inspirer de : ((NewSearchFragment)getFragmentManager().findFragmentByTag(NewSearchFragment.TAG)).setFromDestination(destination);
+    // pour appeler une fonction dans NewSearchFragment qui mette à jour le champ de texte (mDateText) et stocke les données d'horaires dans des attributs de classe du fragment
+    }
+    
+    @Override
+    public void onDateChanged(int year, int monthOfYear, int dayOfMonth){
+            
     }
 
     @Override
