@@ -18,8 +18,12 @@ import fr.poulpi.pegasus.R;
  *
  */
 public class DateFragment extends Fragment {
-
+    
     public static final String TAG = "DateFragment";
+
+    private DatePicker mDatePicker;
+    private TimePicker mTimePicker;
+    
     private OnFragmentInteractionListener mListener;
 
     public DateFragment() {
@@ -36,14 +40,31 @@ public class DateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_date, container, false);
-    }
+                                 
+        View v = inflater.inflate(R.layout.fragment_date, container, false);
+        
+        mTimePicker = (TimePicker) v.findViewById(R.id.time_picker);
+        mDatePicker = (DatePicker) v.findViewById(R.id.date_picker);
+        
+        mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onDateFragmentInteraction(uri);
-        }
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                if (mListener != null) {
+                    mListener.onTimeChanged(hourOfDay, minute);
+                }
+            }
+        });
+        
+        mDatePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                if (mListener != null) {
+                    mListener.onDateChanged(year, monthOfYear, dayOfMonth);
+                }
+            }
+        )};
+        
+        return v;
     }
 
     @Override
@@ -74,7 +95,8 @@ public class DateFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onDateFragmentInteraction(Uri uri);
+        public void onTimeChanged(int hourOfDay, int minute);
+        public void onDateChanged(int year, int monthOfYear, int dayOfMonth);
     }
 
 }
