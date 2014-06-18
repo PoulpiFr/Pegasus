@@ -7,6 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 import fr.poulpi.pegasus.R;
 
@@ -54,15 +58,20 @@ public class DateFragment extends Fragment {
                 }
             }
         });
-        
-        mDatePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+
+        Calendar c = Calendar.getInstance();
+        int years = c.get(Calendar.YEAR);
+        int months = c.get(Calendar.MONTH);
+        int days = c.get(Calendar.DAY_OF_MONTH);
+
+        mDatePicker.init(years, months, days, new DatePicker.OnDateChangedListener() {
 
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 if (mListener != null) {
                     mListener.onDateChanged(year, monthOfYear, dayOfMonth);
                 }
             }
-        )};
+        });
         
         return v;
     }

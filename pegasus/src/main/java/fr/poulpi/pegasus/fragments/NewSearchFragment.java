@@ -19,10 +19,13 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.SuggestedItinariesActivity;
@@ -60,6 +63,9 @@ public class NewSearchFragment extends Fragment {
     private EditText mFromEditText;
     private EditText mToEditText;
     private TextView mDateText;
+
+    private int savedYear, savedMonthOfYear, savedDayOfMonth, savedHourOfDay, savedMinute;
+
 
     private float mHalfHeight;
     private float translatedHeight;
@@ -208,18 +214,44 @@ public class NewSearchFragment extends Fragment {
     }
     
     public void updateTimeInDateText(int hourOfDay, int minute){
-        //PH
+
+        savedHourOfDay = hourOfDay;
+        savedMinute = minute;
+
         if(mDateText != null){
-            mDateText.setText("Coin coin PH change moi");
+            mDateText.setText(buildDateText());
         }
     }
     
     public void updateDateInDateText(int year, int monthOfYear, int dayOfMonth){
-        //PH
+
+        savedYear = year;
+        savedMonthOfYear = monthOfYear;
+        savedDayOfMonth = dayOfMonth;
+
         if(mDateText != null){
-            mDateText.setText("Coin coin PH change moi");
+            mDateText.setText(buildDateText());
         }
     }
+
+    private String buildDateText(){
+
+        String dateText;
+        Calendar c = Calendar.getInstance();
+
+        //Set the time for the notification to occur.
+        c.set(Calendar.YEAR, savedYear);
+        c.set(Calendar.MONTH, savedMonthOfYear);
+        c.set(Calendar.DAY_OF_MONTH, savedDayOfMonth);
+        c.set(Calendar.HOUR_OF_DAY, savedHourOfDay);
+        c.set(Calendar.MINUTE, savedMinute);
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("Le d MMMM yyyy à hh:mm ", Locale.FRENCH);
+        dateText = dateFormatter.format(c.getTime());
+
+        return dateText;
+    }
+
 
     /*------ This is where we manage the smooth transitions between the different edit modes -----*/
     private void getIntoEditMode(int mode){

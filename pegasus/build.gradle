@@ -26,12 +26,15 @@ android {
     }
     productFlavors {
     }
+/*
     signingConfigs {
         debug {
             storeFile file('../debug.keystore')
         }
     }
+*/
 }
+
 
 dependencies {
     compile 'com.android.support:support-v4:+'

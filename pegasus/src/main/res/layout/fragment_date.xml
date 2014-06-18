@@ -30,10 +30,10 @@
                 android:layout_centerHorizontal="true"/>
 
             <TimePicker
+                android:id="@+id/time_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/switch_from_to_time"
-                android:id="@+id/time_picker"
                 android:layout_centerHorizontal="true"/>
 
             <DatePicker
