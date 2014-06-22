@@ -131,7 +131,7 @@ public class NewSearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState.containsKey(fromRefKey) && savedInstanceState.containsKey(toRefKey)){
+        if(savedInstanceState != null && savedInstanceState.containsKey(fromRefKey) && savedInstanceState.containsKey(toRefKey)){
             fromRef = savedInstanceState.getString(fromRefKey);
             toRef = savedInstanceState.getString(toRefKey);
         }

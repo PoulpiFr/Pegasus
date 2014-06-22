@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,27 +19,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import fr.poulpi.pegasus.adapters.DrawerItemAdapter;
-import fr.poulpi.pegasus.cards.ItinarySearchCard;
 import fr.poulpi.pegasus.fragments.DateFragment;
 import fr.poulpi.pegasus.fragments.ItinaryPreferenceFragment;
 import fr.poulpi.pegasus.fragments.MetroMapFragment;
 import fr.poulpi.pegasus.fragments.NewSearchFragment;
-import fr.poulpi.pegasus.fragments.OfflineFragment;
 import fr.poulpi.pegasus.fragments.PredictionsFragment;
-import fr.poulpi.pegasus.fragments.SearchFragment;
-import fr.poulpi.pegasus.fragments.StopFragment;
-import fr.poulpi.pegasus.interfaces.OTPActivityInterface;
-import fr.poulpi.pegasus.interfaces.OTPFragmentInterface;
-import fr.poulpi.pegasus.interfaces.PredictionsInterface;
-import fr.poulpi.pegasus.model.GoogleAPIResult;
 import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
-import fr.poulpi.pegasus.interfaces.TimeInterface;
 
 public class MainActivity extends Activity implements
-        StopFragment.OnFragmentInteractionListener,
-        TimeInterface,
-        PredictionsInterface,
-        OTPActivityInterface,
         NewSearchFragment.OnFragmentInteractionListener,
         DateFragment.OnFragmentInteractionListener,
         PredictionsFragment.OnFragmentInteractionListener {
@@ -110,11 +96,6 @@ public class MainActivity extends Activity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.routing, menu);
         return true;
-    }
-
-    @Override
-    public void onFragmentInteraction(Integer id) {
-
     }
 
     /** Swaps fragments in the main content view */
@@ -207,77 +188,4 @@ private class DrawerItemClickListener implements ListView.OnItemClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-    /* === PredictionsActivityInterface === */
-    @Override
-    public void googleAPIRequestPredictions(String str) {
-
-        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
-
-        if(tmp instanceof PredictionsInterface){
-            ((PredictionsInterface)tmp).googleAPIRequestPredictions(str);
-        }
-
-    }
-
-    @Override
-    public void googleAPISelectFromPrediction(GoogleAPIResultPrediction result) {
-
-        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
-
-        if(tmp instanceof PredictionsInterface){
-            ((PredictionsInterface)tmp).googleAPISelectFromPrediction(result);
-        }
-
-    }
-
-    @Override
-    public void googleAPISelectToPrediction(GoogleAPIResultPrediction result) {
-
-        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
-
-        if(tmp instanceof PredictionsInterface){
-            ((PredictionsInterface)tmp).googleAPISelectToPrediction(result);
-        }
-
-    }
-
-    @Override
-    public int getFromToState() {
-
-        int result = ItinarySearchCard.UNKNOWN;
-
-        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
-
-        if(tmp instanceof PredictionsInterface){
-            result = ((PredictionsInterface)tmp).getFromToState();
-        }
-
-        return result;
-    }
-
-    /* === OTPActivityInterface === */
-    @Override
-    public void getFromTo() {
-
-        GoogleAPIResultPrediction from = null;
-        GoogleAPIResultPrediction to = null;
-
-        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
-
-        if(tmp instanceof OTPFragmentInterface){
-            from = ((OTPFragmentInterface)tmp).getFrom();
-            to = ((OTPFragmentInterface)tmp).getTo();
-        }
-    }
-
-    @Override
-    public void setTime(int hourOfDay, int minute) {
-
-        Fragment tmp = getFragmentManager().findFragmentByTag(SearchFragment.TAG);
-
-        if(tmp instanceof PredictionsInterface){
-            ((TimeInterface)tmp).setTime(hourOfDay, minute);
-        }
-
-    }
 }

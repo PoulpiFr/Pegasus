@@ -3,8 +3,6 @@
     <array name="screens_array">
         <item>Itinéraire</item>
         <item>Plans</item>
-        <item>Infos trafic</item>
-        <item>Statistiques</item>
         <item>Paramètres</item>
     </array>
 

@@ -18,9 +18,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import fr.poulpi.pegasus.R;
-import fr.poulpi.pegasus.dialog.StopChooserDialog;
 import fr.poulpi.pegasus.dijkstra.DijkstraCalc;
-import fr.poulpi.pegasus.interfaces.StopSelectionInterface;
 import fr.poulpi.pegasus.model.OfflineGraph;
 import fr.poulpi.pegasus.model.OfflineStop;
 import fr.poulpi.pegasus.model.SortiesStation;
@@ -32,7 +30,7 @@ import fr.poulpi.pegasus.model.SortiesStation;
  * create an instance of this fragment.
  *
  */
-public class OfflineFragment extends Fragment implements StopSelectionInterface {
+public class OfflineFragment extends Fragment {
 
     static public String TAG = "OfflineFragment";
 
@@ -88,15 +86,15 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         mDepartureEditText = (EditText) view.findViewById(R.id.departure);
         mDestinationEditText = (EditText) view.findViewById(R.id.destination);
 
-        mDepartureEditText.setOnClickListener(departureEditTextOnClickListener);
-        mDestinationEditText.setOnClickListener(destinationEditTextOnClickListener);
+        //mDepartureEditText.setOnClickListener(departureEditTextOnClickListener);
+        //mDestinationEditText.setOnClickListener(destinationEditTextOnClickListener);
 
         //((TextView)view.findViewById(R.id.textView)).setText(mSorties.data.get(1).name.replace("\\n ", "\n"));
         ((Button)view.findViewById(R.id.btn_compute)).setOnClickListener(computeBtnOnClickListener);
         return view;
 
     }
-
+/*
     private View.OnClickListener departureEditTextOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -118,7 +116,7 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
 
         }
     };
-
+*/
     private View.OnClickListener computeBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -139,13 +137,11 @@ public class OfflineFragment extends Fragment implements StopSelectionInterface 
         }
     };
 
-    @Override
     public void setDestination(OfflineStop offlineStop) {
         mDestination = offlineStop;
         mDestinationEditText.setText(offlineStop.name);
     }
 
-    @Override
     public void setDeparture(OfflineStop offlineStop) {
         mDeparture = offlineStop;
         mDepartureEditText.setText(offlineStop.name);
