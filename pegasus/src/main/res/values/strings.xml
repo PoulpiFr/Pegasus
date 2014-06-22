@@ -28,7 +28,7 @@
     <string name="title_activity_suggested_itinaries">Itinéraires</string>
     <string name="rapid">Le + rapide</string>
     <string name="navitia_api_rapid">rapid</string>
-    <string name="comfort">Le + comfortable</string>
+    <string name="comfort">Le + confortable</string>
     <string name="navitia_api_healthy">healthy</string>
     <string name="healthy">Le + sain</string>
     <string name="navitia_api_comfort">comfort</string>
