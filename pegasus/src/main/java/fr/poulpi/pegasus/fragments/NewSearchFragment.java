@@ -3,6 +3,7 @@ package fr.poulpi.pegasus.fragments;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -67,8 +68,24 @@ public class NewSearchFragment extends Fragment {
     private Interpolator ANIMATION_INTERPOLATOR = new AccelerateDecelerateInterpolator();
     private int mEditMode;
     private LayerEnablingAnimatorListener mLayerEnablingAnimatorListener;
+
+    private String fromRefKey = "fromRefKey";
+    private String toRefKey = "toRefKey";
+    private String fromRef = null;
+    private String toRef = null;
+
     private GoogleAPIResultPrediction fromDestination;
     private GoogleAPIResultPrediction toDestination;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        if(fromDestination != null && fromDestination != null) {
+            outState.putString(fromRefKey, fromDestination.getReference());
+            outState.putString(toRefKey, toDestination.getReference());
+        }
+    }
 
     private View.OnClickListener btnSearchOnClickListener = new View.OnClickListener() {
         @Override
@@ -77,18 +94,25 @@ public class NewSearchFragment extends Fragment {
             Intent intent = new Intent(getActivity(), SuggestedItinariesActivity.class);
 
             Bundle bundle = new Bundle();
-            bundle.putString(SuggestedItinariesActivity.FROM_REF, fromDestination.getReference());
-            bundle.putString(SuggestedItinariesActivity.TO_REF, toDestination.getReference());
+            if(fromRef != null && toRef != null) {
+                bundle.putString(SuggestedItinariesActivity.FROM_REF, fromDestination.getReference());
+                bundle.putString(SuggestedItinariesActivity.TO_REF, toDestination.getReference());
 
-            DateFormat dfISO8601 = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
-            Date date = new Date();
-            bundle.putString(SuggestedItinariesActivity.DATE, dfISO8601.format(date));
+                DateFormat dfISO8601 = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+                Date date = new Date();
+                bundle.putString(SuggestedItinariesActivity.DATE, dfISO8601.format(date));
 
-            bundle.putString(SuggestedItinariesActivity.FROM_NAME, fromDestination.getDescription());
-            bundle.putString(SuggestedItinariesActivity.TO_NAME, toDestination.getDescription());
-            intent.putExtras(bundle);
+                bundle.putString(SuggestedItinariesActivity.FROM_NAME, fromDestination.getDescription());
+                bundle.putString(SuggestedItinariesActivity.TO_NAME, toDestination.getDescription());
+                intent.putExtras(bundle);
 
-            startActivity(intent);
+                startActivity(intent);
+            } else {
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setMessage(getActivity().getString(R.string.missing_departure_arrival));
+                adb.show();
+            }
+
         }
     };
 
@@ -106,6 +130,11 @@ public class NewSearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState.containsKey(fromRefKey) && savedInstanceState.containsKey(toRefKey)){
+            fromRef = savedInstanceState.getString(fromRefKey);
+            toRef = savedInstanceState.getString(toRefKey);
+        }
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -183,11 +212,13 @@ public class NewSearchFragment extends Fragment {
 
     public void setFromDestination(GoogleAPIResultPrediction fromDestination) {
         this.fromDestination = fromDestination;
+        this.fromRef = fromDestination.getReference();
         mFromEditText.setText(fromDestination.getDescription());
     }
 
     public void setToDestination(GoogleAPIResultPrediction toDestination) {
         this.toDestination = toDestination;
+        this.toRef = toDestination.getReference();
         mToEditText.setText(toDestination.getDescription());
     }
 

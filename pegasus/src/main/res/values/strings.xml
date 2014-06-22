@@ -36,5 +36,7 @@
     <string name="navitia_api_public_transport">public_transport</string>
     <string name="suggested_itinaries_text_section">Résultats</string>
     <string name="suggested_itinaries_map_section">Carte</string>
+    <string name="short_minute"> min</string>
+    <string name="missing_departure_arrival">Oups, il semblerait que les champs \"Départ\" et/ou \"Arrivée\" ne soit pas correctement remplis !</string>
 
 </resources>

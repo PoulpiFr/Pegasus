@@ -176,8 +176,7 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
             }
         }
 
-        journeyHolder.walkingDuration.setText(walkingDuration/60 + " min");
-
+        journeyHolder.walkingDuration.setText(walkingDuration / 60 + getContext().getString(R.string.short_minute));
 
         return view;
     }
