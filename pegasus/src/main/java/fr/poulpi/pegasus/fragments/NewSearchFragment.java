@@ -291,7 +291,6 @@ public class NewSearchFragment extends Fragment {
             if (fm != null) {
                 int i = fm.getBackStackEntryCount();
 
-                Log.d("Poulpii", ""+i);
                 // If we are getting back to the "Normal mode" we have to get the UI back !
                 if (i == 0) {
 
@@ -319,7 +318,6 @@ public class NewSearchFragment extends Fragment {
                     mEditContainer.setVisibility(View.INVISIBLE);
 
                     //slideInToTop(mEditContainer, true);
-                    Log.d("Poulpii", "Lauching the anim !");
                     fadeOutToTop(mBtnSearchContainer, true);
                 }
             }
@@ -375,7 +373,7 @@ public class NewSearchFragment extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            if(s.length() % 2 == 0 ){
+            if(s.length() % 2 == 0 || count > 1){
                 googleAPIRequestPredictions(s.toString());
             }
         }

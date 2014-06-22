@@ -19,7 +19,7 @@
     <string name="less_walking">Le moins de marche</string>
     <string name="alternative">Itinéraire alternatif</string>
     <string name="now">Maintenant</string>
-    <string name="no_predictions">On a encore rien trouvé !</string>
+    <string name="no_predictions">Tape l'adresse dans la bare du haut !</string>
     <string name="google_api_subway_station">subway_station</string>
     <string name="google_api_rer_station">train_station</string>
     <string name="arrival">Arrivée :\u0020</string>
