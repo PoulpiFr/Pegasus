@@ -8,7 +8,7 @@
     <string name="drawer_open">Ouvrir le menu</string>
     <string name="drawer_close">Fermer le menu</string>
     <string name="from">De :</string>
-    <string name="from_gps">Départ (Position GPS actuelle)</string>
+    <string name="from_gps">Départ</string>
     <string name="to">Arrivée</string>
     <string name="to_gps">A : Position GPS actuelle</string>
     <string name="offline_mode_disabled">Mode hors-ligne désactivé</string>
@@ -19,7 +19,7 @@
     <string name="less_walking">Le moins de marche</string>
     <string name="alternative">Itinéraire alternatif</string>
     <string name="now">Maintenant</string>
-    <string name="no_predictions">Tape l'adresse dans la bare du haut !</string>
+    <string name="no_predictions">Tape l\'adresse dans la barre du haut !</string>
     <string name="google_api_subway_station">subway_station</string>
     <string name="google_api_rer_station">train_station</string>
     <string name="arrival">Arrivée :\u0020</string>
