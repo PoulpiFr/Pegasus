@@ -60,6 +60,7 @@ public class NewSearchFragment extends Fragment {
     private View mDestinationSeparator;
     private EditText mFromEditText;
     private EditText mToEditText;
+    private TextView mDateText;
 
     private float mHalfHeight;
     private float translatedHeight;
@@ -173,6 +174,7 @@ public class NewSearchFragment extends Fragment {
 
         mFromEditText = (EditText) view.findViewById(R.id.destination_from_text);
         mToEditText = (EditText) view.findViewById(R.id.destination_to_text);
+        mDateText = (TextView) view.findViewById(R.id.date_text);
 
         mFromContainer.setOnClickListener(mFromOnClickListener);
         mToContainer.setOnClickListener(mToOnClickListener);
@@ -228,6 +230,20 @@ public class NewSearchFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         public void onSearchFragmentInteraction(Uri uri);
+    }
+    
+    public void updateTimeInDateText(int hourOfDay, int minute){
+        //PH
+        if(mDateText != null){
+            mDateText.setText("Coin coin PH change moi");
+        }
+    }
+    
+    public void updateDateInDateText(int year, int monthOfYear, int dayOfMonth){
+        //PH
+        if(mDateText != null){
+            mDateText.setText("Coin coin PH change moi");
+        }
     }
 
     /*------ This is where we manage the smooth transitions between the different edit modes -----*/
