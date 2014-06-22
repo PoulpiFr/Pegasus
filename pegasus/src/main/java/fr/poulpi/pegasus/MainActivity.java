@@ -136,25 +136,17 @@ public class MainActivity extends Activity implements
                     .commit();
         }
         else if (position == 2){
-            fragment = DateFragment.newInstance();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment)
-                    .commit();
-        }
-        else if(position == 4){
             fragment = ItinaryPreferenceFragment.newInstance();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
-        } else {
-            fragment = new OfflineFragment();
         }
 
-        // Highlight the selected item, update the title, and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
-    }
+    // Highlight the selected item, update the title, and close the drawer
+    mDrawerList.setItemChecked(position, true);
+    setTitle(mPlanetTitles[position]);
+    mDrawerLayout.closeDrawer(mDrawerList);
+}
 
     @Override
     public void setTitle(CharSequence title) {
@@ -183,12 +175,12 @@ public class MainActivity extends Activity implements
 
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
-        }
+private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    @Override
+    public void onItemClick(AdapterView parent, View view, int position, long id) {
+        selectItem(position);
     }
+}
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
