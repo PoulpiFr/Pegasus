@@ -7,6 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 import fr.poulpi.pegasus.R;
 
@@ -18,12 +22,12 @@ import fr.poulpi.pegasus.R;
  *
  */
 public class DateFragment extends Fragment {
-    
+
     public static final String TAG = "DateFragment";
 
     private DatePicker mDatePicker;
     private TimePicker mTimePicker;
-    
+
     private OnFragmentInteractionListener mListener;
 
     public DateFragment() {
@@ -40,12 +44,12 @@ public class DateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-                                 
+
         View v = inflater.inflate(R.layout.fragment_date, container, false);
-        
+
         mTimePicker = (TimePicker) v.findViewById(R.id.time_picker);
         mDatePicker = (DatePicker) v.findViewById(R.id.date_picker);
-        
+
         mTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -54,16 +58,22 @@ public class DateFragment extends Fragment {
                 }
             }
         });
-        
-        mDatePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
 
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                if (mListener != null) {
-                    mListener.onDateChanged(year, monthOfYear, dayOfMonth);
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        mDatePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+
+                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        if (mListener != null) {
+                            mListener.onDateChanged(year, monthOfYear, dayOfMonth);
+                        }
+                    }
                 }
-            }
-        )};
-        
+        );
+
         return v;
     }
 

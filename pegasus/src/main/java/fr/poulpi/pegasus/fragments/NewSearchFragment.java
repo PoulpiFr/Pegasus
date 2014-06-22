@@ -20,10 +20,13 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.SuggestedItinariesActivity;
@@ -74,6 +77,8 @@ public class NewSearchFragment extends Fragment {
     private String toRefKey = "toRefKey";
     private String fromRef = null;
     private String toRef = null;
+
+    private int savedYear, savedMonthOfYear, savedDayOfMonth, savedHourOfDay, savedMinute;
 
     private GoogleAPIResultPrediction fromDestination;
     private GoogleAPIResultPrediction toDestination;
@@ -136,6 +141,13 @@ public class NewSearchFragment extends Fragment {
             fromRef = savedInstanceState.getString(fromRefKey);
             toRef = savedInstanceState.getString(toRefKey);
         }
+
+        final Calendar c = Calendar.getInstance();
+        savedYear = c.get(Calendar.YEAR);
+        savedMonthOfYear = c.get(Calendar.MONTH);
+        savedDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+        savedHourOfDay = c.get(Calendar.HOUR_OF_DAY);
+        savedMinute = c.get(Calendar.MINUTE);
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -230,20 +242,6 @@ public class NewSearchFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         public void onSearchFragmentInteraction(Uri uri);
-    }
-    
-    public void updateTimeInDateText(int hourOfDay, int minute){
-        //PH
-        if(mDateText != null){
-            mDateText.setText("Coin coin PH change moi");
-        }
-    }
-    
-    public void updateDateInDateText(int year, int monthOfYear, int dayOfMonth){
-        //PH
-        if(mDateText != null){
-            mDateText.setText("Coin coin PH change moi");
-        }
     }
 
     /*------ This is where we manage the smooth transitions between the different edit modes -----*/
@@ -553,6 +551,36 @@ public class NewSearchFragment extends Fragment {
             super.onAnimationEnd(animation);
             mTargetView.setLayerType(mLayerType, null);
         }
+    }
+
+    public void updateTimeInDateText(int hourOfDay, int minute){
+        savedHourOfDay = hourOfDay;
+        savedMinute = minute;
+        if(mDateText != null){
+            mDateText.setText(buildDateText());
+        }
+    }
+
+    public void updateDateInDateText(int year, int monthOfYear, int dayOfMonth){
+        savedYear = year;
+        savedMonthOfYear = monthOfYear;
+        savedDayOfMonth = dayOfMonth;
+        if(mDateText != null){
+            mDateText.setText(buildDateText());
+        }
+    }
+    private String buildDateText(){
+        String dateText;
+        Calendar c = Calendar.getInstance();
+        //Set the time for the notification to occur.
+        c.set(Calendar.YEAR, savedYear);
+        c.set(Calendar.MONTH, savedMonthOfYear);
+        c.set(Calendar.DAY_OF_MONTH, savedDayOfMonth);
+        c.set(Calendar.HOUR_OF_DAY, savedHourOfDay);
+        c.set(Calendar.MINUTE, savedMinute);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("'Le 'd MMMM yyyy' à 'hh:mm ", Locale.FRENCH);
+        dateText = dateFormatter.format(c.getTime());
+        return dateText;
     }
 
 }
