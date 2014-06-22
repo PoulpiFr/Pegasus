@@ -131,14 +131,23 @@ public class MainActivity extends Activity implements
         }
         else if(position == 1) {
             fragment = MetroMapFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         }
         else if (position == 2){
             fragment = DateFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         }
         else if(position == 4){
-                fragment = ItinaryPreferenceFragment.newInstance();
+            fragment = ItinaryPreferenceFragment.newInstance();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         } else {
-           fragment = new OfflineFragment();
+            fragment = new OfflineFragment();
         }
 
         // Highlight the selected item, update the title, and close the drawer
