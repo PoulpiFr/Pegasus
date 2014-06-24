@@ -66,6 +66,16 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
             journeyHolder.typeOfJourney.setText(getContext().getString(R.string.comfort));
         } else if(item.getType().equals(getContext().getString(R.string.navitia_api_healthy))){
             journeyHolder.typeOfJourney.setText(getContext().getString(R.string.healthy));
+        } else if(item.getType().equals(getContext().getString(R.string.navitia_api_best))){
+            journeyHolder.typeOfJourney.setText(getContext().getString(R.string.best));
+        } else if(item.getType().equals(getContext().getString(R.string.navitia_api_fastest))){
+            journeyHolder.typeOfJourney.setText(getContext().getString(R.string.fastest));
+        } else if(item.getType().equals(getContext().getString(R.string.navitia_api_no_train))){
+            journeyHolder.typeOfJourney.setText(getContext().getString(R.string.no_train));
+        } else if(item.getType().equals(getContext().getString(R.string.navitia_api_less_fallback_walk))){
+            journeyHolder.typeOfJourney.setText(getContext().getString(R.string.less_fallback_walk));
+        } else if(item.getType().equals(getContext().getString(R.string.navitia_api_less_fallback_bike))){
+            journeyHolder.typeOfJourney.setText(getContext().getString(R.string.less_fallback_bike));
         }
 
         /*------ Journey total duration ------*/

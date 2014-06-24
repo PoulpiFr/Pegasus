@@ -38,5 +38,17 @@
     <string name="suggested_itinaries_map_section">Carte</string>
     <string name="short_minute"> min</string>
     <string name="missing_departure_arrival">Oups, il semblerait que les champs \"Départ\" et/ou \"Arrivée\" ne soit pas correctement remplis !</string>
+    <string name="navitia_api_best">best</string>
+    <string name="navitia_api_fastest">fastest</string>
+    <string name="navitia_api_no_train">no_train</string>
+    <string name="navitia_api_less_fallback_walk">less_fallback_walk</string>
+    <string name="navitia_api_less_fallback_bike">less_fallback_bike</string>
+    <string name="best">Le meilleur</string>
+    <string name="fastest">Le + rapide</string>
+    <string name="no_train">Le - de train</string>
+    <string name="less_fallback_walk">Le - de marche</string>
+    <string name="less_fallback_bike">Le - de vélo</string>
+    <string name="RATPLineView_dashed">dashed</string>
+    <string name="RATPLineView_full">full</string>
 
 </resources>

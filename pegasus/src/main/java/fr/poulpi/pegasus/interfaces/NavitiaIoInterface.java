@@ -14,11 +14,12 @@ public interface NavitiaIoInterface {
 
     @GET("/journeys")
     void journey(
-            //@Header("Authorization") String myKey,
+            @Header("Authorization") String myKey,
             @Query("from") String from,
             @Query("to") String to,
             @Query("datetime") String datetime,
             @Query("datetime_represents") String datetime_represents,
+            @Query("min_nb_journeys") String min_nb_journeys,
             Callback<CTPJourneyResponse> cb
     );
 

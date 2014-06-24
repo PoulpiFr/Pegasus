@@ -180,7 +180,7 @@ public class SuggestedItinariesActivity extends FragmentActivity implements Acti
         String toStr = new StringBuilder().append(to.location.lng).append(";").append(to.location.lat).toString();
 
         NavitiaIoInterface ws = navitiaRestAdapter.create(NavitiaIoInterface.class);
-        ws.journey(fromStr, toStr, getIntent().getExtras().getString(DATE), "departure", itinaryCallback);
+        ws.journey(NavitiaIoConf.navitiaIoKey, fromStr, toStr, getIntent().getExtras().getString(DATE), "departure", NavitiaIoConf.min_nb_journeys, itinaryCallback);
 
     }
 

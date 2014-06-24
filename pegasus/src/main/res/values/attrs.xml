@@ -9,4 +9,9 @@
         <attr name="textSize" format="dimension" />
         <attr name="text" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="RATPLineView">
+        <attr name="lineWidth" format="dimension" />
+        <attr name="mode" format="string" />
+    </declare-styleable>
 </resources>
