@@ -89,14 +89,14 @@ public class RATPLineView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Draw the first circle
+        if(mode == FULL) {
+            // Draw the first circle
         canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mStartEndPaint);
 
         // Draw the second circle
         canvas.drawCircle(getWidth()/2, getBottom() - getWidth()/2, getWidth()/2, mStartEndPaint);
 
         // Draw the line
-        if(mode == FULL) {
             canvas.drawLine((getWidth()) / 2, getTop() + lineWidth, (getWidth()) / 2, getBottom() - lineWidth, mLinePaint);
         } else if(mode == DASHED) {
             canvas.drawLine((getWidth()) / 2, getTop() + lineWidth, (getWidth()) / 2, getBottom() - lineWidth, mDashedLinePaint);

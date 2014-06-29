@@ -15,6 +15,7 @@ import java.util.List;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.model.CTPJourney;
 import fr.poulpi.pegasus.model.CTPSection;
+import fr.poulpi.pegasus.ratp.LineStyle;
 import fr.poulpi.pegasus.view.RATPLineSignView;
 
 /**
@@ -124,57 +125,57 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
 
                 try {
                     if (label.equals("1")) {
-                        currentSign.setMetroLine(RATPLineSignView.M1);
+                        currentSign.setMetroLine(LineStyle.M1);
                     } else if (label.equals("2")) {
-                        currentSign.setMetroLine(RATPLineSignView.M2);
+                        currentSign.setMetroLine(LineStyle.M2);
                     } else if (label.equals("3")) {
-                        currentSign.setMetroLine(RATPLineSignView.M3);
+                        currentSign.setMetroLine(LineStyle.M3);
                     } else if (label.equals("4")) {
-                        currentSign.setMetroLine(RATPLineSignView.M4);
+                        currentSign.setMetroLine(LineStyle.M4);
                     } else if (label.equals("5")) {
-                        currentSign.setMetroLine(RATPLineSignView.M5);
+                        currentSign.setMetroLine(LineStyle.M5);
                     } else if (label.equals("6")) {
-                        currentSign.setMetroLine(RATPLineSignView.M6);
+                        currentSign.setMetroLine(LineStyle.M6);
                     } else if (label.equals("7")) {
-                        currentSign.setMetroLine(RATPLineSignView.M7);
+                        currentSign.setMetroLine(LineStyle.M7);
                     } else if (label.equals("8")) {
-                        currentSign.setMetroLine(RATPLineSignView.M8);
+                        currentSign.setMetroLine(LineStyle.M8);
                     } else if (label.equals("9")) {
-                        currentSign.setMetroLine(RATPLineSignView.M9);
+                        currentSign.setMetroLine(LineStyle.M9);
                     } else if (label.equals("10")) {
-                        currentSign.setMetroLine(RATPLineSignView.M10);
+                        currentSign.setMetroLine(LineStyle.M10);
                     } else if (label.equals("11")) {
-                        currentSign.setMetroLine(RATPLineSignView.M11);
+                        currentSign.setMetroLine(LineStyle.M11);
                     } else if (label.equals("12")) {
-                        currentSign.setMetroLine(RATPLineSignView.M12);
+                        currentSign.setMetroLine(LineStyle.M12);
                     } else if (label.equals("13")) {
-                        currentSign.setMetroLine(RATPLineSignView.M13);
+                        currentSign.setMetroLine(LineStyle.M13);
                     } else if (label.equals("14")) {
-                        currentSign.setMetroLine(RATPLineSignView.M14);
+                        currentSign.setMetroLine(LineStyle.M14);
                     } else if (label.equals("A")) {
-                        currentSign.setMetroLine(RATPLineSignView.RA);
+                        currentSign.setMetroLine(LineStyle.RA);
                     } else if (label.equals("B")) {
-                        currentSign.setMetroLine(RATPLineSignView.RB);
+                        currentSign.setMetroLine(LineStyle.RB);
                     } else if (label.equals("C")) {
-                        currentSign.setMetroLine(RATPLineSignView.RC);
+                        currentSign.setMetroLine(LineStyle.RC);
                     } else if (label.equals("D")) {
-                        currentSign.setMetroLine(RATPLineSignView.RD);
+                        currentSign.setMetroLine(LineStyle.RD);
                     } else if (label.equals("E")) {
-                        currentSign.setMetroLine(RATPLineSignView.RE);
+                        currentSign.setMetroLine(LineStyle.RE);
                     } else if (label.equals("J")) {
-                        currentSign.setMetroLine(RATPLineSignView.RJ);
+                        currentSign.setMetroLine(LineStyle.RJ);
                     } else if (label.equals("K")) {
-                        currentSign.setMetroLine(RATPLineSignView.RK);
+                        currentSign.setMetroLine(LineStyle.RK);
                     } else if (label.equals("L")) {
-                        currentSign.setMetroLine(RATPLineSignView.RL);
+                        currentSign.setMetroLine(LineStyle.RL);
                     } else if (label.equals("N")) {
-                        currentSign.setMetroLine(RATPLineSignView.RN);
+                        currentSign.setMetroLine(LineStyle.RN);
                     } else if (label.equals("P")) {
-                        currentSign.setMetroLine(RATPLineSignView.RP);
+                        currentSign.setMetroLine(LineStyle.RP);
                     } else if (label.equals("R")) {
-                        currentSign.setMetroLine(RATPLineSignView.RR);
+                        currentSign.setMetroLine(LineStyle.RR);
                     } else if (label.equals("U")) {
-                        currentSign.setMetroLine(RATPLineSignView.RU);
+                        currentSign.setMetroLine(LineStyle.RU);
                     } else if (label.startsWith("N")){
                         currentSign.setBusLine(label);
                     } else if (Integer.valueOf(label) >= 20) {

@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.model.GoogleAPIResultPrediction;
+import fr.poulpi.pegasus.ratp.LineStyle;
 import fr.poulpi.pegasus.view.RATPLineSignView;
 
 /**
@@ -61,11 +62,11 @@ public class PredictionListAdapter extends ArrayAdapter<GoogleAPIResultPredictio
         }
 
         if (isSubwayStation) {
-            lineHolder.ratpSign.setMetroLine(RATPLineSignView.METRO);
+            lineHolder.ratpSign.setMetroLine(LineStyle.METRO);
         } else if (isRERStation){
-            lineHolder.ratpSign.setMetroLine(RATPLineSignView.RER);
+            lineHolder.ratpSign.setMetroLine(LineStyle.RER);
         } else {
-            lineHolder.ratpSign.setMetroLine(RATPLineSignView.BLANK);
+            lineHolder.ratpSign.setMetroLine(LineStyle.BLANK);
         }
 
         lineHolder.destinationName.setText(item.getDescription());
