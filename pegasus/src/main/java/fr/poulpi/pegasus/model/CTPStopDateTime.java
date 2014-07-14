@@ -1,11 +1,12 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by pokito on 19/05/2014.
  */
-public class CTPStopDateTime {
+public class CTPStopDateTime implements Serializable {
 
     //A date time
     Date date_time;

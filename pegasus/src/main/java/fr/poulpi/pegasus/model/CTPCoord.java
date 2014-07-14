@@ -1,9 +1,11 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
+
 /**
  * Created by pokito on 19/05/2014.
  */
-public class CTPCoord {
+public class CTPCoord implements Serializable {
 
     //Longitude
     float lon;

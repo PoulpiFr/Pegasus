@@ -1,11 +1,12 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by pokito on 31/05/2014.
  */
-public class CTPGeoJson {
+public class CTPGeoJson implements Serializable {
 
     public String getType() {
         return type;

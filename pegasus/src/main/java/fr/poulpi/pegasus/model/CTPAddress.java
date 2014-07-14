@@ -1,11 +1,12 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by pokito on 19/05/2014.
  */
-public class CTPAddress {
+public class CTPAddress implements Serializable {
 
     //Identifier of the address
     String id;

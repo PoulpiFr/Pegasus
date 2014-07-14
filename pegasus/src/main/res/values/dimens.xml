@@ -36,5 +36,6 @@
     <dimen name="with_left_padding">5dp</dimen>
     <dimen name="big_text">18sp</dimen>
     <dimen name="medium_text">16sp</dimen>
+    <dimen name="line_view_right_space">10dp</dimen>
 
 </resources>

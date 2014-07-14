@@ -1,12 +1,14 @@
 package fr.poulpi.pegasus.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import fr.poulpi.pegasus.ItinaryDetailsActivity;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.SuggestedItinariesActivity;
 import fr.poulpi.pegasus.adapters.SuggestedItinaryListAdapter;
@@ -41,15 +44,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SuggestedItinariesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SuggestedItinariesFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class SuggestedItinariesFragment extends Fragment {
 
     SuggestedItinaryListAdapter mAdapter;
@@ -60,6 +54,15 @@ public class SuggestedItinariesFragment extends Fragment {
     private ListView mListView;
     private TextView mFromTv;
     private TextView mToTv;
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent i = new Intent(getActivity(), ItinaryDetailsActivity.class);
+            i.putExtra(ItinaryDetailsActivity.JOURNEY, ((SuggestedItinariesActivity)getActivity()).getJourneys().get(position));
+            startActivity(i);
+        }
+    };
 
     public static SuggestedItinariesFragment newInstance(Bundle bundle) {
         SuggestedItinariesFragment fragment = new SuggestedItinariesFragment();
@@ -78,7 +81,6 @@ public class SuggestedItinariesFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override
@@ -92,7 +94,7 @@ public class SuggestedItinariesFragment extends Fragment {
         mListView.setAdapter(mAdapter);
         mListView.setEmptyView(view.findViewById(R.id.empty));
         mListView.setItemsCanFocus(true);
-        //mListView.setOnItemClickListener(onItemClickListener);
+        mListView.setOnItemClickListener(onItemClickListener);
 
         mFromTv = (TextView) view.findViewById(R.id.destination_from_text);
         mToTv = (TextView) view.findViewById(R.id.destination_to_text);

@@ -1,9 +1,11 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
+
 /**
  * Created by pokito on 19/05/2014.
  */
-public class CTPPoi {
+public class CTPPoi implements Serializable {
 
     //Identifier of the poi type
     String id;

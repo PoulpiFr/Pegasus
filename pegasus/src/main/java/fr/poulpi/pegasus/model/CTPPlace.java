@@ -1,9 +1,11 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
+
 /**
  * Created by pokito on 31/05/2014.
  */
-public class CTPPlace {
+public class CTPPlace implements Serializable {
 
     //The id of the embedded object
     String name;

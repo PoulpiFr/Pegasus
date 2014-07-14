@@ -110,7 +110,7 @@ public class OfflineFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
-            DialogFragment dialogFrag = new StopChooserDialog(mOfflineGraph, StopChooserDialog.DESTINATION);
+            DialogFragment dialogFrag = new StopChooserDialog(mOfflineGraph, StopChooserDialog.DIRECTION);
             dialogFrag.setTargetFragment(OfflineFragment.this, 0);
             dialogFrag.show(getFragmentManager().beginTransaction(), "dialog");
 

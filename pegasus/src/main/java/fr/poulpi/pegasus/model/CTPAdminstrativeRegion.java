@@ -1,9 +1,11 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
+
 /**
  * Created by pokito on 19/05/2014.
  */
-public class CTPAdminstrativeRegion {
+public class CTPAdminstrativeRegion implements Serializable {
 
     //Identifier of the line
     String id;

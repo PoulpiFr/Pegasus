@@ -74,6 +74,7 @@ public class SuggestedItinariesActivity extends FragmentActivity implements Acti
     GoogleAPIGeometry to = null;
 
     ViewPager mViewPager;
+
     private List<CTPJourney> mJourneys;
 
     @Override

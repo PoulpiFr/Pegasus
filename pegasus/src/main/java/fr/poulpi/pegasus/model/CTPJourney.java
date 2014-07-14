@@ -1,12 +1,13 @@
 package fr.poulpi.pegasus.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by pokito on 19/05/2014.
  */
-public class CTPJourney {
+public class CTPJourney implements Serializable {
 
     //Duration of the journey
     int duration;

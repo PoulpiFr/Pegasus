@@ -50,5 +50,6 @@
     <string name="less_fallback_bike">Le - de vélo</string>
     <string name="RATPLineView_dashed">dashed</string>
     <string name="RATPLineView_full">full</string>
+    <string name="title_activity_itinary_details">Détails</string>
 
 </resources>
