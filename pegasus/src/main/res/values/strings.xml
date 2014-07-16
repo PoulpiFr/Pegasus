@@ -51,5 +51,6 @@
     <string name="RATPLineView_dashed">dashed</string>
     <string name="RATPLineView_full">full</string>
     <string name="title_activity_itinary_details">Détails</string>
+    <string name="walking">En marchant</string>
 
 </resources>

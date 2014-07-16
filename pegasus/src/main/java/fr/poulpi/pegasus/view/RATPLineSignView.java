@@ -158,4 +158,71 @@ public class RATPLineSignView extends View {
         init(false);
         invalidate();
     }
+
+    public void setLine(String label) {
+
+        try {
+            if (label.equals("1")) {
+                this.setMetroLine(LineStyle.M1);
+            } else if (label.equals("2")) {
+                this.setMetroLine(LineStyle.M2);
+            } else if (label.equals("3")) {
+                this.setMetroLine(LineStyle.M3);
+            } else if (label.equals("4")) {
+                this.setMetroLine(LineStyle.M4);
+            } else if (label.equals("5")) {
+                this.setMetroLine(LineStyle.M5);
+            } else if (label.equals("6")) {
+                this.setMetroLine(LineStyle.M6);
+            } else if (label.equals("7")) {
+                this.setMetroLine(LineStyle.M7);
+            } else if (label.equals("8")) {
+                this.setMetroLine(LineStyle.M8);
+            } else if (label.equals("9")) {
+                this.setMetroLine(LineStyle.M9);
+            } else if (label.equals("10")) {
+                this.setMetroLine(LineStyle.M10);
+            } else if (label.equals("11")) {
+                this.setMetroLine(LineStyle.M11);
+            } else if (label.equals("12")) {
+                this.setMetroLine(LineStyle.M12);
+            } else if (label.equals("13")) {
+                this.setMetroLine(LineStyle.M13);
+            } else if (label.equals("14")) {
+                this.setMetroLine(LineStyle.M14);
+            } else if (label.equals("A")) {
+                this.setMetroLine(LineStyle.RA);
+            } else if (label.equals("B")) {
+                this.setMetroLine(LineStyle.RB);
+            } else if (label.equals("C")) {
+                this.setMetroLine(LineStyle.RC);
+            } else if (label.equals("D")) {
+                this.setMetroLine(LineStyle.RD);
+            } else if (label.equals("E")) {
+                this.setMetroLine(LineStyle.RE);
+            } else if (label.equals("J")) {
+                this.setMetroLine(LineStyle.RJ);
+            } else if (label.equals("K")) {
+                this.setMetroLine(LineStyle.RK);
+            } else if (label.equals("L")) {
+                this.setMetroLine(LineStyle.RL);
+            } else if (label.equals("N")) {
+                this.setMetroLine(LineStyle.RN);
+            } else if (label.equals("P")) {
+                this.setMetroLine(LineStyle.RP);
+            } else if (label.equals("R")) {
+                this.setMetroLine(LineStyle.RR);
+            } else if (label.equals("U")) {
+                this.setMetroLine(LineStyle.RU);
+            } else if (label.startsWith("N")){
+                this.setBusLine(label);
+            } else if (Integer.valueOf(label) >= 20) {
+                this.setBusLine(label);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }

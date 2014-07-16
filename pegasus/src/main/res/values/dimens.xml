@@ -37,5 +37,11 @@
     <dimen name="big_text">18sp</dimen>
     <dimen name="medium_text">16sp</dimen>
     <dimen name="line_view_right_space">10dp</dimen>
+    <dimen name="ratp_sign_height_little">23dp</dimen>
+    <dimen name="ratp_sign_width_little">23dp</dimen>
+    <dimen name="ratp_sign_radius_little">10dp</dimen>
+    <dimen name="ratp_sign_border_little">1dp</dimen>
+    <dimen name="ratp_sign_text_size_little">12sp</dimen>
+
 
 </resources>

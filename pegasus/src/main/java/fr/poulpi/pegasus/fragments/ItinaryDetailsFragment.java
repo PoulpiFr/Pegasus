@@ -4,20 +4,19 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 
 import fr.poulpi.pegasus.ItinaryDetailsActivity;
 import fr.poulpi.pegasus.R;
 import fr.poulpi.pegasus.model.CTPJourney;
 import fr.poulpi.pegasus.model.CTPSection;
+import fr.poulpi.pegasus.ratp.LineStyle;
 import fr.poulpi.pegasus.view.ItinaryTransportSection;
 
 /**
@@ -65,25 +64,39 @@ public class ItinaryDetailsFragment extends Fragment {
 
         Iterator<CTPSection> it = mJourney.getSections().iterator();
 
+        Bundle bundle = null;
+
         while (it.hasNext()) {
             CTPSection tempSection = it.next();
 
             if(tempSection.getType() != null && tempSection.getType().equals(getString(R.string.navitia_api_public_transport))) {
-                Bundle bundle = new Bundle();
+
+                if(bundle != null){
+                    bundle.putBoolean(ItinaryTransportSection.IS_CORRESPONDANCE, true);
+                    ll.addView(ItinaryTransportSection.newInstance(getActivity(), bundle));
+                }
+
+                bundle = new Bundle();
                 bundle.putString(ItinaryTransportSection.DEPARTURE_TIME, sdf.format(tempSection.getDeparture_date_time()));
                 bundle.putString(ItinaryTransportSection.ARRIVAL_TIME, sdf.format(tempSection.getArrival_date_time()));
 
                 bundle.putString(ItinaryTransportSection.DEPARTURE_PLACE, tempSection.getFrom().getName());
                 bundle.putString(ItinaryTransportSection.ARRIVAL_PLACE, tempSection.getTo().getName());
 
-                bundle.putString(ItinaryTransportSection.DIRECTION, "dir. " + tempSection.getDisplay_informations().getDirection());
-                bundle.putString(ItinaryTransportSection.TRANSPORT_TIME, (tempSection.getDuration() / 60) + " min");
+                bundle.putString(ItinaryTransportSection.DIRECTION, tempSection.getDisplay_informations().getDirection());
+                bundle.putString(ItinaryTransportSection.TRANSPORT_TIME, tempSection.getStop_date_times().size() + " stations (" + (tempSection.getDuration() / 60) + " min)");
 
-                bundle.putString(ItinaryTransportSection.METRO_LINE, tempSection.getDisplay_informations().getLabel());
+                bundle.putInt(ItinaryTransportSection.LINE_TYPE, LineStyle.METRO);
+                bundle.putString(ItinaryTransportSection.LINE, tempSection.getDisplay_informations().getLabel());
 
-                ll.addView(ItinaryTransportSection.newInstance(getActivity(), bundle));
+                bundle.putBoolean(ItinaryTransportSection.IS_CORRESPONDANCE, false);
             }
         }
+
+        if(bundle != null){
+            ll.addView(ItinaryTransportSection.newInstance(getActivity(), bundle));
+        }
+
         return v;
     }
 

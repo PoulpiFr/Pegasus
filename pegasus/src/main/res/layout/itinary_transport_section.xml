@@ -2,115 +2,150 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ratp="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="250dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="23:43"
-            android:id="@+id/departure_time"
-            android:padding="5dp"
-            android:paddingTop="7dp"
-            android:layout_alignParentTop="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="23:43"
+        android:id="@+id/departure_time"
+        android:padding="5dp"
+        android:paddingTop="7dp"
+        android:layout_alignParentTop="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="23:46"
-            android:id="@+id/arrival_time"
-            android:padding="5dp"
-            android:paddingBottom="7dp"
-            android:layout_alignParentBottom="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="23:46"
+        android:id="@+id/arrival_time"
+        android:padding="5dp"
+        android:paddingBottom="7dp"
+        android:layout_alignParentBottom="true"/>
 
-        <fr.poulpi.pegasus.view.RATPLineView
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/transport_line_view"
-            android:layout_marginLeft="50dp"
-            android:paddingLeft="20dp"
-            android:paddingBottom="40dp"
-            app:lineWidth="14dp"
-            app:mode="full" />
+    <fr.poulpi.pegasus.view.RATPLineView
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/transport_line_view"
+        android:layout_marginLeft="50dp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="40dp"
+        app:lineWidth="8dp"
+        app:mode="full" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            tools:text="Boucicaut"
-            android:id="@+id/departure_place"
-            android:padding="5dp"
-            android:layout_alignBaseline="@+id/departure_time"
-            android:layout_toRightOf="@id/transport_line_view"
-            android:layout_marginLeft="@dimen/line_view_right_space" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        tools:text="Boucicaut"
+        android:id="@+id/departure_place"
+        android:padding="5dp"
+        android:layout_alignBaseline="@+id/departure_time"
+        android:layout_toRightOf="@id/transport_line_view"
+        android:layout_marginLeft="@dimen/line_view_right_space" />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:id="@+id/departure_div"
-            android:background="@color/separator_gray"
-            android:padding="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/departure_place"
-            android:layout_toRightOf="@id/transport_line_view"
-            android:layout_marginLeft="@dimen/line_view_right_space"/>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:id="@+id/departure_div"
+        android:background="@color/separator_gray"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/departure_place"
+        android:layout_toRightOf="@id/transport_line_view"
+        android:layout_marginLeft="@dimen/line_view_right_space"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/transport_line_view"
-            android:layout_marginLeft="@dimen/line_view_right_space">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="Dir. Aubervilliers"
-                android:id="@+id/direction"
-                android:padding="5dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="7 stations (12 min)"
-                android:id="@+id/transport_time"
-                android:padding="5dp"
-                style="@android:style/TextAppearance.DeviceDefault.Small"
-                android:textColor="@color/txt_gray" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:id="@+id/arrival_div"
-            android:background="@color/separator_gray"
-            android:layout_above="@+id/arrival_time"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/transport_line_view"
-            android:layout_marginLeft="@dimen/line_view_right_space"/>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/arrival_gray"
-            android:background="@color/background_gray"
-            android:layout_toRightOf="@id/transport_line_view"
-            android:layout_alignTop="@id/arrival_div"
-            android:layout_marginTop="1dp"
-            android:layout_marginLeft="@dimen/line_view_right_space"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/transport_line_view"
+        android:layout_marginLeft="@dimen/line_view_right_space">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            tools:text="Concorde"
-            android:id="@+id/arrival_place"
+            tools:text="Dir. Aubervilliers"
+            android:id="@+id/direction"
+            android:padding="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="7 stations (12 min)"
+            android:id="@+id/transport_time"
             android:padding="5dp"
-            android:layout_alignBaseline="@+id/arrival_time"
-            android:layout_toRightOf="@id/transport_line_view"
-            android:layout_marginLeft="@dimen/line_view_right_space"/>
+            style="@android:style/TextAppearance.DeviceDefault.Small"
+            android:textColor="@color/txt_gray" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        >
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width_little"
+            android:layout_height="@dimen/ratp_sign_height_little"
+            android:id="@+id/ratp_sign_mode"
+            ratp:bgColor="@color/azur"
+            ratp:filled="false"
+            ratp:text="M"
+            ratp:textSize="@dimen/ratp_sign_text_size_little"
+            ratp:border="@dimen/ratp_sign_border_little"
+            ratp:radius="@dimen/ratp_sign_radius_little"
+            ratp:textColor="@color/azur"/>
+
+        <fr.poulpi.pegasus.view.RATPLineSignView
+            android:layout_width="@dimen/ratp_sign_width_little"
+            android:layout_height="@dimen/ratp_sign_height_little"
+            android:id="@+id/ratp_sign_number"
+            ratp:bgColor="@color/sapin"
+            ratp:filled="true"
+            ratp:text="12"
+            ratp:textSize="@dimen/ratp_sign_text_size_little"
+            ratp:border="@dimen/ratp_sign_border_little"
+            ratp:radius="@dimen/ratp_sign_radius_little"
+            ratp:textColor="@color/white"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:id="@+id/arrival_div"
+        android:background="@color/separator_gray"
+        android:layout_above="@+id/arrival_time"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/transport_line_view"
+        android:layout_marginLeft="@dimen/line_view_right_space"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/arrival_gray"
+        android:background="@color/background_gray"
+        android:layout_toRightOf="@id/transport_line_view"
+        android:layout_alignTop="@id/arrival_div"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="@dimen/line_view_right_space"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        tools:text="Concorde"
+        android:id="@+id/arrival_place"
+        android:padding="5dp"
+        android:layout_alignBaseline="@+id/arrival_time"
+        android:layout_toRightOf="@id/transport_line_view"
+        android:layout_marginLeft="@dimen/line_view_right_space"/>
 
 </RelativeLayout>

@@ -14,6 +14,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 import fr.poulpi.pegasus.R;
+import fr.poulpi.pegasus.ratp.LineStyle;
 
 public class RATPLineView extends View {
 
@@ -91,16 +92,93 @@ public class RATPLineView extends View {
 
         if(mode == FULL) {
             // Draw the first circle
-        canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mStartEndPaint);
+            canvas.drawCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2, mStartEndPaint);
 
-        // Draw the second circle
-        canvas.drawCircle(getWidth()/2, getBottom() - getWidth()/2, getWidth()/2, mStartEndPaint);
+            // Draw the second circle
+            canvas.drawCircle(getWidth()/2, getBottom() - getWidth()/2, getWidth()/2, mStartEndPaint);
 
-        // Draw the line
+            // Draw the line
             canvas.drawLine((getWidth()) / 2, getTop() + lineWidth, (getWidth()) / 2, getBottom() - lineWidth, mLinePaint);
         } else if(mode == DASHED) {
             canvas.drawLine((getWidth()) / 2, getTop() + lineWidth, (getWidth()) / 2, getBottom() - lineWidth, mDashedLinePaint);
         }
     }
 
+    public void setLine(String label) {
+
+        try {
+            if (label.equals("1")) {
+                this.setLineStyle(LineStyle.M1);
+            } else if (label.equals("2")) {
+                this.setLineStyle(LineStyle.M2);
+            } else if (label.equals("3")) {
+                this.setLineStyle(LineStyle.M3);
+            } else if (label.equals("4")) {
+                this.setLineStyle(LineStyle.M4);
+            } else if (label.equals("5")) {
+                this.setLineStyle(LineStyle.M5);
+            } else if (label.equals("6")) {
+                this.setLineStyle(LineStyle.M6);
+            } else if (label.equals("7")) {
+                this.setLineStyle(LineStyle.M7);
+            } else if (label.equals("8")) {
+                this.setLineStyle(LineStyle.M8);
+            } else if (label.equals("9")) {
+                this.setLineStyle(LineStyle.M9);
+            } else if (label.equals("10")) {
+                this.setLineStyle(LineStyle.M10);
+            } else if (label.equals("11")) {
+                this.setLineStyle(LineStyle.M11);
+            } else if (label.equals("12")) {
+                this.setLineStyle(LineStyle.M12);
+            } else if (label.equals("13")) {
+                this.setLineStyle(LineStyle.M13);
+            } else if (label.equals("14")) {
+                this.setLineStyle(LineStyle.M14);
+            } else if (label.equals("A")) {
+                this.setLineStyle(LineStyle.RA);
+            } else if (label.equals("B")) {
+                this.setLineStyle(LineStyle.RB);
+            } else if (label.equals("C")) {
+                this.setLineStyle(LineStyle.RC);
+            } else if (label.equals("D")) {
+                this.setLineStyle(LineStyle.RD);
+            } else if (label.equals("E")) {
+                this.setLineStyle(LineStyle.RE);
+            } else if (label.equals("J")) {
+                this.setLineStyle(LineStyle.RJ);
+            } else if (label.equals("K")) {
+                this.setLineStyle(LineStyle.RK);
+            } else if (label.equals("L")) {
+                this.setLineStyle(LineStyle.RL);
+            } else if (label.equals("N")) {
+                this.setLineStyle(LineStyle.RN);
+            } else if (label.equals("P")) {
+                this.setLineStyle(LineStyle.RP);
+            } else if (label.equals("R")) {
+                this.setLineStyle(LineStyle.RR);
+            } else if (label.equals("U")) {
+                this.setLineStyle(LineStyle.RU);
+            } else if (label.startsWith("N")) {
+                this.setLineStyle(LineStyle.BUS_MODE);
+            } else if (Integer.valueOf(label) >= 20) {
+                this.setLineStyle(LineStyle.BUS_MODE);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setLineStyle(int lineStyle) {
+
+        LineStyle ls = new LineStyle(getContext(), LineStyle.METRO_MODE, lineStyle, null);
+
+        mLinePaint.setColor(ls.getmBgColor());
+        mStartEndPaint.setColor(ls.getmBgColor());
+
+        invalidate();
+
+    }
 }

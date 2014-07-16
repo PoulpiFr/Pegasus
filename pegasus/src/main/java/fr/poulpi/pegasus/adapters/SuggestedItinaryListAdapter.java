@@ -77,6 +77,8 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
             journeyHolder.typeOfJourney.setText(getContext().getString(R.string.less_fallback_walk));
         } else if(item.getType().equals(getContext().getString(R.string.navitia_api_less_fallback_bike))){
             journeyHolder.typeOfJourney.setText(getContext().getString(R.string.less_fallback_bike));
+        } else if(item.getType().equals(getContext().getString(R.string.navitia_api_walking))){
+            journeyHolder.typeOfJourney.setText(getContext().getString(R.string.walking));
         }
 
         /*------ Journey total duration ------*/
@@ -123,67 +125,7 @@ public class SuggestedItinaryListAdapter extends ArrayAdapter<CTPJourney> {
 
                 String label = tmp.getDisplay_informations().getLabel();
 
-                try {
-                    if (label.equals("1")) {
-                        currentSign.setMetroLine(LineStyle.M1);
-                    } else if (label.equals("2")) {
-                        currentSign.setMetroLine(LineStyle.M2);
-                    } else if (label.equals("3")) {
-                        currentSign.setMetroLine(LineStyle.M3);
-                    } else if (label.equals("4")) {
-                        currentSign.setMetroLine(LineStyle.M4);
-                    } else if (label.equals("5")) {
-                        currentSign.setMetroLine(LineStyle.M5);
-                    } else if (label.equals("6")) {
-                        currentSign.setMetroLine(LineStyle.M6);
-                    } else if (label.equals("7")) {
-                        currentSign.setMetroLine(LineStyle.M7);
-                    } else if (label.equals("8")) {
-                        currentSign.setMetroLine(LineStyle.M8);
-                    } else if (label.equals("9")) {
-                        currentSign.setMetroLine(LineStyle.M9);
-                    } else if (label.equals("10")) {
-                        currentSign.setMetroLine(LineStyle.M10);
-                    } else if (label.equals("11")) {
-                        currentSign.setMetroLine(LineStyle.M11);
-                    } else if (label.equals("12")) {
-                        currentSign.setMetroLine(LineStyle.M12);
-                    } else if (label.equals("13")) {
-                        currentSign.setMetroLine(LineStyle.M13);
-                    } else if (label.equals("14")) {
-                        currentSign.setMetroLine(LineStyle.M14);
-                    } else if (label.equals("A")) {
-                        currentSign.setMetroLine(LineStyle.RA);
-                    } else if (label.equals("B")) {
-                        currentSign.setMetroLine(LineStyle.RB);
-                    } else if (label.equals("C")) {
-                        currentSign.setMetroLine(LineStyle.RC);
-                    } else if (label.equals("D")) {
-                        currentSign.setMetroLine(LineStyle.RD);
-                    } else if (label.equals("E")) {
-                        currentSign.setMetroLine(LineStyle.RE);
-                    } else if (label.equals("J")) {
-                        currentSign.setMetroLine(LineStyle.RJ);
-                    } else if (label.equals("K")) {
-                        currentSign.setMetroLine(LineStyle.RK);
-                    } else if (label.equals("L")) {
-                        currentSign.setMetroLine(LineStyle.RL);
-                    } else if (label.equals("N")) {
-                        currentSign.setMetroLine(LineStyle.RN);
-                    } else if (label.equals("P")) {
-                        currentSign.setMetroLine(LineStyle.RP);
-                    } else if (label.equals("R")) {
-                        currentSign.setMetroLine(LineStyle.RR);
-                    } else if (label.equals("U")) {
-                        currentSign.setMetroLine(LineStyle.RU);
-                    } else if (label.startsWith("N")){
-                        currentSign.setBusLine(label);
-                    } else if (Integer.valueOf(label) >= 20) {
-                        currentSign.setBusLine(label);
-                    }
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                currentSign.setLine(label);
             }
         }
 
